@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\FichierController;
+use App\Http\Controllers\FichierDecisionController;
+use App\Http\Controllers\Metier\FichierController;
+use App\Http\Controllers\SDDAController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name("home");
 
 Route::group([
-    'middleware'=>["auth"]
+    'middleware' => ["auth"]
 ], function () {
-    Route::get("/fichiers",[FichierController::class,"index"])->name("file.add");
+    Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
+    Route::resource("fichiers",FichierController::class);
+    Route::resource("fichiers.decision", FichierDecisionController::class);
 });
 
 Route::get('/dashboard', function () {

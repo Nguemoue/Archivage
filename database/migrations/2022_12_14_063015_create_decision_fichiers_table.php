@@ -15,6 +15,9 @@ class CreateDecisionFichiersTable extends Migration
     {
         Schema::create('decision_fichiers', function (Blueprint $table) {
             $table->id();
+            $table->string("code");
+            $table->string("nature");
+            $table->foreignId("fichier_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

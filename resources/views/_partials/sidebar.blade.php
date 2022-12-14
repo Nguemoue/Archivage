@@ -3,7 +3,7 @@
     <div class="pcoded-inner-navbar main-menu">
         <div class="">
             <div class="main-menu-header">
-                <img class="img-80 img-radius" src="assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                <img class="img-80 img-radius" src="{{ asset('logo-admin.jpg') }}" alt="User-Profile-Image">
                 <div class="user-details">
                     <span id="more-details">Utilisateur<i class="fa fa-caret-down"></i></span>
                 </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="pcoded-navigation-label">Navigation</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="active">
+            <li @class(["active"=>Route::is('dashboard')])>
                 <a href="index.html" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext">Dashboard</span>
@@ -37,9 +37,37 @@
                 </a>
             </li>
         </ul>
-        <div class="pcoded-navigation-label">Fichier</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li class="pcoded-hasmenu">
+            <li  @class(["pcoded-hasmenu","active"=>Route::is('sdda.*')])>
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b></b></span>
+                    <span class="pcoded-mtext">DGPAT</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li @class(["active"=>Route::is('sdda.index')])>
+                        <a href="{{ route('sdda.index') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext">SDDA</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+
+                    <li class=" ">
+                        <a href="{{ route('sdda.index') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext">...</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+        </ul>
+        <div class="pcoded-navigation-label">Fichier</div>
+
+        <ul class="pcoded-item pcoded-left-item">
+            <li  @class(["pcoded-hasmenu","active"=>Route::is('fichiers.*')])>
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>add</b></span>
                     <span class="pcoded-mtext">Gestion de fichier</span>
@@ -54,10 +82,10 @@
                         </a>
                     </li>
 
-                    <li class=" ">
-                        <a href="typography.html" class="waves-effect waves-dark">
+                    <li @class(["active"=>Route::is('fichiers.create')])>
+                        <a href="{{ route('fichiers.create') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Decompresser</span>
+                            <span class="pcoded-mtext">Ajouter un fichier</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>

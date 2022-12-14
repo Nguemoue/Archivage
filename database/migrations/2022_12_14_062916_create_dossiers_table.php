@@ -15,6 +15,7 @@ class CreateDossiersTable extends Migration
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
+            $table->string("numero")->unique();
             $table->timestamps();
         });
     }

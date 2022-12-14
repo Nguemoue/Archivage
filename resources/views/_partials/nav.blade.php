@@ -49,7 +49,7 @@
                         </li>
                         <li class="waves-effect waves-light">
                             <div class="media">
-                                <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg"
+                                <img class="d-flex align-self-center img-radius" src="{{ asset('logo-admin.jpg') }}"
                                     alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="notification-user">Utilisateur</h5>
@@ -84,7 +84,7 @@
                 </li>
                 <li class="user-profile header-notification">
                     <a href="#!" class="waves-effect waves-light">
-                        <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                        <img src="{{ asset('logo-admin.jpg') }}" class="img-radius" alt="User-Profile-Image">
                         <span>John Doe</span>
                         <i class="ti-angle-down"></i>
                     </a>

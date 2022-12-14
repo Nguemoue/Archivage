@@ -15,6 +15,10 @@ class CreateFichiersTable extends Migration
     {
         Schema::create('fichiers', function (Blueprint $table) {
             $table->id();
+            $table->string("numero")->unique();
+            $table->string("nom")->unique();
+            $table->string("url");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

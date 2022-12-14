@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    @stack("styles")
 </head>
 
 <body>
@@ -50,7 +51,7 @@
                     @includeIf('_partials.sidebar')
                     <div class="pcoded-content">
                         <!-- Page-header start -->
-                        @includeIf('_partials.header')
+                        @yield('header')
                         <!-- Page-header end -->
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
@@ -133,6 +134,8 @@
     <script src="{{ asset('assets/js/vertical/vertical-layout.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+    @includeIf("_partials.swal")
+    @stack("scripts")
 </body>
 
 </html>
