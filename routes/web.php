@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\FichierDecisionController;
 use App\Http\Controllers\Metier\FichierController;
+use App\Http\Controllers\ScannController;
 use App\Http\Controllers\SDDAController;
+use App\Http\Livewire\Scann\ScannElement;
+use App\Http\Livewire\Scann\ScannGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +26,12 @@ Route::get('/', function () {
 Route::group([
     'middleware' => ["auth"]
 ], function () {
+
     Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
     Route::resource("fichiers",FichierController::class);
     Route::resource("fichiers.decision", FichierDecisionController::class);
+    Route::get("scanner", [ScannController::class, "index"])->name("scan.index");
+    Route::get("scanner/create", ScannGroup::class)->name("scann.create");
 });
 
 Route::get('/dashboard', function () {

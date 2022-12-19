@@ -36,6 +36,8 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     @stack("styles")
+    @livewireStyles()
+    @livewireScripts()
 </head>
 
 <body>
@@ -117,6 +119,7 @@
     <!-- Warning Section Ends -->
 
     <!-- Required Jquery -->
+    @stack("scripts")
     <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }} "></script>
     <script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js') }}"></script>
@@ -135,7 +138,6 @@
 
     <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
     @includeIf("_partials.swal")
-    @stack("scripts")
 </body>
 
 </html>
