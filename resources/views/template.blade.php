@@ -18,6 +18,8 @@
     <meta name="author" content="developper" />
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    @livewireStyles()
+    @livewireScripts()
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
     <!-- waves.css -->
@@ -36,8 +38,7 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     @stack("styles")
-    @livewireStyles()
-    @livewireScripts()
+    
 </head>
 
 <body>

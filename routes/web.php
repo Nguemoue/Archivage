@@ -24,14 +24,12 @@ Route::get('/', function () {
 })->name("home");
 
 Route::group([
-    'middleware' => ["auth"]
-], function () {
 
+], function () {
     Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
     Route::resource("fichiers",FichierController::class);
     Route::resource("fichiers.decision", FichierDecisionController::class);
-    Route::get("scanner", [ScannController::class, "index"])->name("scan.index");
-    Route::get("scanner/create", ScannGroup::class)->name("scann.create");
+
 });
 
 Route::get('/dashboard', function () {
@@ -39,3 +37,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+require __DIR__ . '/route.scan.php';
+
+require __DIR__ . '/route.traitement.php';

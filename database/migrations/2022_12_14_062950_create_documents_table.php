@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDecisionFichiersTable extends Migration
+class CreateDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateDecisionFichiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('decision_fichiers', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string("code");
-            $table->string("nature");
-            $table->foreignId("fichier_id")->constrained()->cascadeOnDelete();
+            $table->string("numero")->unique();
+            $table->string("nom")->unique();
+            $table->string("url");
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateDecisionFichiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('decision_fichiers');
+        Schema::dropIfExists('documents');
     }
 }

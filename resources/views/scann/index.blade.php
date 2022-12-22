@@ -1,24 +1,31 @@
-@extends("template")
+@extends('template')
 
-@section("header")
-    Page de scann
+@section('header')
     {{-- <x-dashboard-header/> --}}
 @endsection
 
-@section("content")
-    <h4 class="text-center">Phase de Scannage de Document</h4>
-    <a href="{{ route('scann.create') }}" class="btn btn-secondary">
-        <span class="mdi mdi-scanner"></span>
-        Effectuer un Scann
-    </a>
+@section('content')
+    <h4 class="text-center">SCANNER UN OU DES DOCUMENTS / DOSSIERS</h4>
+    <hr>
+    <br>
+    <div class="row">
+        <a href="{{ route('scann.document.create') }}" class="btn btn-secondary col-5 p-4">
+            <span class="mdi mdi-scanner"></span>
+            Effectuer un Scann Sur un Documents
+        </a>
+        <a href="{{ route('scann.dossier.create') }}" class="btn btn-success col-5 mx-auto p-4">
+            <span class="mdi mdi-scanner"></span>
+            Effectuer un Scann sur des Dossiers
+        </a>
+    </div>
 @endsection
 
 
-@push("scripts")
+@push('scripts')
     @livewireScripts
 @endpush
 
 
-@push("styles")
+@push('styles')
     @livewireStyles()
 @endpush

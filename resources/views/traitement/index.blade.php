@@ -1,0 +1,37 @@
+@extends('template')
+
+@section('content')
+    <h4 class="my-2 text-center">Page de traitement</h4>
+    <hr>
+    <div class=" row">
+        {{-- bloc pour les documents --}}
+        <div class="col-6">
+            <div class="card" style="min-height: 70vh;height:70vh;overflow-y:scroll">
+                <div class="card-header">
+                    <h4>Les Documents Scanne le {{ now()->Isoformat('D/M/Y') }}</h4>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <input type="text" class="form-control" placeholder="rechercher">
+                        <button type="submit" class="btn btn-sm btn-primary">rechercher</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @foreach ($temp_documents as $item)
+                        <div class="my-2">
+                            <div class="d-flex border justify-content-between  p-3 shadow" style="border:1px solid white">
+                                <img src="{{ asset('icones/fichier.jpg') }}" alt="" class="img-fluid"
+                                    width="40">
+                                <span>{{ $item->numero }}</span>
+                                <a href="{{ route('traitement.document.show',['id'=>$item->id]) }}" class="btn btn-secondary btn-sm">Traiter</a>
+                                <a href="" class="btn border btn-sm" title="voir de document"><span class="fa fa-eye"></span></a>
+                            </div>
+                            <span class="badge p-1 text-light rounded bg-dark">{{ $item->created_at->IsoFormat('lll') }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            dede
+        </div>
+    </div>
+@endsection
