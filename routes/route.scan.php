@@ -17,4 +17,6 @@ Route::group([
     Route::post("scan/document/store", [ScanDocumentController::class, "store"])->name("scann.document.store");
     // pour les dossiers
     Route::get("scan/dossier/create", [ScanDossierController::class,"create"])->name("scann.dossier.create");
+    Route::post("scan/dossier/store", [ScanDossierController::class, "store"])->name("scann.dossier.store");
+
 });

@@ -15,8 +15,8 @@ class CreateTempDossierDocumentsTable extends Migration
     {
         Schema::create('temp_dossiers_documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("dossier_id")->constrained()->cascadeOnDelete();
-            $table->foreignId("document_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("temp_dossier_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("temp_document_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

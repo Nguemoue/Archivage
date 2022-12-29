@@ -13,4 +13,8 @@ class TempDocument extends Model
     protected $fillable = [
         'numero','url','nom'
     ];
+
+    function tempDossiers(){
+        return $this->belongsToMany(TempDossier::class,TempDossierDocument::class);
+    }
 }

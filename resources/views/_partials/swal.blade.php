@@ -2,7 +2,7 @@
 @if(session()->has('success'))
     <script defer>
         Swal.fire({
-            position:"bottom-end",
+            position:"top-end",
             toast:true,
             timer: 4000,
             showCancelButton:false,
