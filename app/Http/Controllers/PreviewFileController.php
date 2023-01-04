@@ -26,12 +26,12 @@ class PreviewFileController extends Controller
         // dd($content);
         // dd("d");
         // return response()->content($pathToFile,"filename",['Content-Type'=>'application/octect-stream']);
-        return view("pdf.content", ['content' => $content,'path'=>$pathToFile],[],[
-            'Content-Type'=>"application/octect-pdf"
-        ]);
-        // return response($content, 200, [
-        //     'Content-Type'=>$contentType
+        // return view("pdf.content", ['content' => $content,'path'=>$pathToFile],[],[
+        //     'Content-Type'=>"application/octect-pdf"
         // ]);
+        return response($content, 200, [
+            'Content-Type'=>$contentType
+        ]);
 
     }
 }
