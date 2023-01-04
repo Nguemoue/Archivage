@@ -27,8 +27,9 @@ class ScanDossierController extends Controller
         ], customAttributes: ['files' => "les fichiers rattaches"]);
         $validator->validate();
         // mon repertoire de stockage
-        $dir  = now()->format("y_m_d");
+        $dir  = now()->format("y_m_d").'/'.$request->input('titre');
         // je stocke mon fichier image
+        
         $createdFolder = TempDossier::query()->create([
             'nom'=>$request->input("titre")
         ]);
@@ -38,7 +39,7 @@ class ScanDossierController extends Controller
             // je cree ma source a partir de cette derniers
                 // je cree mon document
             $tempDocument = TempDocument::query()->create([
-                'url'=>$file->store(TempDocument::DEFAULT_PATH.'/'.$dir),
+                'url'=>$file->store(TempDossier::DEFAULT_PATH.'/'.$dir),
                 'numero'=>Str::uuid()
             ]);
             TempDossierDocument::query()->create([

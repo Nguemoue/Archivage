@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack("styles")
     
 </head>

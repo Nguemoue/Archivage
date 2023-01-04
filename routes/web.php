@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FichierDecisionController;
 use App\Http\Controllers\Metier\FichierController;
+use App\Http\Controllers\PreviewFileController;
 use App\Http\Controllers\ScannController;
 use App\Http\Controllers\SDDAController;
 use App\Http\Livewire\Scann\ScannElement;
@@ -32,6 +33,7 @@ Route::group([
 
 });
 
+Route::get("/preview-file/{id}", PreviewFileController::class)->name("file.preview");
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
