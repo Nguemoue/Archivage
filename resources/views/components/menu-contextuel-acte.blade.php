@@ -7,9 +7,14 @@
                 <input type="text" class="form-control" placeholder="nom de l'acte"/>
             </div>
             <div class="mb-3">
-                <label for="contenu">Contenu</label>
+                <label for="contenu">paticipants</label>
                 <input type="text" class="form-control" placeholder="contenu ...">
             </div>
+            <div class="mb-3">
+                <label for="contenu">Date</label>
+                <input type="date" class="form-control" placeholder="contenu ...">
+            </div>
+
         </div>
     </div>
 </div>
