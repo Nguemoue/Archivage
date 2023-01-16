@@ -3,8 +3,8 @@
     <script defer>
         Swal.fire({
             position:"top-end",
-            toast:true,
-            timer: 4000,
+            toast:false,
+            timer: 3000,
             showCancelButton:false,
             showConfirmButton:false,
             showCloseButton:false,
@@ -19,7 +19,7 @@
     <script defer>
         Swal.fire({
             position:"top-end",
-            toast:true,
+            toast:false,
             showCancelButton:false,
             showConfirmButton:false,
             showCloseButton:true,
@@ -34,8 +34,8 @@
     <script defer>
         Swal.fire({
             position:"top-end",
-            toast:true,
-            timer: 4000,
+            toast:false,
+            timer: 3000,
             timerProgressBar: true,
             showCancelButton:false,
             showConfirmButton:false,
@@ -51,8 +51,8 @@
     <script defer>
         Swal.fire({
             position:"top-end",
-            toast:true,
-            timer: 4000,
+            toast:false,
+            timer: 3000,
             showCancelButton:false,
             showConfirmButton:false,
             showCloseButton:true,

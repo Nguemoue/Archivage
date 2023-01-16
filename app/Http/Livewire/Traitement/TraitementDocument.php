@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire\Traitement;
 
+use App\Models\SousTypeDocument;
+use App\Models\TypeDocument;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class TraitementDocument extends Component
@@ -16,17 +19,23 @@ class TraitementDocument extends Component
     public $step = 1;
 
     public $titre = 'dede';
-    public $type = 'acte';
-
-    public function firstStep(){
+    public $type = [];
+    public $typeId = 0;
+    public $sousTypeId = '';
+    public $soustype = [];
+    public function firstStep()
+    {
+        // dd($this->sousTypeId);
         $this->step = 2;
     }
 
-    function secondStep(){
+    function secondStep()
+    {
         $this->step = 3;
     }
 
-    function thirdStep(){
+    function thirdStep()
+    {
         // $this->step = 4;
     }
     public function render()
@@ -34,8 +43,20 @@ class TraitementDocument extends Component
         return view('livewire.traitement.traitement-document');
     }
 
-    public function prev(){
-        $this->step = $this->step-1;
+    public function prev()
+    {
+        $this->step = $this->step - 1;
+    }
+    public function updateSousType(){
+        $this->soustype = TypeDocument::query()->find($this->typeId)->sousTypes->toArray();
     }
     
+    function mount()
+    {
+        
+        $this->type = TypeDocument::query()->get()->toArray();
+        $this->soustype = SousTypeDocument::query()->get()->toArray();
+        $this->sousTypeId = optional($this->soustype[0])['nom'];
+    }
+
 }

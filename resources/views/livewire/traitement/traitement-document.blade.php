@@ -17,21 +17,27 @@
                     <label for="titre">Titre du Document</label>
                     <input type="text" class="form-control" placeholder="nom du document" wire:model.defer='titre'>
                 </div>
-                <div>
+                <div class="mb-4">
                     <label for="type">Type de Document</label>
-                    <select wire:model.defer='type' id="type" class="form-control">
-                        <option value="acte">Actes</option>
-                        <option value="decision">Decision</option>
-                        <option value="projet">Projet</option>
-                        <option value="note">Notes</option>
-                        <option value="rapport">Rapport</option>
+                    <select wire:model='typeId' id="type" class="form-control" wire:change='updateSousType'>
+                        @foreach ($type as $item)
+                            <option  value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label for="soustype">Sous Type de Document</label>
+                    <select wire:model.defer='sousTypeId' id="soustype" class="form-control">
+                        @foreach ($soustype as $item)
+                            <option value="{{ $item['nom'] }}">{{ $item['nom'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm mt-3"> suivant </button>
             </form>
         @elseif ($step == 2)
             <form wire:submit.prevent='secondStep'>
-                <x-dynamic-component :component="'menu-contextuel' . '-' . $type" />
+                <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" />
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger btn-sm" wire:click='prev'>Precedent</button>
                     <button type="submit" class="btn btn-primary btn-sm"> suivant </button>

@@ -44,6 +44,7 @@
                     <span class="pcoded-mtext">DGPAT</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
+                
                 <ul class="pcoded-submenu">
                     <li @class(["active"=>Route::is('sdda.index')])>
                         <a href="{{ route('sdda.index') }}" class="waves-effect waves-dark">
@@ -93,6 +94,33 @@
                         <a href="{{ route('fichiers.create') }}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext">Ajouter un fichier</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+        </ul>
+        <div class="pcoded-navigation-label">Typages</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li  @class(["pcoded-hasmenu","active"=>Route::is('type$.*')])>
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>add</b></span>
+                    <span class="pcoded-mtext">Gestion </span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li @class(["active"=>Route::is('type.*')])>
+                        <a href="{{ route('type.index') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext"> types</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li @class(["active"=>Route::is('soustype.*')])>
+                        <a href="{{ route('soustype.index') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext"> sous types</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
