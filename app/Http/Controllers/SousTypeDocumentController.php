@@ -94,6 +94,7 @@ class SousTypeDocumentController extends Controller
      */
     public function destroy(SousTypeDocument $soustype)
     {
-        //
+        $soustype->delete();
+        return redirect()->route("soustype.index")->with("success", "supprimer avec success");
     }
 }
