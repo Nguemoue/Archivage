@@ -78,7 +78,12 @@ class SousTypeDocumentController extends Controller
      */
     public function update(UpdateSousTypeDocumentRequest $request, SousTypeDocument $soustype)
     {
-        //
+        $soustype->nom = $request->nom;
+        $soustype->description = $request->descritpion;
+        $soustype->type_document_id = $request->type_document_id;
+        $soustype->save();
+        return redirect()->route("soustype.index")->with("success", "Mis a jour avec success");
+
     }
 
     /**
