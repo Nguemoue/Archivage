@@ -21,7 +21,7 @@
                     <label for="type">Type de Document</label>
                     <select wire:model='typeId' id="type" class="form-control" wire:change='updateSousType'>
                         @foreach ($type as $item)
-                            <option  value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
+                            <option value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -29,7 +29,7 @@
                     <label for="soustype">Sous Type de Document</label>
                     <select wire:model.defer='sousTypeId' id="soustype" class="form-control">
                         @foreach ($soustype as $item)
-                            <option value="{{ $item['nom'] }}">{{ $item['nom'] }}</option>
+                            <option value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -37,8 +37,22 @@
             </form>
         @elseif ($step == 2)
             <form wire:submit.prevent='secondStep'>
-                <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" />
-                <div class="btn-group">
+                {{-- <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" /> --}}
+                {{-- je selectionne tous les champs --}}
+                <div class="card">
+                    <div class="card-header card-border-danger"><h4>Menu Contextuel {{ $menuContextuel }}</h4></div>
+                    <div class="card-body">
+                        <div class="p-4">
+                                @foreach ($fields as $item)
+                                <div class="mb-2">
+                                    <x-field :item="$item" />
+                                </div>
+                                
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                <div class="d-block text-center d-flex justify-content-between mt-2">
                     <button type="button" class="btn btn-danger btn-sm" wire:click='prev'>Precedent</button>
                     <button type="submit" class="btn btn-primary btn-sm"> suivant </button>
                 </div>

@@ -23,6 +23,6 @@ class MenuContextuelRapport extends Component
      */
     public function render()
     {
-        return view('components.menu-contextuel-rapport');
+        return view('components.menuContextuels.menu-contextuel-rapport');
     }
 }

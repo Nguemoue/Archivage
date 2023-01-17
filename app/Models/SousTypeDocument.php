@@ -13,4 +13,8 @@ class SousTypeDocument extends Model
     function type(){
         return $this->belongsTo(TypeDocument::class, "type_document_id");
     }
+
+    function fields(){
+        return $this->hasMany(Field::class,"sous_type_document_id");
+    }
 }

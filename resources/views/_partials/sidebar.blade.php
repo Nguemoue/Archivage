@@ -65,7 +65,8 @@
                 </ul>
             </li>
         </ul>
-        <div class="pcoded-navigation-label">Fichier</div>
+        {{-- box pour les fichiers --}}
+        {{-- <div class="pcoded-navigation-label">Fichier</div>
 
         <ul class="pcoded-item pcoded-left-item">
             <li  @class(["pcoded-hasmenu","active"=>Route::is('fichiers.*')])>
@@ -100,10 +101,10 @@
                     
                 </ul>
             </li>
-        </ul>
+        </ul> --}}
         <div class="pcoded-navigation-label">Typages</div>
         <ul class="pcoded-item pcoded-left-item">
-            <li  @class(["pcoded-hasmenu","active"=>Route::is('type$.*')])>
+            <li  @class(["pcoded-hasmenu","active"=>Route::is('type.*') || Route::is("soustype.*")])>
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>add</b></span>
                     <span class="pcoded-mtext">Gestion </span>
@@ -124,7 +125,6 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    
                 </ul>
             </li>
         </ul>

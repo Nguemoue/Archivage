@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Traitement;
 
+use App\Models\Field;
 use App\Models\SousTypeDocument;
 use App\Models\TypeDocument;
 use Illuminate\Support\Str;
@@ -23,10 +24,15 @@ class TraitementDocument extends Component
     public $typeId = 0;
     public $sousTypeId = '';
     public $soustype = [];
+    public $fields = [];
+
+    public $menuContextuel = '';
     public function firstStep()
     {
         // dd($this->sousTypeId);
         $this->step = 2;
+        $this->fields = Field::query()->where("sous_type_document_id", $this->sousTypeId)->get();
+        $this->menuContextuel = SousTypeDocument::query()->find($this->sousTypeId)->nom;
     }
 
     function secondStep()
@@ -56,7 +62,11 @@ class TraitementDocument extends Component
         
         $this->type = TypeDocument::query()->get()->toArray();
         $this->soustype = SousTypeDocument::query()->get()->toArray();
-        $this->sousTypeId = optional($this->soustype[0])['nom'];
+        $this->sousTypeId = optional($this->soustype[0])['id'];
+    }
+
+    function getSousTypeNom($id){
+        return SousTypeDocument::query()->where("id", $id)->first()->pluck("nom");
     }
 
 }

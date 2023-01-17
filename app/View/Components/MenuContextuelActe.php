@@ -23,6 +23,6 @@ class MenuContextuelActe extends Component
      */
     public function render()
     {
-        return view('components.menu-contextuel-acte');
+        return view('components.menuContextuels.menu-contextuel-acte');
     }
 }

@@ -15,7 +15,7 @@ class TypeDocumentController extends Controller
      */
     public function index()
     {
-        $types = TypeDocument::all();
+        $types = TypeDocument::query()->withCount("sousTypes")->get();
         return view("types.index", compact("types"));
     }
 

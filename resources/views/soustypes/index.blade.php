@@ -34,13 +34,14 @@
                                 <td>{{ $item->created_at->IsoFormat('lll') }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-sm btn-danger text-white mx-1">
+                                        <a class="btn btn-sm btn-danger text-white ">
                                         <form onclick="submit()" action="{{ route('soustype.destroy',['soustype'=>$item->id]) }}" method="POST" id="delete">
                                             @csrf @method('DELETE')
                                             <span class="text-white">delete</span>
                                         </form>
                                     </a>
-                                        <a href="{{ route('soustype.edit',['soustype'=>$item->id]) }}" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{{ route('soustype.edit',['soustype'=>$item->id]) }}" class="btn btn-sm btn-success"><span class="fa fa-pencil"></span></a>
+                                    <a href="{{ route('soustype.fields.index',['soustype'=>$item->id]) }}" class="btn btn-secondary"><span class="fa fa-cogs"></span></a>
                                     </div>
                                 </td>
                             </tr>

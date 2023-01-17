@@ -23,6 +23,6 @@ class MenuContextuelNote extends Component
      */
     public function render()
     {
-        return view('components.menu-contextuel-note');
+        return view('components.menuContextuels.menu-contextuel-note');
     }
 }

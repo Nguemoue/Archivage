@@ -23,6 +23,6 @@ class MenuContextuelDecision extends Component
      */
     public function render()
     {
-        return view('components.menu-contextuel-decision');
+        return view('components.menuContextuels.menu-contextuel-decision');
     }
 }
