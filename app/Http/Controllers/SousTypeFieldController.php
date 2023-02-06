@@ -34,7 +34,7 @@ class SousTypeFieldController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function store(Request $request,$soustype)
     {
@@ -42,7 +42,7 @@ class SousTypeFieldController extends Controller
             'nom'=>'required',
         ]);
 
-        $data = $request->only('nom', 'type', 'placeholder', 'min', 'class', 'max', 'value','label');
+        $data = $request->only('nom', 'type', 'placeholder', 'min', 'class', 'max', 'value','label','name');
         $data += ["required"=>$request->boolean("required"),"sous_type_document_id"=>$soustype];
         Field::query()->create($data);
         return redirect()->route("soustype.fields.index", ['soustype' => $soustype])->with("success", "champ ajouter avec success");
@@ -75,14 +75,14 @@ class SousTypeFieldController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+    //  * @return \Illuminate\Http\Response
      */
     public function update(Request $request, SousTypeDocument $soustype,Field $field)
     {
         $request->validate([
             'nom'=>'required'
         ]);
-        $data = $request->only('nom', 'type', 'placeholder', 'min', 'class', 'max', 'value', 'label');
+        $data = $request->only('nom','name', 'type', 'placeholder', 'min', 'class', 'max', 'value', 'label');
         $data += ["required" => $request->boolean("required")];
         $field->update($data);
         return redirect()->route("soustype.fields.index", ['soustype' => $soustype->id])->with("success", "Mis a jour avec success");

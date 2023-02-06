@@ -25,12 +25,12 @@
                             <label for="type">Selectionner le Fomat <span class="text-danger">*</span>  </label>
                             <select name="type" id="type" required class="form-control form-select border">
                                 <option value="date" {{  ($field->nom == "date") ?'selected':''}} > Date </option>
-                                <option value="datetime"> Date et heure </option>
-                                <option value="color"> Couleur </option>
-                                <option value="text"> Texte </option>
-                                <option value="email"> Email </option>
-                                <option value="password"> Mot de passe </option>
-                                <option value="search"> Recherche </option>
+                                <option value="datetime" {{  ($field->nom == "datetime") ?'selected':''}}> Date et heure </option>
+                                <option value="color" {{  ($field->nom == "date") ?'color':''}}> Couleur </option>
+                                <option value="text" {{  ($field->nom == "date") ?'text':''}}> Texte </option>
+                                <option value="email" {{  ($field->nom == "date") ?'email':''}}> Email </option>
+                                <option value="password" {{  ($field->nom == "date") ?'password':''}}> Mot de passe </option>
+                                <option value="search" {{  ($field->nom == "date") ?'search':''}}> Recherche </option>
                             </select>
                         </div>
                         <div class="mb-2">
@@ -40,6 +40,10 @@
                         <div class="mb-2">
                             <label for="label">Placeholder</label>
                             <input type="text" name="placeholder" id="placeholder" value="{{$field->placeholder}}" class="form-control">
+                        </div>
+                        <div class="mb-2">
+                            <label for="name">Name Attributes</label>
+                            <input type="text" value="{{ $field->name }}" name="name" id="name" class="form-control">
                         </div>
                         <div class="mb-2">
                             <label for="class">Classe CSS</label>

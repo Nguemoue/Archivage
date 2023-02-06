@@ -41,6 +41,10 @@
                             <input type="text" name="placeholder" id="placeholder" class="form-control">
                         </div>
                         <div class="mb-2">
+                            <label for="name">Name Attributes</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="mb-2">
                             <label for="class">Classe CSS</label>
                             <input type="text" name="class" id="classe" class="form-control">
                         </div>

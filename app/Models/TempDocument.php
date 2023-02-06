@@ -17,4 +17,6 @@ class TempDocument extends Model
     function tempDossiers(){
         return $this->belongsToMany(TempDossier::class,TempDossierDocument::class);
     }
+
+    
 }

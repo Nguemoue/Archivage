@@ -36,7 +36,8 @@
                 <button type="submit" class="btn btn-primary btn-sm mt-3"> suivant </button>
             </form>
         @elseif ($step == 2)
-            <form wire:submit.prevent='secondStep'>
+            <form wire:submit.prevent='secondStep' method="post" action="{{route('fichiers.store')}}">
+                @csrf
                 {{-- <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" /> --}}
                 {{-- je selectionne tous les champs --}}
                 <div class="card">
@@ -45,9 +46,8 @@
                         <div class="p-4">
                                 @foreach ($fields as $item)
                                 <div class="mb-2">
-                                    <x-field :item="$item" />
-                                </div>
-                                
+                                    <x-field  :item="$item" />
+                                </div>                 
                                 @endforeach
                             </div>
                         </div>
@@ -59,14 +59,18 @@
             </form>
         @elseif ($step == 3)
             <form wire:submit.prevent='thirdStep'>
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <a href=""></a>
+                    </div>
+                </div>
                 <div class="mt-2">
                     <button type="button" class="btn p-3 btn-sm" wire:click='prev'>Page precedent Precedent</button>
-
-                    <button type="submit" class="btn p-3 btn-primary btn-sm"> validation finale </button>
+                    <button  type="submit" class="btn p-3 btn-primary btn-sm"> Traiter <span class="fa fa-validate"></span> </button>
                 </div>
             </form>
+            
         @endif
     </div>
-
 
 </div>
