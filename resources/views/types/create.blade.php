@@ -19,12 +19,13 @@
                                 placeholder="Entrez le nom du type" value="{{ old('nom') }}" />
                         </div>
                         <div class="mb-3">
-                            <label for="type" class="form-label">
+                            <label for="description" class="form-label">
                                 Description
                             </label>
-                            <textarea name="description" class="form-control" id="description" cols="10" rows="10">{{ old('description') }}</textarea>
+									<div id="editor"></div>
+                            <textarea  name="description" class="sumernote form-control" id="description" cols="10" rows="10">{{ old('description') }}</textarea>
                         </div>
-       
+
                         <button type="submit" class="btn btn-success">
                             <span class="fa fa-send"></span>
                             Enregistrer
