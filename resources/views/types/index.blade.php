@@ -15,7 +15,7 @@
                 @includeIf('_partials.errors')
             </div>
             <div class="card-body">
-                <table class="table table-hover  table-bordered">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -61,8 +61,6 @@
 
 @push('scripts')
     <script src="{{ mix('js/app.js') }}"></script>
+
 @endpush
 
-@push('styles')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endpush

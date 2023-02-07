@@ -30,20 +30,12 @@ class TraitementDocument extends Component
 	public $menuContextuel = '';
 	public $document = null;
 	public $dossier;
+	public $name;
 	protected $rules = [
 		'titre' => 'required',
 		'quantite' => 'required'
 	];
 
-	/**
-	 * TraitementDocument constructor.
-	 * @param $document
-	 */
-	public function __construct(TempDocument $document)
-	{
-		$this->document = $document;
-		$this->dossier = $document->tempDossiers->first();
-	}
 
 	/**
 	 * lorsque on valide notre premiere etape de traitement de fichiers
@@ -94,8 +86,8 @@ class TraitementDocument extends Component
 
 	public function mount()
 	{
-
 		$this->type = TypeDocument::query()->get()->toArray();
+		$this->dossier = $this->document->tempDossiers->first();
 		$this->soustype = SousTypeDocument::query()->get()->toArray();
 		$this->sousTypeId = optional($this->soustype[0])['id'];
 	}

@@ -37,7 +37,7 @@
 		<hr>
 		<div class="row">
 			@forelse ($temp_dossiers as $key=>$temp)
-				<div class="col-6">
+				<div class="col-12">
 					<div class="card" style="min-height: 70vh;height:70vh;overflow-y:scroll">
 						<div class="card-header">
 							<h4>Scan du {{ $key }}</h4>
