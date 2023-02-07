@@ -7,10 +7,12 @@ use Livewire\Component;
 class TraitementDossier extends Component
 {
 
+	public $dossier;
 
-    public $dossier;
+	function mount(){
+	}
     public function render()
     {
-        return view('livewire.traitement.traitement-dossier');
+        return view('livewire.traitement.traitement-dossier',['dossier' => $this->dossier]);
     }
 }

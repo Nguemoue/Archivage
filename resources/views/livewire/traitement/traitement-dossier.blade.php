@@ -6,10 +6,11 @@
 			<span>{{ $item->numero }}</span>
 			{{-- si le dossier es en cours de traitement--}}
 			@if(session()->has("dossier-{$dossier->id}.document-{$item->id}"))
-				<a href="#!" class="float-right border rounded btn-success btn"> <span class="fa fa-play"></span> continuer le traitement</a>
+				<a href="#!" class="float-right border rounded btn-success btn"> <span class="fa fa-play"></span> continuer
+					le traitement</a>
 			@else
-			<a href="{{ route('traitement.document.show',['id'=>$item->id]) }}"
-				class="float-right border p-2 btn btn-secondary">traiter ce fichier</a>
+				<a href="{{ route('traitement.document.show',[$item->id]) }}"
+					class="float-right border p-2 btn btn-secondary">traiter ce fichier</a>
 			@endif
 		</div>
 	@endforeach

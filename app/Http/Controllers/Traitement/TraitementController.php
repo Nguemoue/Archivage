@@ -13,17 +13,27 @@ use Illuminate\Support\Facades\Storage;
 class TraitementController extends Controller
 {
     function index(){
-        // dd(session('status'));
         // dd(app("controllers","TraitementController"));
         $date_format = "%Y-%m-%d";
         // je selectionne tous mes documents
         $temp_documents = TempDocument::query()->whereDoesntHave("tempDossiers")->paginate(10);
-        $temp_dossiers = TempDossier::all();
-        $req = TempDossier::query()
-            ->whereHas("tempDocuments")
-            ->selectRaw("DATE_FORMAT(created_at,'$date_format') as date")
-//            ->groupByRaw("DATE_FORMAT(created_at,'$date_format')")
-            ->get();
+        $temp_dossiers = TempDossier::query()->with("tempDocuments")
+			  ->withCount("tempDocuments")->get();
+			foreach ($temp_dossiers as $temp_dossier){
+				$date = $temp_dossier->created_at->format("y_m_d");
+				$name = TempDossier::DEFAULT_PATH.'/'.$date."/".$temp_dossier->nom;
+				$allFiles = Storage::files($name);
+				$size = 0;
+				foreach ($allFiles as $item){
+					$size+= Storage::size($item);
+				}
+				$temp_dossier->size = megaOctet($size);
+			}
+        //        $req = TempDossier::query()
+//            ->whereHas("tempDocuments")
+//            ->selectRaw("DATE_FORMAT(created_at,'$date_format') as date")
+////            ->groupByRaw("DATE_FORMAT(created_at,'$date_format')")
+//            ->get();
         // dd($temp_dossiers);
 //        $temp_dossiers = [];
 //        foreach($req as $item){

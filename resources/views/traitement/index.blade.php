@@ -2,107 +2,86 @@
 
 @section('content')
 	<div class="">
-		{{-- bloc pour les documents --}}
-		{{-- <div class="col-12">
-			 <div class="card" style="min-height: 70vh;height:70vh;overflow-y:scroll">
-				  <div class="card-header">
-						<h4>Les Documents Scanne le {{ now()->Isoformat('D/M/Y') }}</h4>
-						<div class="d-flex justify-content-between align-items-end">
-							 <input type="text" class="form-control" placeholder="rechercher">
-							 <button type="submit" class="btn btn-sm btn-primary">rechercher</button>
-						</div>
-				  </div>
-				  <div class="card-body">
-						@forelse ($temp_documents as $item)
-							 <div class="my-2">
-								  <div class="d-flex border justify-content-between  p-3 shadow" style="border:1px solid white">
-										<img src="{{ asset('icones/fichier.jpg') }}" alt="" class="img-fluid"
-											 width="40">
-										<span>{{ $item->numero }}</span>
-										<a href="{{ route('traitement.document.show', ['id' => $item->id]) }}"
-											 class="btn btn-secondary btn-sm">Traiter</a>
-										<a href="" class="btn border btn-sm" title="voir de document"><span
-												  class="fa fa-eye"></span></a>
-								  </div>
-								  <span
-										class="badge p-1 text-light rounded bg-dark">{{ $item->created_at->IsoFormat('lll') }}</span>
-							 </div>
-						@empty
-							 <div class="alert alert-warning">Auccun Document Scanner</div>
-						@endforelse
-				  </div>
-			 </div>
-		</div> --}}
 		<h4 class="text-center mb-2">Les Dossiers</h4>
 		<hr>
-		<div class="row">
-			@forelse ($temp_dossiers as $key=>$temp)
-				<div class="col-12">
-					<div class="card" style="min-height: 70vh;height:70vh;overflow-y:scroll">
-						<div class="card-header">
-							<h4>Scan du {{ $key }}</h4>
-							<div class="d-flex justify-content-between align-items-end">
-								<input type="text" class="form-control" placeholder="rechercher">
-								<button type="submit" class="btn btn-sm btn-primary">rechercher</button>
-							</div>
-						</div>
-						<div class="card-body">
-							@foreach ($temp as $item)
-								<div class="my-2">
-									{{-- si le traitement a deja commencer--}}
-									@if(session()->has("dossier-$item->id"))
-										<span class="badge bg-danger">en cours de traitement ...</span>
-									@endif
-									<div class="d-flex border justify-content-between  p-3 shadow"
-										  style="border:1px solid white">
-										<img src="{{ asset('icones/dossier.png') }}" alt="" class="img-fluid"
-											  width="40">
-										<span>{{ $item->nom }}</span>
-										<a href="{{ route('traitement.dossier.show', ['id' => $item->id]) }}"
-											class="btn btn-secondary rounded btn-sm">Traitement</a>
-										<a href="#!" data-bs-toggle="collapse"
-											data-bs-target="#collapseDossier{{ $item->id }}" class="btn border btn-sm"
-											title="voir de document">
-											<span class="fa fa-arrow-circle-down"></span></a>
-									</div>
-									<span
-										class="badge p-1 text-light rounded bg-dark">{{ $item->created_at->format('h\h:i a') }}</span>
-									<span class="border badge rounded p-1 mt-1">{{ $item->tempDocuments->count() }}
-                                        fichiers</span>
-									<div class="collapse" id="collapseDossier{{ $item->id }}">
-										<div class="border p-2">
-											@foreach ($item->tempDocuments as $doc)
-												@php
-													$url = $doc->url;
-													// dump($url);
-													$part = explode('.', $url);
-													$ext = end($part)
-												@endphp
-												<div class="border mx-2 my-2">
-													<div class="d-flex border justify-content-between"
-														  style="border:1px solid white">
-														<img src="{{ asset('icones/' . ($ext == 'pdf' ? 'pdf' : 'img') . '.png') }}"
-															  alt="" class="img-fluid" width="30">
-														<span>{{ '[' . Str::substr($doc->numero, 0, 14) . '...]' }}.{{ $ext }}</span>
-														@if(session()->has("dossier-{$item->id}.document-{$doc->id}"))
-															<span class="text-danger">(initie)</span>
-														@endif
-														<a href="{{ route('file.preview',['id'=>$doc->id]) }}"
-															class="btn border btn-sm"
-															title="voir de document"><span class="fa fa-eye"></span></a>
-													</div>
-												</div>
-											@endforeach
+		<div class="w-100">
+			@if ($temp_dossiers->count() > 0)
+				<table class="table table-borderless">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>Nom</th>
+						<th>status</th>
+						<th>Cree le</th>
+						<th>Fichiers</th>
+						<th>Taille (Mo) </th>
+						<th>Actions</th>
+					</tr>
+					</thead>
+					<tbody>
+					@foreach ($temp_dossiers as $key=>$dossier)
+						<tr>
+							<td><i class="fa fa-folder fa-2x"></i> </td>
+							<td> {{$dossier->nom}} </td>
+
+							<td>
+								@if(session()->has("dossier-$dossier->id"))
+									<span class="bage badge-danger rounded p-1"> en cours de traitement</span>
+								@else
+									<span class="badge bg-dark">non initie</span>
+								@endif
+							</td>
+							<td>{{$dossier->created_at->isoFormat("ll")}}</td>
+							<td>{{$dossier->temp_documents_count}} Fichiers</td>
+							<td> {{round($dossier->size,2)}} </td>
+							<td class="btn-group btn-group-sm">
+								<a href="{{route('traitement.dossier.show',[$dossier->id])}}" class="btn btn-success">
+									traiter
+									<i class="fa fa-edit"></i>
+								</a>
+								<a href="#" data-bs-toggle="modal" data-bs-target="#dossierModal{{$dossier->id}}"
+									class="btn btn-outline-secondary">
+									<span class="fa fa-eye"></span>
+								</a>
+								{{--	modal --}}
+								<x-modal-component id="dossierModal{{$dossier->id}}" title="Liste des document du dossiers">
+									@foreach ($dossier->tempDocuments as $doc)
+										@php
+											$url = $doc->url;
+											// dump($url);
+											$part = explode('.', $url);
+											$ext = end($part)
+										@endphp
+										<div class="border mx-2 my-2">
+											<div class="d-flex border justify-content-between"
+												  style="border:1px solid white">
+												<img
+													src="{{ asset('icones/' . ($ext == 'pdf' ? 'pdf' : 'img') . '.png') }}"
+													alt="" class="img-fluid" width="30">
+												<span>{{ '[' . Str::substr($doc->numero, 0, 14) . '...]' }}.{{ $ext }}</span>
+												@if(session()->has("dossier-{$dossier->id}.document-{$doc->id}"))
+													<span class="text-danger">(initie)</span>
+												@endif
+												<a href="{{ route('file.preview',['id'=>$doc->id]) }}"
+													class="btn border btn-sm"
+													title="voir de document"><span class="fa fa-eye"></span></a>
+
+											</div>
 										</div>
-									</div>
-								</div>
-							@endforeach
-						</div>
-					</div>
+									@endforeach
+								</x-modal-component>
+							</td>
+						</tr>
+					@endforeach
+
+					</tbody>
+				</table>
+				<div class="col-12">
+
 				</div>
-			@empty
+			@else
 				<div class="alert alert-warning">Aucun dossier sacnner</div>
-			@endforelse
+			@endif
 		</div>
 	</div>
 @endsection
