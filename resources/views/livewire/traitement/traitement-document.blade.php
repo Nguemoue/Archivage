@@ -36,7 +36,7 @@
                 <button type="submit" class="btn btn-primary btn-sm mt-3"> suivant </button>
             </form>
         @elseif ($step == 2)
-            <form wire:submit.prevent='secondStep' method="post" action="{{route('fichiers.store')}}">
+            <form  method="post" id="form" action="{{route('traitement.document.updateData',[$document->id])}}">
                 @csrf
                 {{-- <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" /> --}}
                 {{-- je selectionne tous les champs --}}
@@ -47,8 +47,9 @@
                                 @foreach ($fields as $item)
                                 <div class="mb-2">
                                     <x-field  :item="$item" />
-                                </div>                 
+                                </div>
                                 @endforeach
+                                    <input type="hidden" value="{{$document->id}}" name="dossierId">
                             </div>
                         </div>
                     </div>
@@ -57,6 +58,7 @@
                     <button type="submit" class="btn btn-primary btn-sm"> suivant </button>
                 </div>
             </form>
+
         @elseif ($step == 3)
             <form wire:submit.prevent='thirdStep'>
                 <div class="card card-primary">
@@ -69,8 +71,22 @@
                     <button  type="submit" class="btn p-3 btn-primary btn-sm"> Traiter <span class="fa fa-validate"></span> </button>
                 </div>
             </form>
-            
+
         @endif
     </div>
 
+    @if($step == 2)
+
+        <script>
+            let form = document.getElementById("form")
+            let formData = new FormData()
+            form.onsubmit = (event)=>{
+                event.preventDefault();
+                formData = new FormData(form)
+                axios.post(form.getAttribute("action"),formData).then(({data})=>{
+                   location.assign("{{route('traitement.document.finish',[$document->id])}}")
+                });
+            }
+        </script>
+    @endif
 </div>

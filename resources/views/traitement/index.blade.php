@@ -21,7 +21,7 @@
 					<tbody>
 					@foreach ($temp_dossiers as $key=>$dossier)
 						<tr>
-							<td><i class="fa fa-folder fa-2x"></i> </td>
+							<td><i style="color: rgba(210,210,10,.9)" class="fa fa-folder fa-2x"></i> </td>
 							<td> {{$dossier->nom}} </td>
 
 							<td>

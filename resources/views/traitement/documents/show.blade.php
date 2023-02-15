@@ -10,3 +10,8 @@
 		 <livewire:traitement.traitement-document :dossier="$document" :document="$document"/>
     </div>
 @endsection
+
+
+@push("scripts")
+    <script src="{{asset('js/app.js')}}"></script>
+@endpush

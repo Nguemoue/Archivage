@@ -103,29 +103,12 @@
             </li>
         </ul>
 
-        <div class="pcoded-navigation-label">Autres</div>
-        <ul class="pcoded-item pcoded-left-item">
-            <li class="">
-                <a href="bs-basic-table.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-receipt"></i><b>B</b></span>
-                    <span class="pcoded-mtext">Local</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-        </ul>
         <div class="pcoded-navigation-label">Organisation</div>
         <ul class="pcoded-item pcoded-left-item">
             <li class="">
-                <a href="chart-morris.html" class="waves-effect waves-dark">
+                <a href="" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-bar-chart-alt"></i><b>C</b></span>
                     <span class="pcoded-mtext">Locale</span>
-                    <span class="pcoded-mcaret"></span>
-                </a>
-            </li>
-            <li class="">
-                <a href="map-google.html" class="waves-effect waves-dark">
-                    <span class="pcoded-micon"><i class="ti-map-alt"></i><b>M</b></span>
-                    <span class="pcoded-mtext">Hisotrique</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
@@ -140,8 +123,8 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="auth-normal-sign-in.html" class="waves-effect waves-dark">
-                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                        <a href="" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="fa fa-print"></i></span>
                             <span class="pcoded-mtext">Imprimer les rapports</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
@@ -149,7 +132,7 @@
                     <li class="">
                         <a href="auth-sign-up.html" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">COmpte rendu</span>
+                            <span class="pcoded-mtext">Compte rendu</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>

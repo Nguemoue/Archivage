@@ -49,4 +49,5 @@ class TraitementController extends Controller
         return view("traitement.index",compact('temp_documents','temp_dossiers'));
 
     }
+
 }

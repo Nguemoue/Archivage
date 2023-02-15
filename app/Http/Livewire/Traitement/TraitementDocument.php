@@ -12,12 +12,6 @@ use Livewire\Component;
 class TraitementDocument extends Component
 {
 
-	/**
-	 * variable step
-	 * si step = 1 alors on doit on affiche le document et on demande le titre
-	 * step 2 on regarde le type de fichier
-	 * set 3 on valide
-	 */
 	public $step = 1;
 
 	public $titre = '';
@@ -36,6 +30,7 @@ class TraitementDocument extends Component
 		'quantite' => 'required'
 	];
 
+	protected $listeners = ["updatedData"=>"secondStep"];
 
 	/**
 	 * lorsque on valide notre premiere etape de traitement de fichiers
@@ -48,19 +43,20 @@ class TraitementDocument extends Component
 		$this->fields = Field::query()->where("sous_type_document_id", $this->sousTypeId)->get();
 		//je met a jour mon menu contextuel
 		$this->menuContextuel = SousTypeDocument::query()->find($this->sousTypeId)->nom;
-		//je stocke les information recupere en sessions
+    		//je stocke les information recupere en sessions
 		#1) je recupere l'identifiant du dossier en question
 		$dossierId = $this->dossier->id;
-		#)je stocke mes information en bd
-		session()->put("dossier-".$dossierId.".document-".$this->document->id,[
+		$documentId = $this->document->id;
+        session()->put("dossier-".$dossierId.".document-".$documentId.".titre",$this->titre);
+        session()->put("dossier-".$dossierId.".document-".$documentId.".type",$this->typeId);
+        session()->put("dossier-".$dossierId.".document-".$documentId.".soustype",$this->sousTypeId);
+        session()->save();
+    }
 
-		]);
-	}
 
-
-	public function secondStep(Request $request)
+	public function secondStep()
 	{
-
+        $this->step = 3;
 	}
 
 	public function thirdStep()
@@ -86,11 +82,14 @@ class TraitementDocument extends Component
 
 	public function mount()
 	{
-		$this->type = TypeDocument::query()->get()->toArray();
+
+	    $this->type = TypeDocument::query()->get()->toArray();
+	    $this->typeId = $this->type[0]['id'];
 		$this->dossier = $this->document->tempDossiers->first();
 		$this->soustype = SousTypeDocument::query()->get()->toArray();
 		$this->sousTypeId = optional($this->soustype[0])['id'];
 	}
+
 
 	public function getSousTypeNom($id)
 	{

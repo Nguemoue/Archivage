@@ -20,5 +20,8 @@ Route::group(
         // route pour les dossiers
         Route::get("dossier", [TraitementDossier::class, "index"])->name("dossier.index");
         Route::get("dossier/{id}", [TraitementDossier::class, "show"])->name("dossier.show");
+
+        Route::get("document/{id}/sucess",[TraitementDocument::class,"success"])->name("document.finish");
+        Route::post("document/{id}/updateData",[TraitementDocument::class,"updateData"])->name("document.updateData");
     }
 );

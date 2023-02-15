@@ -19,6 +19,9 @@ class TempDossier extends Model
         return $this->belongsToMany(TempDocument::class,TempDossierDocument::class);
     }
 
+    function get0Attribute(){
+        return null;
+    }
     protected $casts = [
         'date'=>'date'
     ];
