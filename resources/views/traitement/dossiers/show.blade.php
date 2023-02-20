@@ -37,9 +37,12 @@
                 </div>
             @endforeach
             <div class="card-footer">
-                <button class="btn btn-sm btn-outline-info text-lowercase">
-                    <i class="fa fa-reply-all"></i>
-                    Valider tous ses traitements</button>
+                <form method="post" action="{{route('traitement.dossier-traitement.finish',['id'=>$dossier->id])}}">
+                    @csrf
+                    <button hreflang="fr" class="btn btn-sm btn-outline-info text-lowercase">
+                        <i class="fa fa-reply-all"></i>
+                        Valider tous ses traitements</button>
+                </form>
             </div>
         </div>
 

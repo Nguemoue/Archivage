@@ -49,7 +49,7 @@
                                     <x-field  :item="$item" />
                                 </div>
                                 @endforeach
-                                    <input type="hidden" value="{{$document->id}}" name="dossierId">
+                                    <input type="hidden" value="{{$dossier->id}}" name="dossierId">
                             </div>
                         </div>
                     </div>
