@@ -28,7 +28,7 @@
 								@if(session()->has("dossier-$dossier->id"))
 									<span class="bage badge-danger rounded p-1"> en cours de traitement</span>
 								@else
-									<span class="badge bg-dark">non initie</span>
+									<span class="badge text-light bg-dark">non initie</span>
 								@endif
 							</td>
 							<td>{{$dossier->created_at->isoFormat("ll")}}</td>
@@ -62,7 +62,7 @@
 												@if(session()->has("dossier-{$dossier->id}.document-{$doc->id}"))
 													<span class="text-danger">(initie)</span>
 												@endif
-												<a href="{{ route('file.preview',['id'=>$doc->id]) }}"
+												<a target="_blank" href="{{ route('file.preview',['id'=>$doc->id]) }}"
 													class="btn border btn-sm"
 													title="voir de document"><span class="fa fa-eye"></span></a>
 
@@ -70,6 +70,9 @@
 										</div>
 									@endforeach
 								</x-modal-component>
+								<a href="#" class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</a>
 							</td>
 						</tr>
 					@endforeach

@@ -40,7 +40,8 @@ class ScanDossierController extends Controller
                 // je cree mon document
             $tempDocument = TempDocument::query()->create([
                 'url'=>$file->store(TempDossier::DEFAULT_PATH.'/'.$dir),
-                'numero'=>Str::uuid()
+                'numero'=>Str::uuid(),
+                'data'=>"null"
             ]);
             TempDossierDocument::query()->create([
                 'temp_document_id'=>$tempDocument->id,

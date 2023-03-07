@@ -14,7 +14,7 @@ class TempDocument extends Model
     public const DEFAULT_PATH = "temp_documents";
 
     protected $fillable = [
-        'numero','url','nom'
+        'numero','url','nom','data'
     ];
 
     function tempDossiers():BelongsToMany{

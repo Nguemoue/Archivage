@@ -74,7 +74,8 @@ class TraitementDossier extends Controller
         $dossier->tempDocuments()->delete();
         $dossier->delete();
         session()->forget("dossier-{$id}");
-        return back()->with("success","creer avec success");
-
+        //je lui redirige le dossier creer vers un cardre de classement
+        
+        return redirect()->route("traitement.index")->with("success","Dossier finaliser");
     }
 }
