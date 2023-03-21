@@ -76,6 +76,6 @@ class TraitementDossier extends Controller
         session()->forget("dossier-{$id}");
         //je lui redirige le dossier creer vers un cardre de classement
         
-        return redirect()->route("traitement.index")->with("success","Dossier finaliser");
+        return redirect()->route("classement.dossier.post",[$doc->id])->with("success","Dossier finaliser");
     }
 }

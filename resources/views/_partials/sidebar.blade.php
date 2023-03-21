@@ -99,6 +99,20 @@
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
+                    <li @class(["active"=>Route::is('classsement.*')])>
+                        <a href="{{ route('classement.index') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext"> Classement</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li @class(["active"=>Route::is('sousclasssement.*')])>
+                        <a href="{{ route('sousClassement.all') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext"> SousClassement</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

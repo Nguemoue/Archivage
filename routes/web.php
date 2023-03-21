@@ -42,3 +42,4 @@ require __DIR__.'/auth.php';
 require __DIR__ . '/route.scan.php';
 require __DIR__ . '/route.traitement.php';
 require __DIR__ . '/type.php';
+require  __DIR__.'/route.classement.php';
