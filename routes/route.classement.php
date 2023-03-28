@@ -13,8 +13,9 @@ Route::group(
     ],
     function () {
         Route::get("dossier", [\App\Http\Controllers\ClassementController::class, "index"])->name("dossier.index");
-        Route::get("dossier/{dossierId}", [\App\Http\Controllers\ClassementController::class, "classDossier"])->name("dossier.post")
-            ->whereNumber("id");
+        Route::get("dossier/{dossierId}", [\App\Http\Controllers\ClassementController::class, "classDossier"])
+            ->name("dossier.post")
+            ->whereNumber("dossierId");
     }
 );
 

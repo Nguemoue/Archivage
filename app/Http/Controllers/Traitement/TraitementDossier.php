@@ -37,18 +37,18 @@ class TraitementDossier extends Controller
         $dossier = TempDossier::query()->findOrFail($id);
         abort_if($dossier == null,new Response("model non trouve",404));
         $tempDocuments = $dossier->tempDocuments;
+//        dd($tempDocuments,$dossier);
         $doc = new Dossier();
         $doc->nom = $dossier->nom;
         $doc->numero = Str::uuid();
         $doc->save();
         $sessionsDoc = session("dossier-{$id}");
-        foreach ($sessionsDoc as $key => $item) {
 
+        foreach ($sessionsDoc as $key => $item) {
             $tempDocumentKey = explode("-",$key)[1];
             $tmpDoc = TempDocument::find($tempDocumentKey);
             //je cree un dossiers
             $storage = Storage::disk("local")->createDir($doc->nom);
-
             $document = new Document();
             $document->nom = $item["titre"];
             $document->created_at = $item["created_at"];
@@ -58,7 +58,7 @@ class TraitementDossier extends Controller
             $ext = explode(".",$tmpDoc->url)[1];
 //            dd($ext);
             $newUrl = $doc->nom.'/'. $document->numero.'.'.$ext;
-            if(File::exists($tmpDoc->url)){
+            if(Storage::exists($tmpDoc->url)){
                 Storage::move($tmpDoc->url,$newUrl);
             }
             $document->url = $newUrl;

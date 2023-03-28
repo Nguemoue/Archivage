@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Dossier extends Model
 {
     use HasFactory;
+
     public function documents(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(DossierDocument::class,Document::class);
+        return $this->belongsToMany(Document::class,"dossiers_documents");
     }
 }
