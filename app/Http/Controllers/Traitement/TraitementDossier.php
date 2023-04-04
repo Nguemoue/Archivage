@@ -57,7 +57,7 @@ class TraitementDossier extends Controller
             $document->numero = Str::uuid();
             $ext = explode(".",$tmpDoc->url)[1];
 //            dd($ext);
-            $newUrl = $doc->nom.DIRECTORY_SEPARATOR. $document->numero.'.'.$ext;
+            $newUrl = $doc->nom."/". $document->numero.'.'.$ext;
             if(Storage::exists($tmpDoc->url)){
                 Storage::move($tmpDoc->url,$newUrl);
             }

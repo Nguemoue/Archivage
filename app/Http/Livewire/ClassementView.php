@@ -53,7 +53,7 @@ class ClassementView extends Component
     {
         $this->currentSousClassement = $sousClassementId;
         $sousClassement = SousClassement::find($sousClassementId);
-        $url = $sousClassement->classement->nom .   DIRECTORY_SEPARATOR. $sousClassement->nom;
+        $url = $sousClassement->classement->nom .  "/". $sousClassement->nom;
         $this->sousDirectories = Storage::directories($url);
         $final = [];
         foreach ($this->sousDirectories as $val){
