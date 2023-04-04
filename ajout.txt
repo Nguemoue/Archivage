@@ -1,0 +1,2 @@
+composer require asantibanez/livewire-charts
+php artisan vendor:publish --tag=livewire-charts:public

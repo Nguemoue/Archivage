@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
+    protected $casts = [
+        'data' => 'json'
+    ];
 
+    protected $hidden = [
+        'data->dossierId'
+    ];
 }

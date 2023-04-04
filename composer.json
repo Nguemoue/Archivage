@@ -1,11 +1,14 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "readme": "README.md",
+    "description": "Logiciel pour l'archivage des documents",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "8.0",
+        "php": "^8.0",
+        "asantibanez/livewire-charts": "^2.5",
+        "barryvdh/laravel-elfinder": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.3",
@@ -13,8 +16,7 @@
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
-        "tightenco/ziggy": "^1.0",
-      "ext-json": "*"
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -43,3 +43,5 @@ require __DIR__ . '/route.scan.php';
 require __DIR__ . '/route.traitement.php';
 require __DIR__ . '/type.php';
 require  __DIR__.'/route.classement.php';
+require  __DIR__ .'/route.navigation.php';
+require __DIR__.'/route.statistique.php';
