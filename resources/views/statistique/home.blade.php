@@ -17,6 +17,10 @@
         <div>
             <livewire:livewire-pie-chart :pie-chart-model="$pieChart"/>
         </div>
+        <div>
+            <livewire:livewire-line-chart :line-chart-model="$histogrameChart"/>
+        </div>
+        
     </div>
 @endsection
 @push("styles")

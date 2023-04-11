@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @livewire("navigation",['dossierId' => $dossier->id])
+        @livewire("navigation-classement",['dossierId' => $dossier->id])
     </div>
 @endsection
 

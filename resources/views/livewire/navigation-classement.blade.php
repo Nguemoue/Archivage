@@ -48,24 +48,24 @@
 
                                             <div class="jumbotron border p-2" style="cursor: pointer">
                                                 <a data-toggle="collapse" class=""
-                                                     data-target="#dropDownMenu{{$key}}">
+                                                     data-target="#dropDownMenu{{$sousDirectory->key}}">
                                                     <i class="fa fa-folder fa-2x text-warning mx-2"></i>
                                                     <span class="">
-                                                    {{\Illuminate\Support\Arr::last(explode("/",$key))}}
-                                                    <b class="text-bold font-bold"> ({{count($sousDirectory)}}</b> Fichiers)
+                                                    {{$sousDirectory->nom}}
+                                                    <b class="text-bold font-bold"> ({{($sousDirectory->count)}}</b> Fichiers)
                                                     </span>
                                                 </a>
                                                 <hr class="my-1">
-                                                <div class="collapse" id="dropDownMenu{{$key}}">
+                                                <div class="collapse" id="dropDownMenu{{$sousDirectory->key}}">
                                                     <ul class="list-unstyled px-2">
-                                                        @foreach($sousDirectory as $sousDirect)
+                                                        @foreach($sousDirectory->url as $sousDirect)
                                                             <li title="voir les details sur le fichiers" class="d-flex justify-content-between my-2">
-                                                                <span><i class="fa fa-file"></i>
-                                                                <em>{{\Illuminate\Support\Arr::last(explode("/",$sousDirect))}}</em></span>
-                                                                <a data-toggle="modal" data-target="#" href="#modalFile{{$sousDirect}}" class="btn btn-sm btn-outline-info"><i class="fa fa-sync"></i></a>
+                                                                <span><i class="fa fa-{{$sousDirect->extension}}"></i>
+                                                                <em>{{$sousDirect->nom}}</em></span>
+                                                                <a data-toggle="modal"  href="#modalFile{{$sousDirect->key}}" class="btn btn-sm btn-outline-info"><i class="fa fa-sync"></i></a>
                                                             </li>
                                                             {{-- pour la modal --}}
-                                                            <x-navigation.modal :document-url="$sousDirect" id="modalFile{{$sousDirect}}"  />
+                                                            <x-navigation.modal :document-url="$sousDirect->url" id="modalFile{{$sousDirect->key}}"  />
                                                         @endforeach
                                                     </ul>
                                                 </div>

@@ -11,12 +11,15 @@ class Modal extends Component
     public $documentUrl;
     public $id;
     public $document = null;
+    public $content = [];
     public function __construct($documentUrl,$id)
     {
         $this->documentUrl = $documentUrl;
         $this->id = $id;
-        $this->document = Document::where("url",$this->documentUrl)->first();
-
+        $this->document = Document::query()->where("url",'like',$this->documentUrl)->first();
+        $d= optional($this->document)->data;
+        $this->content= $d;
+        
     }
 
     public function render(): View

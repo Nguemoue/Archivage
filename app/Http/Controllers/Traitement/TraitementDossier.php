@@ -61,6 +61,7 @@ class TraitementDossier extends Controller
             if(Storage::exists($tmpDoc->url)){
                 Storage::move($tmpDoc->url,$newUrl);
             }
+            $newUrl = str_replace(DIRECTORY_SEPARATOR,"/",$newUrl);
             $document->url = $newUrl;
             $document->sous_type_document_id = $item["soustype"];
             $document->save();

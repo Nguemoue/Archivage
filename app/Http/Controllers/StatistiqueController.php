@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\SousTypeDocument;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use Asantibanez\LivewireCharts\Models\LineChartModel;
 use Asantibanez\LivewireCharts\Models\PieChartModel;
 use Faker\Core\Color;
 use Faker\Factory;
@@ -41,6 +42,8 @@ class StatistiqueController extends Controller
             ->groupByRaw("$gp(created_at),data")
             ->get();
         $data = $data->groupBy('date');
+        // dd($data);
+        $operateur = $request->input('type');
         $data = $data->map(function ($elt) use ($operateur){
            $sum = 0;
            foreach ($elt as $e){
@@ -57,13 +60,16 @@ class StatistiqueController extends Controller
             ->setTitle('Statistique de << '.$champ." >> Par ".$periode);
         $pieChart =(new PieChartModel())
             ->setTitle('Statistique de << '.$champ." >> Par ".$periode);
+        $histogrameChart = (new LineChartModel())
+        ->setTitle('Statistique de << '.$champ." >> Par ".$periode);
 
         foreach ($data as $k=>$v){
             $color = $faker->unique()->hexColor();
             $lineChart->addColumn($periode. ' '.$k,$v,$color);
             $pieChart->addSlice($periode. ' '.$k,$v,$color);
+            $histogrameChart->addPoint($periode. ' '.$k,$v,$color);
         }
-        return view("statistique.home",compact("lineChart","pieChart"));
+        return view("statistique.home",compact("lineChart","histogrameChart","pieChart"));
     }
 
     private  function getGp($gp){

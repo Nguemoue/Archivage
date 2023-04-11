@@ -3,12 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\Classement;
+use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\SousClassement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Illuminate\Support\Str;
+use stdClass;
 
 class NavigationClassement extends Component
 {
@@ -43,25 +46,43 @@ class NavigationClassement extends Component
 
     function setDepth($number)
     {
-        $this->reset("currentClassement", "sousClassements");
+        $this->reset( "sousClassements","sousDepth","currentSousClassement");
         $this->depth = $number;
 
     }
 
-    function setSousDepth($val, $sousClassementId)
-    {
+    function setSousDepth($first, $sousClassementId){
+    
         $this->currentSousClassement = $sousClassementId;
-        $sousClassement = SousClassement::find($sousClassementId);
-        $url = $sousClassement->classement->nom .DIRECTORY_SEPARATOR. $sousClassement->nom;
-        $this->sousDirectories = Storage::directories($url);
-        $final = [];
+        $this->currentSousClassement = SousClassement::find($sousClassementId);
+        $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
+        
+        $this->sousDirectories = Storage::disk('local')->directories($url);
+        $final = collect([]);
         foreach ($this->sousDirectories as $val){
-            $final[$val] = Storage::files($val);
+            $item = new stdClass;
+            $tempFiles = Storage::files($val);
+            foreach($tempFiles as $file){
+                $finalTemFiles = new stdClass;
+                $finalTemFiles->url = $file;
+                $file = str_replace(DIRECTORY_SEPARATOR,'/',$file);
+                $doc = Document::query()->where("url","like",$file)->first();
+                $finalTemFiles->key = Str::uuid();
+                $finalTemFiles->nom = $doc->nom??$file;
+                $finalTemFiles->extension = Arr::last(explode('.',$file));
+                if(in_array($finalTemFiles->extension, ['jpg','jpeg','png'])){
+                    $finalTemFiles->extension ='image';
+                }
+                $item->url[] = $finalTemFiles;
+            }
+            $item->count = count($item->url);
+            $item->key = Str::uuid(); 
+            $item->nom = Arr::last(explode('/',$val));
+            $final->put($val,$item);   
         }
-
         $this->sousDirectories = $final;
         #je charge le contenu du dossiers
-        $this->sousDepth = boolval($val);
+        $this->sousDepth = boolval($first);
     }
 
     function download(Request $request)

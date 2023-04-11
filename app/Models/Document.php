@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     protected $casts = [
-        'data' => 'json'
+        'data'=>'array'
     ];
 
     protected $hidden = [

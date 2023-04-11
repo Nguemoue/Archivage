@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\SousTypeDocument;
 use App\Models\SousTypesField;
+use Illuminate\Support\Arr;
 
 class SousTypeApiController extends Controller
 {
@@ -15,8 +16,9 @@ class SousTypeApiController extends Controller
         $documents = $sousType->documents;
         $final = collect();
         $except = collect(["dossierId"]);
-        ($documents->pluck("data")->map(function ($elt){
-            return array_keys($elt);
+        ($documents->pluck("data")->map(function ($elt)
+        {
+          return array_keys($elt);
         })->each(function ($req) use(&$final,$except){
             foreach ($req as $re){
                 if(!$final->contains($re) and $except->doesntContain($re)){

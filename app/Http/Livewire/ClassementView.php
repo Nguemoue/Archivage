@@ -75,6 +75,7 @@ class ClassementView extends Component
         $documents->each(function ($element) use ($endUrl) {
             $endPart = Arr::last(explode(DIRECTORY_SEPARATOR, $element->url));
             $url = $endUrl . DIRECTORY_SEPARATOR . $endPart;
+            $url = str_replace(DIRECTORY_SEPARATOR,"/",$url);
             #je deplace mon fichier vers ce repertoire
             if(Storage::exists($element->url)){
                 $moved = Storage::move($element->url, $url);
