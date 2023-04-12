@@ -43,6 +43,12 @@
                         </select>
                     </div>
                     <hr class="my-4">
+						 <div class="my-2">
+							 <label for="champTab">champ pour le tableau de statistique</label>
+							 <div id="chamTab">
+
+							 </div>
+						 </div>
                     <button class="btn btn-success btn-sm">
                         soumettre <i class="fa fa-send"></i>
                     </button>
@@ -61,10 +67,15 @@
         $("#sousType").on('change',function (event){
             $.get(`/api/sousType/${event.target.value}/fields`).done(function (data){
                let html = '';
+               let champTab = '';
                 data.forEach(elt=>{
                    html+=`<option value="${elt}">${elt}</option>`;
+                   champTab+=`<label for="${elt}" class="mx-4">
+						${elt} <input type="checkbox" id="${elt}" value="${elt}" name="champTab[]">
+					</label>`;
                })
                 $('#champ').html(html)
+					$("#chamTab").html(champTab)
             });
         })
     </script>

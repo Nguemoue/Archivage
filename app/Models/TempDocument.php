@@ -17,6 +17,9 @@ class TempDocument extends Model
         'numero','url','nom','data'
     ];
 
+    protected $casts = [
+    	"data" => "array"
+	 ];
     function tempDossiers():BelongsToMany{
         return $this->belongsToMany(TempDossier::class,TempDossierDocument::class);
     }

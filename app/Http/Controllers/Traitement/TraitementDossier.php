@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Nette\Utils\Json;
 use Symfony\Component\HttpFoundation\Response;
 use function PHPUnit\Framework\throwException;
 
@@ -37,12 +38,12 @@ class TraitementDossier extends Controller
         $dossier = TempDossier::query()->findOrFail($id);
         abort_if($dossier == null,new Response("model non trouve",404));
         $tempDocuments = $dossier->tempDocuments;
-//        dd($tempDocuments,$dossier);
+
+		 $sessionsDoc = session("dossier-{$id}");
         $doc = new Dossier();
         $doc->nom = $dossier->nom;
         $doc->numero = Str::uuid();
         $doc->save();
-        $sessionsDoc = session("dossier-{$id}");
 
         foreach ($sessionsDoc as $key => $item) {
             $tempDocumentKey = explode("-",$key)[1];
@@ -53,7 +54,7 @@ class TraitementDossier extends Controller
             $document->nom = $item["titre"];
             $document->created_at = $item["created_at"];
             $document->updated_at = $item["updated_at"];
-            $document->data = $item["data"];
+            $document->data = Json::decode($item["data"],true);
             $document->numero = Str::uuid();
             $ext = explode(".",$tmpDoc->url)[1];
 //            dd($ext);
@@ -76,7 +77,7 @@ class TraitementDossier extends Controller
         $dossier->delete();
         session()->forget("dossier-{$id}");
         //je lui redirige le dossier creer vers un cardre de classement
-        
+
         return redirect()->route("classement.dossier.post",[$doc->id])->with("success","Dossier finaliser");
     }
 }

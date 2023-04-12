@@ -7,6 +7,7 @@ use App\Http\Controllers\ScannController;
 use App\Http\Controllers\SDDAController;
 use App\Http\Livewire\Scann\ScannElement;
 use App\Http\Livewire\Scann\ScannGroup;
+use App\Models\TempDocument;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('index');

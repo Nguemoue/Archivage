@@ -31,8 +31,8 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $item->nom }}</td>
-                                <td class="text-center"><span class="badge bg-secondary">{{ $item->sous_types_count }}</span></td>
-                                <td>{{ Str::words($item->description, 3, '...') }}</td>
+                                <td class="text-center"><a href="#!" class="btn btn-sm bg-secondary">{{ $item->sous_types_count }}</a></td>
+                                <td>{!!  Str::words($item->description, 3, '...') !!}</td>
                                 <td>{{ $item->created_at->IsoFormat('ll') }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
