@@ -32,10 +32,11 @@ Route::group([
     Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
     Route::resource("fichiers",FichierController::class);
     Route::resource("fichiers.decision", FichierDecisionController::class);
+    Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
 
 });
 
-Route::get("/preview-file/{id}", PreviewFileController::class)->name("file.preview");
+Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])->name("file.preview");
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

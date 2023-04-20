@@ -60,7 +60,7 @@ class TraitementDossier extends Controller
 //            dd($ext);
             $newUrl = $doc->nom."/". $document->numero.'.'.$ext;
             if(Storage::exists($tmpDoc->url)){
-                Storage::move($tmpDoc->url,$newUrl);
+                Storage::copy($tmpDoc->url,$newUrl);
             }
             $newUrl = str_replace(DIRECTORY_SEPARATOR,"/",$newUrl);
             $document->url = $newUrl;

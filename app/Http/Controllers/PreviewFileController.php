@@ -34,4 +34,15 @@ class PreviewFileController extends Controller
         ]);
 
     }
+
+    function previewFile($url){
+			$hashed = base64_decode($url);
+			$extParts = explode(".",$hashed);
+			$ext = \Arr::last($extParts);
+			$mime = $ext == "pdf"?"application/pdf":"image/$ext";
+			$file = Storage::disk("local")->get($hashed);
+			return  response($file)->withHeaders([
+				"Content-Type"=>$mime
+			]);
+	 }
 }
