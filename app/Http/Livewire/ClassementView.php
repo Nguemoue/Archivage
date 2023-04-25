@@ -82,12 +82,9 @@ class ClassementView extends Component
                 if ($moved) {
                     $element->url = $url;
                     $element->save();
-                    session()->flash("enregistre avec success");
                 }
-
             }
-
         });
-
-    }
+		 session()->flash("success","Enregistre avec success");
+	 }
 }

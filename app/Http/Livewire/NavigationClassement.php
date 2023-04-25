@@ -52,16 +52,17 @@ class NavigationClassement extends Component
     }
 
     function setSousDepth($first, $sousClassementId){
-    
+
         $this->currentSousClassement = $sousClassementId;
         $this->currentSousClassement = SousClassement::find($sousClassementId);
         $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
-        
+
         $this->sousDirectories = Storage::disk('local')->directories($url);
         $final = collect([]);
         foreach ($this->sousDirectories as $val){
             $item = new stdClass;
             $tempFiles = Storage::files($val);
+            $item->url = [];
             foreach($tempFiles as $file){
                 $finalTemFiles = new stdClass;
                 $finalTemFiles->url = $file;
@@ -76,9 +77,9 @@ class NavigationClassement extends Component
                 $item->url[] = $finalTemFiles;
             }
             $item->count = count($item->url);
-            $item->key = Str::uuid(); 
+            $item->key = Str::uuid();
             $item->nom = Arr::last(explode('/',$val));
-            $final->put($val,$item);   
+            $final->put($val,$item);
         }
         $this->sousDirectories = $final;
         #je charge le contenu du dossiers

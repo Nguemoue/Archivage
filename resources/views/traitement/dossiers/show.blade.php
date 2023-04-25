@@ -37,9 +37,10 @@
                 </div>
             @endforeach
             <div class="card-footer">
-                <form method="post" action="{{route('traitement.dossier-traitement.finish',['id'=>$dossier->id])}}">
+                <form id="validAllForm" method="post" action="{{route('traitement.dossier-traitement.finish',['id'=>$dossier->id])}}">
                     @csrf
-                    <button hreflang="fr" class="btn btn-sm btn-outline-info text-lowercase">
+						 <input type="hidden" name="copy" id="copyVal" value="0">
+                    <button id="validAll" type="button" hreflang="fr" class="btn btn-sm btn-outline-info text-lowercase">
                         <i class="fa fa-reply-all"></i>
                         Valider tous ses traitements</button>
                 </form>
@@ -48,3 +49,20 @@
 
     </div>
 @endsection
+
+@push("scripts")
+	<script>
+		let button = document.getElementById("validAll")
+		let copyVal = document.getElementById("copyVal")
+		let validAllForm = document.getElementById("validAllForm")
+		button.onclick = function (event) {
+			let result = confirm("voulez vous conservez une copie du dossier ?")
+			if(result){
+				copyVal.value = 1
+			}else{
+				copyVal.value = 0
+			}
+			validAllForm.submit()
+		}
+	</script>
+@endpush

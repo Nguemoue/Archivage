@@ -50,7 +50,7 @@
 												<a data-toggle="collapse" class=""
 													data-target="#dropDownMenu{{$sousDirectory->key}}">
 													<i class="fa fa-folder fa-2x text-warning mx-2"></i>
-													<span class="">
+													<span class="text-wrap" style="max-width: 100px;overflow-x: wrap">
                                                     {{$sousDirectory->nom}}
                                                     <b class="text-bold font-bold"> ({{($sousDirectory->count)}}</b> Fichiers)
                                                     </span>

@@ -3,8 +3,12 @@
 @section('content')
 
 	<div class="float-right">
+		<a href="#" class="btn btn-outline-primary mx-3 btn-sm " id="preview"><i class="fa fa-eye-slash"></i>
+			Apercu avant impresion
+		</a>
 		<a href="#" class="btn btn-outline-info btn-sm btn-download" id="download"><i class="fa fa-download"></i>
-			telecharger</a>
+			telecharger
+		</a>
 	</div>
 	<div class="container-fluid">
 		<h2 class="text-center">Filtre pour Les Statistique</h2>
@@ -16,7 +20,7 @@
 				Statistiaques des Documents
 			</div>
 			<div class="card-body">
-				<table class="table table-bordered">
+				<table id="tableStat" class="table table-bordered">
 					<thead>
 					<tr>
 						<th>#</th>
@@ -36,7 +40,9 @@
 							<td>{{$document->sous_type_document->type->nom}}</td>
 							<td>{{$document->created_at->isoFormat("lll")}}</td>
 							@foreach($champTab as $c)
-								<th>{{$document->data[$c]}}</th>
+								@if(isset($document->data[$c]))
+									<th>{{$document->data[$c]}}</th>
+								@endif
 							@endforeach
 						</tr>
 					@endforeach
@@ -83,6 +89,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
 	<script>
 		$('#download').on('click', function () {
+			table.destroy()
 			html2PDF(document.getElementById("print-chart"), {
 				jsPDF: {
 					format: 'a4',

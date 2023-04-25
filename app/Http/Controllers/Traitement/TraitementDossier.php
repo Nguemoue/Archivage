@@ -35,9 +35,11 @@ class TraitementDossier extends Controller
      */
     public function finish($id, Request $request){
 
-        $dossier = TempDossier::query()->findOrFail($id);
-        abort_if($dossier == null,new Response("model non trouve",404));
-        $tempDocuments = $dossier->tempDocuments;
+    		$method = "move";
+    		$method = $request->input("copy") == '1' ?"copy":$method;
+         $dossier = TempDossier::query()->findOrFail($id);
+         abort_if($dossier == null,new Response("model non trouve",404));
+         $tempDocuments = $dossier->tempDocuments;
 
 		 $sessionsDoc = session("dossier-{$id}");
         $doc = new Dossier();
@@ -60,7 +62,7 @@ class TraitementDossier extends Controller
 //            dd($ext);
             $newUrl = $doc->nom."/". $document->numero.'.'.$ext;
             if(Storage::exists($tmpDoc->url)){
-                Storage::copy($tmpDoc->url,$newUrl);
+                Storage::$method($tmpDoc->url,$newUrl);
             }
             $newUrl = str_replace(DIRECTORY_SEPARATOR,"/",$newUrl);
             $document->url = $newUrl;
@@ -78,6 +80,6 @@ class TraitementDossier extends Controller
         session()->forget("dossier-{$id}");
         //je lui redirige le dossier creer vers un cardre de classement
 
-        return redirect()->route("classement.dossier.post",[$doc->id])->with("success","Dossier finaliser");
+        return redirect()->route("classement.dossier.post",[$doc->id]);
     }
 }

@@ -151,12 +151,11 @@
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 
 <script defer>
-	$(function (){
-		$(".table").DataTable()
+		const table = $(".table").DataTable()
 		$(".sumernote").summernote({
 			placeholder:"content"
 		})
-	})
+
 </script>
 @livewireScripts
 @includeIf("_partials.swal")

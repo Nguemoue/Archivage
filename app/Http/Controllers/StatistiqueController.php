@@ -71,7 +71,10 @@ class StatistiqueController extends Controller
 			$pieChart->addSlice($periode . ' ' . $k, $v, $color);
 			$histogrameChart->addPoint($periode . ' ' . $k, $v, $color);
 		}
-		$documents = Document::query()->get();
+		$sousType = (int) $request->input("sousType");
+		$documents = Document::query()
+						->where("sous_type_document_id","=",$sousType)
+						->get();
 		$champTab = $request->input("champTab");
 
 		return view("statistique.home",

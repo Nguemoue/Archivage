@@ -2,6 +2,11 @@
     <div class="card-header">
         <h4 class="card-title text-center">Ordre de Classements</h4>
     </div>
+	@if(session()->has("success"))
+		<div class="alert alert-success w-75 mx-auto">
+			Enregistrement Efectuer avec success
+		</div>
+	@endif
     <div class="card-body border ">
         @if($depth == 1)
             <div class="row gap-1 p-1">
