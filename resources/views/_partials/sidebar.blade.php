@@ -153,5 +153,13 @@
                 </ul>
             </li>
         </ul>
+
+        <div class="pcoded-navigation-label">Deconnexion</div>
+        {{-- <ul class="pcoded-item pcoded-left-item">
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button class="mx-auto  btn btn-danger"><i class="ti-logout"></i> Se deconnecter</button>
+            </form>
+        </ul> --}}
     </div>
 </nav>

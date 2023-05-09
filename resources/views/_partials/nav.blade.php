@@ -71,8 +71,9 @@
 								<i class="ti-lock"></i> Lock Screen
 							</a>
 						</li>
+						<form action="{{route('logout')}}" id="logoutForm" method="post">@csrf</form>
 						<li class="waves-effect waves-light">
-							<a href="auth-normal-sign-in.html">
+							<a href="#!" onclick="document.forms.logoutForm.submit()">
 								<i class="ti-layout-sidebar-left"></i> Logout
 							</a>
 						</li>
