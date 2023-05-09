@@ -5,7 +5,6 @@
 	<div class="card-body border ">
 		@if($depth == 1)
 			<div class="row gap-1 p-1">
-
 				@foreach($classements as $classement)
 					<div class="d-flex px-2 flex-column m-3">
 						<a wire:click='loadSousClassement({{$classement->id}})' href="#!">

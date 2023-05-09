@@ -22,18 +22,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('index');
-})->name("home");
-
-Route::group([
-
-], function () {
-    Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
-    Route::resource("fichiers",FichierController::class);
-    Route::resource("fichiers.decision", FichierDecisionController::class);
-    Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
-
+Route::middleware("auth")->group(function(){
+    Route::get('/', function () {
+        return view('index');
+    })->name("home");
+    
+    Route::group([
+    
+    ], function () {
+        Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
+        Route::resource("fichiers",FichierController::class);
+        Route::resource("fichiers.decision", FichierDecisionController::class);
+        Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
+    
+    });
 });
 
 Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])->name("file.preview");
