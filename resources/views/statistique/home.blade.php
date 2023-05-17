@@ -2,13 +2,19 @@
 
 @section('content')
 
-	<div class="float-right">
-		<a href="#" class="btn btn-outline-primary mx-3 btn-sm " id="preview"><i class="fa fa-eye-slash"></i>
-			Apercu avant impresion
-		</a>
-		<a href="#" class="btn btn-outline-info btn-sm btn-download" id="download"><i class="fa fa-download"></i>
-			telecharger
-		</a>
+	<div class="d-flex justify-content-end flex-end">
+			<form action="{{route('statistique.filePdf',['sousType'=>$sousType])}}" method="post">
+				@csrf
+				<button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i>	 Pdf en fichier</button>
+			</form>
+			
+			<a href="#" class="btn btn-outline-primary mx-3 btn-sm " id="preview"><i class="fa fa-eye-slash"></i>
+				Apercu avant impresion
+			</a>
+			<a href="#" class="btn btn-outline-info btn-sm btn-download" id="download"><i class="fa fa-download"></i>
+				telecharger
+			</a>
+		
 	</div>
 	<div class="container-fluid">
 		<h2 class="text-center">Filtre pour Les Statistique</h2>

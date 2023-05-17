@@ -58,7 +58,8 @@
 												<div class="collapse" id="dropDownMenu{{$sousDirectory->key}}">
 													<ul class="list-unstyled px-2">
 														@foreach($sousDirectory->url as $sousDirect)
-															<li title="voir les details sur le fichiers"
+															<div>
+																<li title="voir les details sur le fichiers"
 																 class="d-flex justify-content-between my-2">
                                                                 <span><i class="fa fa-{{$sousDirect->extension}}"></i>
                                                                 <em>{{$sousDirect->nom}}</em></span>
@@ -76,7 +77,38 @@
 																					  id="modalFile{{$sousDirect->key}}"/>
 															<x-navigation.modal-preview :nom="$sousDirect->nom" :document-url="$sousDirect->url"
 																								 id="modalPreview{{$sousDirect->key}}"/>
-														@endforeach
+															</div>
+															@endforeach
+															<div><a data-toggle="modal" data-target="#modalNewFile{{$sousDirect->key}}" class="btn btn-primary" href="#">ajouter un documents</a></div>		
+															{{-- pour la modal d'ajout --}}
+															<div class="modal fade" id="modalNewFile{{$sousDirect->key}}" tabindex="-1" role="dialog"  aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title" id="exampleModalLongTitle">Ajouter d'un document </h5>
+																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">
+																			<form action="#!">
+																				@csrf
+																				<div class="form-group">
+																					<label for="file">Fichier a selectionner</label>
+																					<input type="file" class="custom-file form-control">
+																				</div>
+																				<div class="form-group">
+																					<label for="nom">Nom du document</label>
+																					<input type="text" placeholder="nom du document" class="form-control">
+																				</div>
+																			</form>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Fermer</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
 													</ul>
 												</div>
 											</div>

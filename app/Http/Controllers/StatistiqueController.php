@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Document;
 use App\Models\SousTypeDocument;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
@@ -77,9 +77,10 @@ class StatistiqueController extends Controller
 						->get();
 		$champTab = $request->input("champTab");
 
+		$sousType=$request->input("sousType");
 		return view("statistique.home",
 			compact("lineChart", "histogrameChart", "pieChart","documents","champTab"
-			,"champ","operateur")
+			,"champ","operateur","sousType")
 		);
 	}
 
@@ -93,4 +94,11 @@ class StatistiqueController extends Controller
 			return 'month';
 		}
 	}
+
+	public function filePdf($sousType){
+		$file = Pdf::loadview("statistique.pdfFile",[]);
+		return $file->stream();
+	}
+
 }
+
