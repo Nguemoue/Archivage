@@ -100,5 +100,9 @@ class StatistiqueController extends Controller
 		return $file->stream();
 	}
 
+	public function file($sousType){
+		return view("statistique.pdfFile");
+	}
+
 }
 

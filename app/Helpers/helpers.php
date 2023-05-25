@@ -22,3 +22,12 @@
 			return null;
 		}
 	}
+function getDataUrl($image, $mime = 'image/png'): string
+{
+
+	//je verifie si le fichier existe
+	if (!empty($image)) {
+		return 'data:image/png;base64,' . base64_encode($image);
+	}
+	return '';
+}
