@@ -7,14 +7,14 @@
 				@csrf
 				<button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i>	 Pdf en fichier</button>
 			</form>
-			
+
 			<a href="#" class="btn btn-outline-primary mx-3 btn-sm " id="preview"><i class="fa fa-eye-slash"></i>
 				Apercu avant impresion
 			</a>
 			<a href="#" class="btn btn-outline-info btn-sm btn-download" id="download"><i class="fa fa-download"></i>
 				telecharger
 			</a>
-		
+
 	</div>
 	<div class="container-fluid">
 		<h2 class="text-center">Filtre pour Les Statistique</h2>
@@ -69,17 +69,31 @@
 		</div>
 		<div class="chart" >
 			<hr>
-			<div class="">
-				<livewire:livewire-column-chart :column-chart-model="$lineChart"/>
+			<div class="card">
+				<div class="card-header">
+					Diagramme #1
+				</div>
+				<div class="card-body">
+					<livewire:livewire-column-chart :column-chart-model="$lineChart"/>
+				</div>
 			</div>
 			<hr class="my-4">
-			<div>
-				<livewire:livewire-pie-chart :pie-chart-model="$pieChart"/>
+			<div class="card">
+				<div class="card-header">
+					Diagramme #2
+				</div>
+				<div class="card-body">
+					<livewire:livewire-pie-chart :pie-chart-model="$pieChart"/>
+				</div>
 			</div>
-			<div>
-				<livewire:livewire-line-chart :line-chart-model="$histogrameChart"/>
+			<div class="card">
+				<div class="card-header">
+					Diagramme #3
+				</div>
+				<div class="card-body">
+					<livewire:livewire-line-chart :line-chart-model="$histogrameChart"/>
+				</div>
 			</div>
-
 		</div>
 	</section>
 @endsection
