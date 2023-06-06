@@ -17,8 +17,8 @@
 					</div>
 				</div>
 			</div>
-			<a href="{{route('home')}}">
-				<em>ARCHIVE APP</em>
+			<a href="{{route('admin.home')}}">
+				<em>Administration</em>
 				{{-- <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" /> --}}
 			</a>
 			<a class="mobile-options waves-effect waves-light">
@@ -56,12 +56,12 @@
 						<i class="ti-bell"></i>
 						<span class="badge bg-c-red"></span>
 					</a>
-					<x-notification-component :user="auth()->user()"/>
+					<x-notification-component :user="auth(adminGuard())->user()"/>
 				</li>
 				<li class="user-profile header-notification">
 					<a href="#!" class="waves-effect waves-light">
 						<img src="{{ asset('logo-admin.jpg') }}" class="img-radius" alt="User-Profile-Image">
-						<span>{{auth('web')->user()->name}}</span>
+						<span>{{auth(adminGuard())->user()->name}}</span>
 						<i class="ti-angle-down"></i>
 					</a>
 					<ul class="show-notification profile-notification">
@@ -85,7 +85,7 @@
 								<i class="ti-lock"></i> Lock Screen
 							</a>
 						</li>
-						<form action="{{route('logout')}}" id="logoutForm" method="post">@csrf</form>
+						<form action="{{route('admin.logout')}}" id="logoutForm" method="post">@csrf</form>
 						<li class="waves-effect waves-light">
 							<a href="#!" onclick="document.forms.logoutForm.submit()">
 								<i class="ti-layout-sidebar-left"></i> Logout

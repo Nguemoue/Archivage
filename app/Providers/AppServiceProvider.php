@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,12 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive("scanneur", function (User $user) {
-
-        });
-
-        Blade::directive("traiteur", function (User $user) {
-
-        });
+    	$supportedLocales = LaravelLocalization::getSupportedLocales();
+			\View::share("supportedlocales",$supportedLocales);
     }
 }

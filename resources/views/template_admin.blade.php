@@ -53,10 +53,10 @@
 <div id="pcoded" class="pcoded">
 	<div class="pcoded-overlay-box"></div>
 	<div class="pcoded-container navbar-wrapper">
-		@includeIf('_partials.nav')
+		@includeIf('_partials.admin_nav')
 		<div class="pcoded-main-container">
 			<div class="pcoded-wrapper">
-				@includeIf('_partials.sidebar')
+				@includeIf('_partials.admin_sidebar')
 				<div class="pcoded-content">
 					<!-- Page-header start -->
 				@yield('header')

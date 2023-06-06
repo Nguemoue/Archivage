@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+		 "admin"=>[
+		 	"driver"=>"session",
+			 "provider"=>"admins"
+		 ],
+		 "superAdmin"=>[
+		 	"driver"=>"session",
+			 "provider"=>"superAdmin"
+		 ]
     ],
 
     /*
@@ -55,7 +63,7 @@ return [
     | sources which represent each model / table. These sources may then
     | be assigned to any extra authentication guards you have defined.
     |
-    | Supported: "database", "eloquent"
+    | Supported: "database", "eloquent"t
     |
     */
 
@@ -64,6 +72,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+		 "admins"=>[
+		 	"driver"=>"eloquent",
+			 "model"=>App\Models\Admin::class
+		 ],
+		 "superAdmin"=>[
+		 	"driver"=>"eloquent",
+			 "model"=>App\Models\superAdmin::class
+		 ]
 
         // 'users' => [
         //     'driver' => 'database',

@@ -21,28 +21,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([
+	"prefix" => LaravelLocalization::setLocale(),
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
+],function(){
 
-Route::middleware("auth")->group(function(){
-    Route::get('/', function () {
-        return view('index');
-    })->name("home");
-    
-    Route::group([
-    
-    ], function () {
-        Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
-        Route::resource("fichiers",FichierController::class);
-        Route::resource("fichiers.decision", FichierDecisionController::class);
-        Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
-    
-    });
+	Route::middleware("auth")->group(function(){
+		Route::get('/', function () {
+			return view('index');
+		})->name("home");
+
+		Route::group([
+
+		], function () {
+			Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
+			Route::resource("fichiers",FichierController::class);
+			Route::resource("fichiers.decision", FichierDecisionController::class);
+			Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
+
+		});
+	});
+
+	Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])->name("file.preview");
+	Route::get('/dashboard', function () {
+		return view('dashboard');
+	})->middleware(['auth'])->name('dashboard');
+
 });
-
-Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])->name("file.preview");
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 require __DIR__ . '/route.scan.php';
 require __DIR__ . '/route.traitement.php';

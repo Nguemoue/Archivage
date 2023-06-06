@@ -132,21 +132,21 @@
             <li class="pcoded-hasmenu ">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-id-badge"></i><b>A</b></span>
-                    <span class="pcoded-mtext">Pages</span>
+                    <span class="pcoded-mtext">Espace</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
                     <li class="">
-                        <a href="" class="waves-effect waves-dark">
+                        <a href="{{route('admin.home')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="fa fa-print"></i></span>
-                            <span class="pcoded-mtext">Imprimer les rapports</span>
+                            <span class="pcoded-mtext"> Administrateur</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="auth-sign-up.html" class="waves-effect waves-dark">
+                        <a href="#" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                            <span class="pcoded-mtext">Compte rendu</span>
+                            <span class="pcoded-mtext"> Super Administrateur</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>

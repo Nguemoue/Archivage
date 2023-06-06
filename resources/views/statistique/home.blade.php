@@ -116,7 +116,9 @@
 				},
 				imageType: 'image/jpeg',
 				output: './pdf/generate.pdf'
-			});
+			}).then(function(){
+				var table = ('.table').datatable()
+			})
 		});
 	</script>
 @endpush
