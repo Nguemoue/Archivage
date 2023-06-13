@@ -10,6 +10,7 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<!-- Meta -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -18,7 +19,7 @@
 	<meta name="author" content="developper"/>
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
-@livewireStyles
+	@livewireStyles
 
 	<!-- Google font-->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
@@ -126,7 +127,6 @@
 </div>
 <![endif]-->
 <!-- Warning Section Ends -->
-@livewireScripts
 
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }} "></script>
@@ -142,6 +142,7 @@
 
 <!-- slimscroll js -->
 <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+@livewireScripts
 
 <!-- menu js -->
 <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
@@ -152,7 +153,7 @@
 {{-- end of sumernote--}}
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-
+@stack("scripts")
 <script defer>
 		var table = $(".table").DataTable()
 		$(".sumernote").summernote({
