@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 	 */
 	public function destroy(Request $request)
 	{
-		Auth::guard(config("misc.guard.superAdmin"))->logout();
+		Auth::guard(superAdminGuard())->logout();
 		/* je reset mon token */
 		$request->session()->invalidate();
 		/* je regénère mon token d'authentification */

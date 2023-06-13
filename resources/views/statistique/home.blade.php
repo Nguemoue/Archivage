@@ -26,7 +26,7 @@
 				Statistiaques des Documents
 			</div>
 			<div class="card-body">
-				<table id="tableStat" class="table table-bordered">
+				<table id="tableStat" class="table datatable table-bordered">
 					<thead>
 					<tr>
 						<th>#</th>
@@ -107,9 +107,9 @@
 	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
-	<script>
+	<script defer>
 		$('#download').on('click', function () {
-			table.destroy()
+			dataTables.destroy()
 			html2PDF(document.getElementById("print-chart"), {
 				jsPDF: {
 					format: 'a4',
@@ -117,7 +117,7 @@
 				imageType: 'image/jpeg',
 				output: './pdf/generate.pdf'
 			}).then(function(){
-				var table = ('.table').datatable()
+				var dataTables = $('.datatable').datatable()
 			})
 		});
 	</script>

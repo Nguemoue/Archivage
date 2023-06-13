@@ -7,6 +7,7 @@ use App\Models\SousTypeDocument;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Asantibanez\LivewireCharts\Models\LineChartModel;
 use Asantibanez\LivewireCharts\Models\PieChartModel;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
@@ -15,6 +16,7 @@ class StatistiqueController extends Controller
 {
 	public function index()
 	{
+
 		return $this->filter();
 	}
 
@@ -96,8 +98,20 @@ class StatistiqueController extends Controller
 	}
 
 	public function filePdf($sousType){
-		$file = Pdf::loadview("statistique.pdfFile",[]);
-		return $file->stream();
+
+		$options =[
+//			"enable-forms"=>true,
+			"enable-javascript"=>true,
+//			"javascript-delay"=>400,
+//			"enable-local-file-access"=>true
+		];
+		$file = SnappyPdf::loadView("statistique.pdfFile",[]);
+		$file->setOptions($options)->setTemporaryFolder(base_path('resources/tempDir/pdf'));
+		$content =  $file->output();
+		return response($content)->withHeaders([
+			"Content-Type"=>"application/pdf",
+			"Content-Disposition"=>"inline"
+		]);
 	}
 
 	public function file($sousType){

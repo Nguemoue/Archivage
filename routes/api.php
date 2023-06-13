@@ -20,3 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get("/sousType/{id}/fields", [SousTypeApiController::class, "index"])->name("api.soustype.fields");
+
+Route::get("/logo",function (){
+	$file = base_path("public/minepat.jpg");
+	$f = File::get($file);
+	return response($f)->withHeaders(['Content-Type'=>'image/jpg']);
+})->name("api.logo");

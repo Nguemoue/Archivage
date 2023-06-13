@@ -1,3 +1,7 @@
+@php
+$file = base_path('public/amoirie.jpg');
+	$logo = \File::get($file);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,103 +10,78 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<style>
-		* {
+		*{
 			padding: 0;
 			margin: 0;
 			box-sizing: border-box;
 		}
-
-		#header {
-			margin-top: 80px;
-			font-size: 8px;
-			display: inline-block;
-			justify-content: space-between;
-			/*align-content: stretch;*/
-			align-items: stretch;
-		}
-
-		#header > div {
-			border: 1px solid black;
-			text-align: center;
-		}
-
-		.part-left {
-			margin-left: 20px;
-			display: inline-block;
-			width: 45%;
-		}
-
-		.part-right {
-			display: inline-block;
-			width: 45%;
-		}
-		.text-center{
-			text-align: center;
-		}
-		.text-underline{
-			text-decoration: underline;
-		}
-
 	</style>
+	<style>
+		{!!  \File::get(base_path('public/assets/css/bootstrap/css/bootstrap.min.css')); !!}
+	</style>
+	<style>
+		.dashed::after{
+			content: '';
+			margin-left: auto;
+			margin-right: auto;
+			/*background-color: red;*/
+			display: block;
+			position: relative;
+			padding: 4px;
+			width: 30%;
+			height: 4px;
+			border-bottom: 2px dashed black;
+			/*border-bottom: 2px dashed black;*/
+			/*border-bottom-width: medium;*/
+			/*line-height: 2em;*/
+		}
+	</style>
+
 </head>
-<body>
-<header id="header">
-	<div class="part-left">
-		<p>
-			REPUBLIOUE DU CAMEROUN
-			Paix -Travail - PATRIE
-		</p>
-		-------------------------------------------
-		<p>
+<body >
+<header class="row no-gutters align-items-center">
+
+	<div class="col-4 text-center ">
+		<div class="dashed">REPUBLIOUE DU CAMEROUN</div>
+		<div class="dashed">Paix -Travail - PATRIE</div>
+		<div class="dashed">
 			MINISTERE DE L'ECONOMIE, DE LA PLANIFICATON
 			ET DE L'AMENAGEMENT DU TERRITOIRE
-		</p>
-		---------
-		<p>
-			DIRECTION GENERALE DE LA PLANIFICATION
-			ET DE L'AMENAGEMENT DU TERRITOIRE
-		</p>
-		------------------------
-		<p>
-			DIRECTEUR GENERAL
-		</p>
-		----------------
-		<p>
-			DIRECTION DE L'AMENAGEMENT DU TERRITOIRE ET DE LA
-			MISE NE VALEUR DES ZONES FRONTALIERS
-		</p>
-		----------------
+		</div>
+		<div class="dashed">SECRETARIAT  GENERAL</div>
+		<div>
+			SOUS-DIRECTION DE LA DOCUMENTATION ET DES ARCHIVES
+		</div>
 	</div>
-	{{--		<div class="part-center"></div>--}}
-	<div class="part-right">
-		<p>
+
+
+	<div class="col-4  text-center">
+		<img src="{{getDataUrl($logo)}}" width="70%" alt="Logo" class="img-fluid">
+	</div>
+
+	<div class="col-4 text-center ">
+		<div class="dashed">
 			REPUBLIC OF CAMEROON
-			Peace - Work - Fatherland
-		</p>
-		------------------------
-		<p>
+		</div>
+		<div class="dashed">			Peace - Work - Fatherland
+		</div>
+		<div class="dashed">
 			MINISTRY OF ECONOMY, PLANNING
 			AND REGIONAL DEVELOPMENT
-		</p>
-		----------------------------
-		<p>
+		</div>
+		<div class="dashed">
 			GENERAL SECRETARIAT
-		</p>-----------------------------------
-		<p>
-			GENERAL DIRECTORATE OF PLANNING
-			AND REGIONAL DEVELOPMENT
-			DEPARTMENT OF REGIONAL
-			AND BORDER AREA DEVELOPMENT
-		</p>
-		----------------------------
-		<p>
-			SUBDEPARTEMENT OF BORDERLESS AND AREA
-		</p>
-		-----------
+		</div>
+		<div >
+			SUB DIRECTORATE OF DOCUMENTATION AND ARCHIVES
+		</div>
+
 	</div>
 </header>
 <br>
 <br>
-<h1 class="text-center text-underline">Titre du Document</h1>
+<h1 class="text-center text-underline" id="de">Titre du Document</h1>
+
 </body>
 </html>
+

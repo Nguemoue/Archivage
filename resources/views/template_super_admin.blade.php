@@ -18,8 +18,6 @@
 	<meta name="author" content="developper"/>
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
-@livewireStyles
-
 	<!-- Google font-->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
 	<!-- waves.css -->
@@ -44,6 +42,7 @@
 	{{-- link for datatables	--}}
 	<link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 	@stack("styles")
+	@livewireStyles
 
 </head>
 
@@ -54,10 +53,10 @@
 <div id="pcoded" class="pcoded">
 	<div class="pcoded-overlay-box"></div>
 	<div class="pcoded-container navbar-wrapper">
-		@includeIf('_partials.nav')
+		@includeIf('_partials.super_admin_nav')
 		<div class="pcoded-main-container">
 			<div class="pcoded-wrapper">
-				@includeIf('_partials.sidebar')
+				@includeIf('_partials.super_admin_sidebar')
 				<div class="pcoded-content">
 					<!-- Page-header start -->
 				@yield('header')
@@ -125,7 +124,6 @@
 </div>
 <![endif]-->
 <!-- Warning Section Ends -->
-@livewireScripts
 
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }} "></script>

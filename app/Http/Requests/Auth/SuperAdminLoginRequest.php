@@ -47,7 +47,7 @@ class SuperAdminLoginRequest extends FormRequest
 	{
 		$this->ensureIsNotRateLimited();
 
-		if (! Auth::guard(config('misc.guard.superAdmin'))
+		if (! Auth::guard(superAdminGuard())
 				->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
 			RateLimiter::hit($this->throttleKey());
 

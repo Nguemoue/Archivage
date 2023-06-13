@@ -2,4 +2,9 @@
 
 use App\Http\Controllers\NavigateController;
 
-\Illuminate\Support\Facades\Route::get("/navigate/index",NavigateController::class)->name("navigation.index");
+Route::group([
+	"prefix" => LaravelLocalization::setLocale(),
+	'middleware' => ["localeSessionRedirect", "localizationRedirect", "localeViewPath"]
+], function () {
+	Route::get("/navigate/index", NavigateController::class)->name("navigation.index");
+});
