@@ -48,6 +48,7 @@
 </head>
 
 <body>
+@routes
 <!-- Pre-loader start -->
 <x-preloader-component/>
 <!-- Pre-loader end -->
