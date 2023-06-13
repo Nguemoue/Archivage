@@ -78,7 +78,7 @@ return [
 		 ],
 		 "superAdmin"=>[
 		 	"driver"=>"eloquent",
-			 "model"=>App\Models\superAdmin::class
+			 "model"=>App\Models\SuperAdmin::class
 		 ]
 
         // 'users' => [

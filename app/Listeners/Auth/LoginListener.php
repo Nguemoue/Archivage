@@ -3,7 +3,7 @@
 namespace App\Listeners\Auth;
 
 use App\Http\Requests\Auth\SuperAdminLoginRequest;
-use App\Models\superAdmin;
+use App\Models\SuperAdmin;
 use App\Notifications\Auth\LoginNotification;
 use Illuminate\Auth\Events\Login;
 
@@ -33,7 +33,7 @@ class LoginListener
 			["device"=>$currentDevice]
 		 );
 		//je notifies mes super admin
-		 $superAdmins = superAdmin::query()->get();
+		 $superAdmins = SuperAdmin::query()->get();
 		 $superAdmins->each(function($superAdmin) use($user){
 		 	$superAdmin->notify(new LoginNotification($user));
 		 });

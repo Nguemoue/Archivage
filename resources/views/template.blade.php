@@ -159,9 +159,5 @@
 		})
 
 </script>
-@livewireScripts
-@includeIf("_partials.swal")
-@stack("scripts")
 </body>
-
 </html>
