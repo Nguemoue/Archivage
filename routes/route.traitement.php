@@ -6,7 +6,7 @@ use App\Http\Controllers\Traitement\TraitementController;
 use Illuminate\Support\Facades\Route;
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath","permission:".config('perm_names.TRAIT_DOC')]
 ],function() {
 
 

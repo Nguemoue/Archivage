@@ -4,7 +4,7 @@ use App\Http\Controllers\StatistiqueController;
 use Illuminate\Support\Facades\Route as Route;
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath","permission:".config('perm_names.SHOW_STAT')]
 ],function() {
 
 	Route::get("/statistique/index", [StatistiqueController::class, "index"])->name("statistique.index");

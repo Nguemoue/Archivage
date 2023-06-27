@@ -38,7 +38,6 @@
 			</div>
 		@endcan
 		@can(config('perm_names.SHOW_STAT'))
-
 			<div class="col-6">
 				<a href="{{ route('statistique.index') }}" style="line-height: 100px;" class="w-100 btn btn-outline-danger">
 					<span class="fa fa-book fa-2x"></span>

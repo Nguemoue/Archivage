@@ -15,7 +15,8 @@ Route::group([
 	Route::group([
 
 	], function () {
-		Route::get("scan", [ScannController::class, "index"])->name("scan.index");
+		Route::get("scan", [ScannController::class, "index"])
+			->name("scan.index");
 		// Route::get("scan/create", ScannGroup::class)->name("scann.create");
 
 		// pour les documents
