@@ -36,7 +36,7 @@ Route::group([
 		Route::post("account/user/{userId}/delete",[SuperAdminUserAccountController::class,"delete"])->name("user.account.delete");
 		//pour la gestion des structures
 		Route::get("structure/list",[StructureController::class,"index"])->name("structure.list");
-		Route::get("structure/store",[StructureController::class,"store"])->name("structure.store");
+		Route::post("structure/store",[StructureController::class,"store"])->name("structure.store");
 		Route::post("structure/{structureId}/update",[StructureController::class,"update"])->name("structure.update");
 		Route::post("structure/{structureId}/delete",[StructureController::class,"delete"])->name("structure.delete");
 		//pour les permissions des comptes
