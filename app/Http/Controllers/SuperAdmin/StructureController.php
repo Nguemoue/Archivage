@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use App\Models\Structure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -36,12 +35,12 @@ class StructureController extends Controller
 		 \Validator::make(['structureId'=>$structureId],[
 			 "structuredId"=>["int",Rule::exists("structures","id")]
 		 ])->validate();
-		 Structure::query()->delete();
+		 Structure::query()->whereId($structureId)->delete();
 		 return redirect()->back()->with("success",__("response.delete.success"));
 	 }
 
 	 public function store(Request $request){
-		 Validator::make($request->only("description","email"),[
+		 Validator::make($request->only("description","nom"),[
 			 "nom"=>"required|string|unique:structures,nom",
 			 "description"=>['required','string']
 		 ])->validate();
