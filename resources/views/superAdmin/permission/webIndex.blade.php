@@ -2,24 +2,25 @@
 
 @section("content")
 	<h5 class="text-center my-3">
-		<p>
-		<h3>Gestion des Permissions</h3>
-		</p>
+		Permissions pour les Utilisateurs
 	</h5>
-	<hr>
-	<div class="row gap-1  border" style="gap:4px 0px;font-family: 'Algerian',serif;letter-spacing: 2px;font-size: 5em;font-weight: bolder">
-		<div class="col-6">
-			<a href="{{route('superAdmin.permission.admin.index')}}" style="line-height: 100px;" class="w-100 btn btn-outline-warning">
-				<span class="fa fa-user-secret fa-2x"></span>
-				Pour les Administrateurs
-			</a>
-		</div>
-		<div class="col-6">
-			<a href="{{route('superAdmin.permission.web.index')}}" style="line-height: 100px;" class="w-100 btn btn-outline-success">
-				<span class="fa fa-user-secret fa-2x"></span>
-				Pour les Utilisateurs
-			</a>
-		</div>
+	<div class="row gap-1 ">
+		@foreach($permissions as $permission)
+			<div class="col-3">
+				<div class="card">
+					<div class="card-body">
+						<div class="card-text h6">
+							{{$permission->name}}
+						</div>
+					</div>
+					<hr>
+					<div class="card-footer">
+						<button class="btn btn-sm btn-secondary rounded">gerer</button>
+						<button class="btn btn-outline-dark btn-sm">{{$permission->users_count}} Affecté(s)</button>
+					</div>
+				</div>
+			</div>
+		@endforeach
 	</div>
 @endsection
 

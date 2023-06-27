@@ -17,6 +17,8 @@
 
 	<meta name="keywords" content="archivage"/>
 	<meta name="author" content="developper"/>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 	@livewireStyles
@@ -130,7 +132,7 @@
 
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }} "></script>
-<script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{asset("assets/js/bootstrap/js/bootstrap.min.js")}}"></script>
 {{--<script type="text/javascript" src="{{ asset('assets/js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>--}}
@@ -147,18 +149,25 @@
 <!-- menu js -->
 <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
 <script src="{{ asset('assets/js/vertical/vertical-layout.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 {{-- SUMERNOTE --}}
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 {{-- end of sumernote--}}
-<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 @stack("scripts")
 <script defer>
+	$(document).ready(function(){
 		var table = $(".table").DataTable()
 		$(".sumernote").summernote({
 			placeholder:"content"
 		})
+		$(".select2").select2();
+
+		@includeIf("_partials.swal")
+	})
 
 </script>
 </body>

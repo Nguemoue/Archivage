@@ -10,7 +10,8 @@ class ConnectionController extends Controller
 {
     public function index()
     {
-    	$connections = Connection::query()->with("profile")->get();
+    	$connections = Connection::query()
+			->with("profile")->get();
     	return view("superAdmin.connection.list",['connections' =>$connections]);
     }
 

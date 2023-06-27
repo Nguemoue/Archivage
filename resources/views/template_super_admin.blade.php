@@ -34,13 +34,13 @@
 	<!-- scrollbar.css -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
 	<!-- Style.css -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{--	sumernote--}}
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	{{-- link for datatables	--}}
 	<link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	@stack("styles")
 	@livewireStyles
 
@@ -127,11 +127,13 @@
 
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{ asset('assets/js/jquery/jquery.min.js') }} "></script>
-<script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('assets/js/jquery-ui/jquery-ui.min.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('assets/js/popper.js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{asset("assets/js/bootstrap/js/bootstrap.min.js")}}"></script>
 {{--<script type="text/javascript" src="{{ asset('assets/js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>--}}
 <!-- waves js -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script src="{{ asset('assets/pages/waves/js/waves.min.js') }}"></script>
 <!-- jquery slimscroll js -->
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
@@ -147,18 +149,21 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 {{-- end of sumernote--}}
-<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-
-<script defer>
+<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+<script>
+	$(document).ready(function(){
 		var table = $(".table").DataTable()
 		$(".sumernote").summernote({
 			placeholder:"content"
 		})
+		$(".select2").select2();
+
+		@includeIf("_partials.swal")
+	})
 
 </script>
 @livewireScripts
-@includeIf("_partials.swal")
 @stack("scripts")
 </body>
 

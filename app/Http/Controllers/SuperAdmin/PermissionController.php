@@ -7,19 +7,27 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+
     public function home()
     {
     	return view("superAdmin.permission.home");
     }
 
     public function adminIndex(){
-    	$permissions = Permission::query()->withCount("users")->get();
+    	$permissions = Permission::query()->withCount("users")
+			->where("guard_name",adminGuard())
+			->get();
 		 return view("superAdmin.permission.adminIndex",[
 		 	'permissions'=>$permissions
 		 ]);
 
 	 }
 	 public function webIndex(){
-		 return view("superAdmin.permission.webIndex");
+		 $permissions = Permission::query()->withCount("users")
+			 ->where("guard_name",webGuard())
+			 ->get();
+		 return view("superAdmin.permission.webIndex",[
+		 	"permissions" => $permissions
+		 ]);
 	 }
 }

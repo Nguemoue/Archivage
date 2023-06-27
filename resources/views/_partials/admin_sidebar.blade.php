@@ -27,13 +27,17 @@
 							<span class="pcoded-mcaret"></span>
 						</a>
 					</li>
+					<x-permission
+						:permissions="[config('perm_names.MAN_USER'),config('perm_names.CREATE_USER')]"
+						operand="or">
 					<li class="">
-						<a href="#" class="waves-effect waves-dark">
+						<a href="{{route('admin.user.account.list')}}" class="waves-effect waves-dark">
 							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
 							<span class="pcoded-mtext"> Utilisateur</span>
 							<span class="pcoded-mcaret"></span>
 						</a>
 					</li>
+					</x-permission>
 				</ul>
 			</li>
 		</ul>

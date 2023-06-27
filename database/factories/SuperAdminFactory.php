@@ -6,12 +6,14 @@ use App\Models\SuperAdmin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
 class SuperAdminFactory extends Factory
 {
     protected $model = SuperAdmin::class;
 
-    public function definition(): array
+    #[ArrayShape(['name' => "string", 'email' => "string", 'email_verified_at' => "\Illuminate\Support\Carbon", 'password' => "string", 'organisation' => "string", 'remember_token' => "string", 'created_at' => "\Illuminate\Support\Carbon", 'updated_at' => "\Illuminate\Support\Carbon"])]
+	 public function definition(): array
     {
         return [
             'name' => $this->faker->name(),

@@ -21,7 +21,9 @@
 
 		<div class="pcoded-navigation-label">Gestions</div>
 		<ul class="pcoded-item pcoded-left-item">
-			<li  @class(["pcoded-hasmenu","active pcoded-trigger"=>\Route::is("superAdmin.connection.index")])>
+			<li  @class(["pcoded-hasmenu",
+								"active pcoded-trigger"=>
+								\Route::is(["superAdmin.connection.index","superAdmin.admin.account.list","superAdmin.user.account.list","superAdmin.structure.list"])])>
 				<a href="javascript:void(0)" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-id-badge"></i><b>A</b></span>
 					<span class="pcoded-mtext">Resources</span>
@@ -35,15 +37,32 @@
 							<span class="pcoded-mcaret"></span>
 						</a>
 					</li>
-					<li class="">
-						<a href="#" class="waves-effect waves-dark">
+					<li @class(["active"=>\Route::is("superAdmin.user.account.list")])>
+						<a href="{{route('superAdmin.user.account.list')}}" class="waves-effect waves-dark">
 							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
 							<span class="pcoded-mtext"> Utilisateur</span>
 							<span class="pcoded-mcaret"></span>
 						</a>
 					</li>
+					<li @class(["active"=>\Route::is("superAdmin.admin.account.list")])>
+						<a href="{{route('superAdmin.admin.account.list')}}" class="waves-effect waves-dark">
+							<span class="pcoded-micon"><i class="fa fa-print"></i></span>
+							<span class="pcoded-mtext"> Comptes Administrateur</span>
+							<span class="pcoded-mcaret"></span>
+						</a>
+					</li>
+					<li @class(["active"=>\Route::is("superAdmin.structure.list")])>
+						<a href="{{route('superAdmin.structure.list')}}" class="waves-effect waves-dark">
+							<span class="pcoded-micon"><i class="fa fa-print"></i></span>
+							<span class="pcoded-mtext"> Structures</span>
+							<span class="pcoded-mcaret"></span>
+						</a>
+					</li>
+
 				</ul>
 			</li>
 		</ul>
 	</div>
+
+
 </nav>

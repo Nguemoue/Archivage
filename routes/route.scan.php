@@ -8,7 +8,7 @@ use App\Http\Controllers\Scan\ScanDossierController;
 
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath","permission:".config('perm_names.SCAN_DOC')]
 ],function() {
 
 

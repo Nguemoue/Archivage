@@ -26,7 +26,7 @@
 			<tr>
 				<td>{{$loop->index + 1}}</td>
 				<td>{{$connection->device}}</td>
-				<td>{{$connection->profile->name}}</td>
+				<td>{{$connection?->profile?->name??'-'}}</td>
 				<td>{{$connection->guard}}</td>
 				<td>{{$connection->ip_address}}</td>
 				<td>{{$connection->created_at->isoFormat("ll")}}</td>

@@ -1,63 +1,79 @@
-
 @if(session()->has('success'))
-    <script defer>
-        Swal.fire({
-            position:"top-end",
-            toast:false,
-            timer: 3000,
-            showCancelButton:false,
-            showConfirmButton:false,
-            showCloseButton:false,
-            icon:"success",
-            titleText:`{{session()->get('success')}}`
-        })
-    </script>
+	Swal.fire({
+	position:"top-end",
+	toast:true,
+	timer: 3000,
+	showCancelButton:false,
+	showConfirmButton:false,
+	showCloseButton:false,
+	icon:"success",
+	titleText:`{{session()->get('success')}}`
+	})
+
 @endif
 
 
 @if(session()->has('danger'))
-    <script defer>
-        Swal.fire({
-            position:"top-end",
-            toast:false,
-            showCancelButton:false,
-            showConfirmButton:false,
-            showCloseButton:true,
-            icon:"error",
-            titleText:`{{session()->get('danger')}}`
-        })
-    </script>
+	Swal.fire({
+	position:"top-end",
+	toast:true,
+	showCancelButton:false,
+	showConfirmButton:false,
+	showCloseButton:true,
+	icon:"error",
+	titleText:`{{session()->get('danger')}}`
+	})
+
 @endif
 
 
 @if(session()->has('warning'))
-    <script defer>
-        Swal.fire({
-            position:"top-end",
-            toast:false,
-            timer: 3000,
-            timerProgressBar: true,
-            showCancelButton:false,
-            showConfirmButton:false,
-            showCloseButton:true,
-            icon:"warning",
-            titleText:`{{session()->get('warning')}}`
-        })
-    </script>
+
+	Swal.fire({
+	position:"top-end",
+	toast:true,
+	timer: 3000,
+	timerProgressBar: true,
+	showCancelButton:false,
+	showConfirmButton:false,
+	showCloseButton:true,
+	icon:"warning",
+	titleText:`{{session()->get('warning')}}`
+	})
+
 @endif
 
 
 @if(session()->has('info'))
-    <script defer>
-        Swal.fire({
-            position:"top-end",
-            toast:false,
-            timer: 3000,
-            showCancelButton:false,
-            showConfirmButton:false,
-            showCloseButton:true,
-            icon:"info",
-            titleText:`{{session()->get('info')}}`
-        })
-    </script>
+
+	Swal.fire({
+	position:"top-end",
+	toast:true,
+	timer: 3000,
+	showCancelButton:false,
+	showConfirmButton:false,
+	showCloseButton:true,
+	icon:"info",
+	titleText:`{{session()->get('info')}}`
+	})
+
+@endif
+
+@if($errors->any())
+
+	Swal.fire({
+	position:"top-end",
+	toast:true,
+	timer: 3000,
+	showCancelButton:false,
+	showConfirmButton:false,
+	showCloseButton:true,
+	icon:"danger",
+	title:`<ul>
+		@foreach($errors->all() as $item)
+			<li>{{$item}}</li>
+		@endforeach
+	</ul>`
+	})
+
 @endif
