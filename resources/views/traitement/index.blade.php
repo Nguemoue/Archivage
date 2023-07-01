@@ -39,10 +39,10 @@
 									traiter
 									<i class="fa fa-edit"></i>
 								</a>
-								<a href="#" data-bs-toggle="modal" data-bs-target="#dossierModal{{$dossier->id}}"
+								<button role="button" data-toggle="modal" data-target="#dossierModal{{$dossier->id}}"
 									class="btn btn-outline-secondary">
 									<span class="fa fa-eye"></span>
-								</a>
+								</button>
 								{{--	modal --}}
 								<x-modal-component id="dossierModal{{$dossier->id}}" title="Liste des document du dossiers">
 									@foreach ($dossier->tempDocuments as $doc)

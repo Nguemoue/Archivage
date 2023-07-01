@@ -16,6 +16,7 @@ class Admin extends Authenticatable
 	use Notifiable,HasFactory,HasPermissions,HasRoles;
 
 	protected $guarded = [];
+
 	function connections(): \Illuminate\Database\Eloquent\Relations\MorphMany
 	{
 		return $this->morphMany(Connection::class,"profile");

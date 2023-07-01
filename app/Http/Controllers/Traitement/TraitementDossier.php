@@ -57,6 +57,7 @@ class TraitementDossier extends Controller
             $document->created_at = $item["created_at"];
             $document->updated_at = $item["updated_at"];
             $document->data = Json::decode($item["data"],true);
+            $document->structure_id = auth(webGuard())->user()->structure->id;
             $document->numero = Str::uuid();
             $ext = explode(".",$tmpDoc->url)[1];
 //            dd($ext);

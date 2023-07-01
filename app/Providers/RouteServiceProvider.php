@@ -85,7 +85,8 @@ class RouteServiceProvider extends ServiceProvider
 
 	private function bootWebRoutes()
 	{
-		Route::middleware('web')
+		Route::domain(webUrl())
+			->middleware('web')
 			->namespace($this->namespace)
 			->group(base_path('routes/web.php'));
 	}

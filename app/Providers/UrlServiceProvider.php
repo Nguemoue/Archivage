@@ -20,5 +20,8 @@ class UrlServiceProvider extends ServiceProvider
 		Request::macro("isSuperAdminUrl",function (){
 			return $this->getHost() == superAdminUrl();
 		});
+		Request::macro("isWebUrl",function (){
+			return $this->getHost()  == webUrl();
+		});
 	}
 }

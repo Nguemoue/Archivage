@@ -81,6 +81,7 @@ class ClassementView extends Component
                 $moved = Storage::move($element->url, $url);
                 if ($moved) {
                     $element->url = $url;
+                    $element->structure_id = auth(webGuard())->user()->structure->id;
                     $element->save();
                 }
             }

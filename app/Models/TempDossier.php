@@ -12,7 +12,7 @@ class TempDossier extends Model
     use HasFactory;
     public const DEFAULT_PATH = "temp_dossiers";
     protected $fillable = [
-        'nom'
+        'nom',"structure_id"
     ];
 
     function tempDocuments(){

@@ -37,6 +37,11 @@ if(!function_exists("adminUrl")){
 		return config("url.admin","admin.localhost");
 	}
 }
+if(!function_exists("webUrl")){
+	function webUrl(){
+		return config("url.web","localhost");
+	}
+}
 
 if(!function_exists("superAdminUrl")){
 	function superAdminUrl(){

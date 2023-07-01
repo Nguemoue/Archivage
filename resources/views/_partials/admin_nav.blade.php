@@ -80,14 +80,10 @@
 								<i class="ti-email"></i> My Messages
 							</a>
 						</li>
-						<li class="waves-effect waves-light">
-							<a href="#">
-								<i class="ti-lock"></i> Lock Screen
-							</a>
-						</li>
+
 						<form action="{{route('admin.logout')}}" id="logoutForm" method="post">@csrf</form>
 						<li class="waves-effect waves-light">
-							<a href="#!" onclick="document.forms.logoutForm.submit()">
+							<a href="#" onclick="document.forms.logoutForm.submit()">
 								<i class="ti-layout-sidebar-left"></i> Logout
 							</a>
 						</li>

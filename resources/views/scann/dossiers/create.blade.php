@@ -8,7 +8,7 @@
         <div class="card-header">Formulaire de scann</div>
         <div class="card-body">
             @includeIf("_partials.errors")
-            @includeIf("_partials.swal")
+
             <form action="{{ route('scann.dossier.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">

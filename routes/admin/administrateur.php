@@ -13,8 +13,8 @@ Route::group(
 
 	], function () {
 
-	Route::middleware(["auth:admin"])->group(function(){
-		Route::view('/', "admin.index")->name("home");
+	Route::middleware(["auth:admin","passwordChanged:admin"])->group(function(){
+		Route::get('/',[\App\Http\Controllers\Admin\AdminHomeController::class,"home"] )->name("home");
 		//route pour les comptes utilisateurs
 		Route::get("account/user/list",[UserAccountController::class,"index"])->name("user.account.list");
 		Route::post("account/user/create",[UserAccountController::class,"store"])->name("user.account.store");
@@ -24,15 +24,6 @@ Route::group(
 		Route::post("user/{userId}/permission/update",[UserAccountPermissionController::class,"update"])->name("user.permission.update");
 	});
 
-	Route::middleware(["guest:admin"])->group(function () {
-		/**
-		 * Route pour les page de connexions et autres
-		 */
-		Route::get("/login", [App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, "create"])->name("login");
-		Route::post("/login", [App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, "store"])->name("login");
-		Route::post("/logout", [App\Http\Controllers\Admin\Auth\AuthenticatedSessionController::class, "destroy"])->name("logout");
-	});
-
-
 });
 require __DIR__.'/auth.php';
+require __DIR__.'/change_password.php';

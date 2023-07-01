@@ -15,23 +15,16 @@ class PreviewFileController extends Controller
         // je selectionne le documents
         $tempDoc = TempDocument::query()->findOrFail($id);
         $pathToFile = $tempDoc->url;
-        $part = explode(".", $pathToFile);
-        $ext = end($part);
-        if($ext == "pdf"){
-            $contentType = "application/pdf";
-        }else if(in_array($ext,$imageMimes)){
-            $contentType = "image/$ext";
-        }
-        $content = Storage::get($pathToFile);
+        $pathToFile = base_path("storage/app/").$pathToFile;
+
+
         // dd($content);
         // dd("d");
         // return response()->content($pathToFile,"filename",['Content-Type'=>'application/octect-stream']);
         // return view("pdf.content", ['content' => $content,'path'=>$pathToFile],[],[
         //     'Content-Type'=>"application/octect-pdf"
         // ]);
-        return response($content, 200, [
-            'Content-Type'=>$contentType
-        ]);
+		 return response()->file($pathToFile,["Content-Disposition"=>"inline"]);
 
     }
 

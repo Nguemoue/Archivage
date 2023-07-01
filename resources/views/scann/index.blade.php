@@ -9,13 +9,10 @@
     <hr>
     <br>
     <div class="row">
-        <a href="{{ route('scann.document.create') }}" class="btn btn-secondary col-5 p-4">
+        <a href="{{ route('scann.dossier.create') }}" class="btn btn-success col-11 mx-auto p-4">
             <span class="mdi mdi-scanner"></span>
-            Effectuer un Scann Sur un Documents
-        </a>
-        <a href="{{ route('scann.dossier.create') }}" class="btn btn-success col-5 mx-auto p-4">
-            <span class="mdi mdi-scanner"></span>
-            Effectuer un Scann sur des Dossiers
+
+			  Poursuivre le traitement pour Scanner le Dossier
         </a>
     </div>
 @endsection

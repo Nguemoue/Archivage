@@ -29,10 +29,12 @@ class ScanDossierController extends Controller
         // mon repertoire de stockage
         $dir  = now()->format("y_m_d").'/'.$request->input('titre');
         // je stocke mon fichier image
-        
+
         $createdFolder = TempDossier::query()->create([
-            'nom'=>$request->input("titre")
-        ]);
+            'nom'=>$request->input("titre"),
+			   "structure_id"=>auth(webGuard())->user()->structure->id
+
+		  ]);
         // je cree les documents_dossiers qui correspondents
         // je parcours toutes la liste de mes fichiers
         foreach($request->file("files") as   $file){
@@ -41,7 +43,8 @@ class ScanDossierController extends Controller
             $tempDocument = TempDocument::query()->create([
                 'url'=>$file->store(TempDossier::DEFAULT_PATH.'/'.$dir),
                 'numero'=>Str::uuid(),
-                'data'=>"null"
+                'data'=>"null",
+					 "structure_id"=>auth(webGuard())->user()->structure->id
             ]);
             TempDossierDocument::query()->create([
                 'temp_document_id'=>$tempDocument->id,

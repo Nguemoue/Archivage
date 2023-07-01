@@ -18,7 +18,7 @@
 				</div>
 			</div>
 			<a href="{{route('home')}}">
-				<em>ARCHIVE APP</em>
+				<em>SYSDDA</em>
 				{{-- <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" /> --}}
 			</a>
 			<a class="mobile-options waves-effect waves-light">
@@ -36,10 +36,13 @@
 					</a>
 				</li>
 			</ul>
+
 			<ul class="nav-right">
+				<li style="transform: translateX(-15vw)" class="text-white font-weight-bold h6">
+					{{auth(webGuard())->user()->structure->nom}}
+				</li>
 				<li class="">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<x-dynamic-component :component="'flag-language-'.\LaravelLocalization::getCurrentLocale()"/>
 						{{LaravelLocalization::getCurrentLocaleName()}}
 					</a>
 					<ul class="dropdown-menu">
@@ -56,39 +59,33 @@
 						<i class="ti-bell"></i>
 						<span class="badge bg-c-red"></span>
 					</a>
-					<x-notification-component :user="auth()->user()"/>
+					<x-notification-component :user="auth(webGuard())->user()"/>
 				</li>
 				<li class="user-profile header-notification">
-					<a href="#!" class="waves-effect waves-light">
-						<img src="{{ asset('logo-admin.jpg') }}" class="img-radius" alt="User-Profile-Image">
-						<span>{{auth('web')->user()->name}}</span>
+					<a href="#" class="waves-effect waves-light">
+						<span class="text-wrap">{{auth('web')->user()->name}}</span>
 						<i class="ti-angle-down"></i>
 					</a>
 					<ul class="show-notification profile-notification">
 						<li class="waves-effect waves-light">
 							<a href="#!">
-								<i class="ti-settings"></i> Settings
+								<i class="ti-settings"></i> {{__("Settings")}}
 							</a>
 						</li>
 						<li class="waves-effect waves-light">
 							<a href="#">
-								<i class="ti-user"></i> Profile
+								<i class="ti-user"></i> {{__("Profile")}}
 							</a>
 						</li>
 						<li class="waves-effect waves-light">
 							<a href="#">
-								<i class="ti-email"></i> My Messages
-							</a>
-						</li>
-						<li class="waves-effect waves-light">
-							<a href="#">
-								<i class="ti-lock"></i> Lock Screen
+								<i class="ti-email"></i> {{__("My Messages")}}
 							</a>
 						</li>
 						<form action="{{route('logout')}}" id="logoutForm" method="post">@csrf</form>
 						<li class="waves-effect waves-light">
 							<a href="#!" onclick="document.forms.logoutForm.submit()">
-								<i class="ti-layout-sidebar-left"></i> Logout
+								<i class="ti-layout-sidebar-left"></i> {{__('Logout')}}
 							</a>
 						</li>
 					</ul>

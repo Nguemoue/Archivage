@@ -27,7 +27,7 @@ Route::group([
 	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
 ],function(){
 
-	Route::middleware("auth")->group(function(){
+	Route::middleware(["auth","passwordChanged:web"])->group(function(){
 		Route::get('/', function () {
 			return view('index');
 		})->name("home");
@@ -47,8 +47,10 @@ Route::group([
 	Route::get('/dashboard', function () {
 		return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');
+	//route pour changer de mot de passe
 
 });
+
 require __DIR__.'/auth.php';
 require __DIR__ . '/route.scan.php';
 require __DIR__ . '/route.traitement.php';
@@ -56,3 +58,4 @@ require __DIR__ . '/type.php';
 require  __DIR__.'/route.classement.php';
 require  __DIR__ .'/route.navigation.php';
 require __DIR__.'/route.statistique.php';
+require __DIR__.'/change_password.php';

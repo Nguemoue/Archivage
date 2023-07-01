@@ -25,6 +25,7 @@ class ScanDocumentController extends Controller
         // je stocke mon fichier image
         $doc = TempDocument::query()->create([
             'numero'=>Str::uuid(),
+			  "structure_id"=>auth(webGuard())->user()->structure->id,
             'url'=>$request->file('url')->store(TempDocument::DEFAULT_PATH. '/'.$dir)
         ]);
 

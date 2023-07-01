@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Document extends Model
 {
+	protected $guarded = [];
 
 	protected $hidden = [
 		'data->dossierId'
@@ -25,5 +26,5 @@ class Document extends Model
 	{
 		return $this->hasOne(DossierDocument::class, 'document_id');
 	}
-	
+
 }
