@@ -57,31 +57,31 @@ class NavigationClassement extends Component
         $this->currentSousClassement = SousClassement::find($sousClassementId);
         $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
 
-        $this->sousDirectories = Storage::disk('local')->directories($url);
-        $final = collect([]);
-        foreach ($this->sousDirectories as $val){
-            $item = new stdClass;
-            $tempFiles = Storage::files($val);
-            $item->url = [];
-            foreach($tempFiles as $file){
-                $finalTemFiles = new stdClass;
-                $finalTemFiles->url = $file;
-                $file = str_replace(DIRECTORY_SEPARATOR,'/',$file);
-                $doc = Document::query()->where("url","like",$file)->first();
-                $finalTemFiles->key = Str::uuid();
-                $finalTemFiles->nom = $doc->nom??$file;
-                $finalTemFiles->extension = Arr::last(explode('.',$file));
-                if(in_array($finalTemFiles->extension, ['jpg','jpeg','png'])){
-                    $finalTemFiles->extension ='image';
-                }
-                $item->url[] = $finalTemFiles;
-            }
-            $item->count = count($item->url);
-            $item->key = Str::uuid();
-            $item->nom = Arr::last(explode('/',$val));
-            $final->put($val,$item);
-        }
-        $this->sousDirectories = $final;
+        $this->sousDirectories = $this->currentSousClassement->dossiers;
+//        $final = collect([]);
+//        foreach ($this->sousDirectories as $val){
+//            $item = new stdClass;
+//            $tempFiles = Storage::files($val);
+//            $item->url = [];
+//            foreach($tempFiles as $file){
+//                $finalTemFiles = new stdClass;
+//                $finalTemFiles->url = $file;
+//                $file = str_replace(DIRECTORY_SEPARATOR,'/',$file);
+//                $doc = Document::query()->where("url","like",$file)->first();
+//                $finalTemFiles->key = Str::uuid();
+//                $finalTemFiles->nom = $doc->nom??$file;
+//                $finalTemFiles->extension = Arr::last(explode('.',$file));
+//                if(in_array($finalTemFiles->extension, ['jpg','jpeg','png'])){
+//                    $finalTemFiles->extension ='image';
+//                }
+//                $item->url[] = $finalTemFiles;
+//            }
+//            $item->count = count($item->url);
+//            $item->key = Str::uuid();
+//            $item->nom = Arr::last(explode('/',$val));
+//            $final->put($val,$item);
+//        }
+//        $this->sousDirectories = $final;
         #je charge le contenu du dossiers
         $this->sousDepth = boolval($first);
     }

@@ -84,3 +84,19 @@ if(!function_exists("superAdminGuard")){
 	}
 }
 
+if(!function_exists("tmpDisk")){
+	function tmpDisk(){
+		return (config("misc.disk.tmp","tmp"));
+	}
+}
+if(!function_exists("prefixDossier")){
+	function prefixDossier(){
+		return (config("misc.prefix.dossier","dossier-"));
+	}
+}
+if(!function_exists("prefixDocument")){
+	function prefixDocument(){
+		return (config("misc.prefix.document","document-"));
+	}
+}
+

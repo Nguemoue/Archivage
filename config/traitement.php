@@ -2,6 +2,6 @@
 
 return [
     'debuter' => 0,
-    'commencer' => 1,
+    'encours' => 1,
     'terminer' => 2
 ];

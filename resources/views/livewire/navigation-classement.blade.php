@@ -43,45 +43,45 @@
 										<div wire:loading class="text-danger">
 											recuperation du contenu ...
 										</div>
-										@foreach($sousDirectories as $key => $sousDirectory)
+										@foreach($sousDirectories as $key => $dossier)
 
 											<div class="jumbotron border p-2" style="cursor: pointer">
 												<a data-toggle="collapse" class=""
-													data-target="#dropDownMenu{{$sousDirectory->key}}">
+													data-target="#dropDownMenu{{$dossier->id}}">
 													<i class="fa fa-folder fa-2x text-warning mx-2"></i>
 													<span class="text-wrap" style="max-width: 100px;overflow-x: wrap">
-                                                    {{$sousDirectory->nom}}
-                                                    <b class="text-bold font-bold"> ({{($sousDirectory->count)}}</b> Fichiers)
+                                                    {{$dossier->nom}}
+                                                    <b class="text-bold font-bold"> ({{($dossier->documents->count())}}</b> Fichiers)
                                                     </span>
 												</a>
 												<hr class="my-1">
-												<div class="collapse" id="dropDownMenu{{$sousDirectory->key}}">
+												<div class="collapse" id="dropDownMenu{{$dossier->id}}">
 													<ul class="list-unstyled px-2">
-														@foreach($sousDirectory->url as $sousDirect)
+														@foreach($dossier->documents as $sousDirect)
 															<div>
 																<li title="voir les details sur le fichiers"
 																 class="d-flex justify-content-between my-2">
-                                                                <span><i class="fa fa-{{$sousDirect->extension}}"></i>
+                                                                <span><i class="fa fa-file"></i>
                                                                 <em>{{$sousDirect->nom}}</em></span>
 																<div class="btn-group">
-																	<a data-toggle="modal" href="#modalFile{{$sousDirect->key}}"
+																	<a data-toggle="modal" href="#modalFile{{$sousDirect->id}}"
 																		class="btn btn-sm btn-outline-info"><i class="fa fa-sync"></i></a>
-																	<a data-toggle="modal" href="#modalPreview{{$sousDirect->key}}"
+																	<a data-toggle="modal" href="#modalPreview{{$sousDirect->id}}"
 																		class="btn btn-sm btn-primary">
 																		<i class="fa fa-eye"></i>
 																	</a>
 																</div>
 															</li>
 															{{-- pour la modal --}}
-															<x-navigation.modal  :document-url="$sousDirect->url"
-																					  id="modalFile{{$sousDirect->key}}"/>
-															<x-navigation.modal-preview :nom="$sousDirect->nom" :document-url="$sousDirect->url"
-																								 id="modalPreview{{$sousDirect->key}}"/>
+															<x-navigation.modal  :document="$sousDirect"
+																					  id="modalFile{{$sousDirect->id}}"/>
+															<x-navigation.modal-preview  :document="$sousDirect"
+																								 id="modalPreview{{$sousDirect->id}}"/>
 															</div>
 															@endforeach
-															<div><a data-toggle="modal" data-target="#modalNewFile{{$sousDirect->key}}" class="btn btn-primary" href="#">ajouter un documents</a></div>		
+															<div><a data-toggle="modal" data-target="#modalNewFile{{$sousDirect->id}}" class="btn btn-primary" href="#">ajouter un documents</a></div>
 															{{-- pour la modal d'ajout --}}
-															<div class="modal fade" id="modalNewFile{{$sousDirect->key}}" tabindex="-1" role="dialog"  aria-hidden="true">
+															<div class="modal fade" id="modalNewFile{{$sousDirect->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered" role="document">
 																	<div class="modal-content">
 																		<div class="modal-header">

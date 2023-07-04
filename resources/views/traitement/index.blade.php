@@ -25,11 +25,7 @@
 							<td> {{$dossier->nom}} </td>
 
 							<td>
-								@if(session()->has("dossier-$dossier->id"))
-									<span class="bage badge-danger rounded p-1"> en cours de traitement</span>
-								@else
-									<span class="badge text-light bg-dark">non initie</span>
-								@endif
+								<span class="bage badge-danger rounded p-1"> {{$dossier->status}}</span>
 							</td>
 							<td>{{$dossier->created_at->isoFormat("ll")}}</td>
 							<td>{{$dossier->temp_documents_count}} Fichiers</td>
@@ -48,7 +44,6 @@
 									@foreach ($dossier->tempDocuments as $doc)
 										@php
 											$url = $doc->url;
-											// dump($url);
 											$part = explode('.', $url);
 											$ext = end($part)
 										@endphp

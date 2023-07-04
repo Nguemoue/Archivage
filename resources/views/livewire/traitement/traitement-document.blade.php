@@ -3,7 +3,7 @@
         <p>
             Actions
         </p>
-        <a href="#" class="btn btn-danger btn-sm">Annuler le traitement</a>
+        <a href="{{route('traitement.dossier.show',['id'=>$dossierId])}}" class="btn btn-danger btn-sm">Annuler le traitement</a>
         <a href="#" class="btn btn-secondary btn-sm">voir le fichier</a>
     </div>
     <hr>
@@ -15,11 +15,12 @@
             <form wire:submit.prevent='firstStep'>
                 <div class="mb-4">
                     <label for="titre">Titre du Document</label>
-                    <input type="text" class="form-control" placeholder="nom du document" wire:model.defer='titre'>
+                    <input type="text"  class="form-control" placeholder="nom du document" wire:model.defer='titre'>
                 </div>
                 <div class="mb-4">
                     <label for="type">Type de Document</label>
-                    <select wire:model='typeId' id="type" class="form-control" wire:change='updateSousType'>
+                    <select wire:model.defer='typeId' id="type" class="form-control" wire:change='updateSousType'>
+							  <option selected hidden="">---Selectionner une valeur ----</option>
                         @foreach ($type as $item)
                             <option value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
                         @endforeach
@@ -28,6 +29,7 @@
                 <div class="mb-2">
                     <label for="soustype">Sous Type de Document</label>
                     <select wire:model.defer='sousTypeId' id="soustype" class="form-control">
+							  <option selected hidden="">---Selectionner une valeur ----</option>
                         @foreach ($soustype as $item)
                             <option value="{{ $item['id'] }}">{{ $item['nom'] }}</option>
                         @endforeach
@@ -36,6 +38,7 @@
                 <button type="submit" class="btn btn-primary btn-sm mt-3"> suivant </button>
             </form>
         @elseif ($step == 2)
+
             <form  method="post" id="form" action="{{route('traitement.document.updateData',[$document->id])}}">
                 @csrf
                 {{-- <x-dynamic-component :component="'menu-contextuel' . '-' . Str::lower($sousTypeId)" /> --}}
@@ -49,7 +52,7 @@
                                     <x-field  :item="$item" />
                                 </div>
                                 @endforeach
-                                    <input type="hidden" value="{{$dossier->id}}" name="dossierId">
+                                    <input type="hidden" value="{{$dossierId}}" name="dossierId">
                             </div>
                         </div>
                     </div>

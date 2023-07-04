@@ -21,6 +21,7 @@
 
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+	<link rel="stylesheet" href="{{asset('assets/css/file-input-preview.css')}}">
 	@livewireStyles
 
 	<!-- Google font-->
@@ -157,6 +158,7 @@
 {{-- end of sumernote--}}
 <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+<script type="text/javascript" src="{{asset('assets/js/file-input-preview.js')}}"></script>
 @stack("scripts")
 <script defer>
 	$(document).ready(function(){
@@ -165,7 +167,7 @@
 			placeholder:"content"
 		})
 		$(".select2").select2();
-
+		$(".input-file-preview").fileInputPreview()
 		@includeIf("_partials.swal")
 	})
 

@@ -11,7 +11,6 @@
     <div class="row">
         <a href="{{ route('scann.dossier.create') }}" class="btn btn-success col-11 mx-auto p-4">
             <span class="mdi mdi-scanner"></span>
-
 			  Poursuivre le traitement pour Scanner le Dossier
         </a>
     </div>

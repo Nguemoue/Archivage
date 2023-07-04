@@ -38,6 +38,17 @@
 						</a>
 					</li>
 					</x-permission>
+
+					<x-permission
+						:permissions="[config('perm_names.MAN_STRUCTURE')]">
+						<li class="">
+							<a href="{{route('admin.structure.list')}}" class="waves-effect waves-dark">
+								<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+								<span class="pcoded-mtext"> Structures</span>
+								<span class="pcoded-mcaret"></span>
+							</a>
+						</li>
+					</x-permission>
 				</ul>
 			</li>
 		</ul>

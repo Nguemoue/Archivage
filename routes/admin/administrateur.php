@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\UserAccountPermissionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\StructureController as AdminStructureController;
 
 Route::group(
 	[
@@ -22,6 +23,13 @@ Route::group(
 		Route::post("account/user/{userId}/delete",[UserAccountController::class,"delete"])->name("user.account.delete");
 		//pour les permissions des comptes
 		Route::post("user/{userId}/permission/update",[UserAccountPermissionController::class,"update"])->name("user.permission.update");
+		//pour les structures
+Route::middleware(['permission:'.config('perm_names.MAN_STRUCTURE')])->group(function (){
+	Route::get("structure/list",[AdminStructureController::class,"index"])->name("structure.list");
+	Route::post("structure/store",[AdminStructureController::class,"store"])->name("structure.store");
+	Route::post("structure/{structureId}/update",[AdminStructureController::class,"update"])->name("structure.update");
+	Route::post("structure/{structureId}/delete",[AdminStructureController::class,"delete"])->name("structure.delete");
+});
 	});
 
 });

@@ -6,7 +6,9 @@ use App\Http\Controllers\TypeDocumentController;
 use Illuminate\Support\Facades\Route;
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath",
+	"permission:".config('perm_names.MAN_TYPE').','.config('perm_names.MAN_SOUSTYPE')
+	]
 ],function() {
 
 	Route::group([

@@ -13,11 +13,16 @@ class PermissionSeeder extends Seeder
     		"Scanner document",
 			"Traiter document",
 			"Voir statistique",
-			"Navigation"
+			"Navigation",
+			"Gerer Classement",
+			"Gerer Type",
+			"Gerer Sous Type",
+			"Gerer Sous Classement"
 		];
     	$adminPermissions = [
     		"Creer utilisateur",
 			"Gerer utilisateur",
+			"Gerer les Structures"
 		];
 
     	foreach ($webPermissions as $permission){

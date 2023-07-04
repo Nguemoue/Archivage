@@ -14,7 +14,6 @@
 		</ul>
 
 
-
 		{{-- box pour les fichiers --}}
 		{{-- <div class="pcoded-navigation-label">Fichier</div>
 
@@ -61,34 +60,45 @@
 					<span class="pcoded-mcaret"></span>
 				</a>
 				<ul class="pcoded-submenu">
-					<li @class(["active"=>Route::is('type.*')])>
-						<a href="{{ route('type.index') }}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-							<span class="pcoded-mtext"> types</span>
-							<span class="pcoded-mcaret"></span>
-						</a>
-					</li>
-					<li @class(["active"=>Route::is('soustype.*')])>
-						<a href="{{ route('soustype.index') }}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-							<span class="pcoded-mtext"> sous types</span>
-							<span class="pcoded-mcaret"></span>
-						</a>
-					</li>
-					<li @class(["active"=>Route::is('classsement.*')])>
-						<a href="{{ route('classement.index') }}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-							<span class="pcoded-mtext"> Classement</span>
-							<span class="pcoded-mcaret"></span>
-						</a>
-					</li>
-					<li @class(["active"=>Route::is('sousclasssement.*')])>
-						<a href="{{ route('sousClassement.all') }}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-							<span class="pcoded-mtext"> SousClassement</span>
-							<span class="pcoded-mcaret"></span>
-						</a>
-					</li>
+					@can(config('perm_names.MAN_TYPE'))
+						<li @class(["active"=>Route::is('type.*')])>
+							<a href="{{ route('type.index') }}" class="waves-effect waves-dark">
+								<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+								<span class="pcoded-mtext"> types</span>
+								<span class="pcoded-mcaret"></span>
+							</a>
+						</li>
+					@endcan
+					@can(config('perm_names.MAN_SOUSTYPE'))
+						<li @class(["active"=>Route::is('soustype.*')])>
+							<a href="{{ route('soustype.index') }}" class="waves-effect waves-dark">
+								<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+								<span class="pcoded-mtext"> sous types</span>
+								<span class="pcoded-mcaret"></span>
+							</a>
+						</li>
+					@endcan
+					@can(config('perm_names.MAN_CLASS'))
+
+						<li @class(["active"=>Route::is('classsement.*')])>
+							<a href="{{ route('classement.index') }}" class="waves-effect waves-dark">
+								<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+								<span class="pcoded-mtext"> Classement</span>
+								<span class="pcoded-mcaret"></span>
+							</a>
+						</li>
+					@endcan
+					@can(config('perm_names.MAN_SOUSCLASS'))
+
+						<li @class(["active"=>Route::is('sousclasssement.*')])>
+							<a href="{{ route('sousClassement.all') }}" class="waves-effect waves-dark">
+								<span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+								<span class="pcoded-mtext"> SousClassement</span>
+								<span class="pcoded-mcaret"></span>
+							</a>
+						</li>
+					@endcan
+
 				</ul>
 			</li>
 		</ul>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Scan;
 
 use App\Models\TempDossierDocument;
+use Faker\Core\File;
+use Faker\Factory;
 use Illuminate\Support\Str;
 use App\Models\TempDocument;
 use Illuminate\Http\Request;
@@ -23,9 +25,10 @@ class ScanDossierController extends Controller
     function store(Request $request){
         $validator = Validator::make($request->only('titre', 'files'), [
             'files' => ["required"],
-            'titre' => "required|string"
+            'titre' => "required|string|unique:temp_dossiers,nom"
         ], customAttributes: ['files' => "les fichiers rattaches"]);
         $validator->validate();
+
         // mon repertoire de stockage
         $dir  = now()->format("y_m_d").'/'.$request->input('titre');
         // je stocke mon fichier image
@@ -41,9 +44,10 @@ class ScanDossierController extends Controller
             // je cree ma source a partir de cette derniers
                 // je cree mon document
             $tempDocument = TempDocument::query()->create([
-                'url'=>$file->store(TempDossier::DEFAULT_PATH.'/'.$dir),
+            	'url'=> $file->store(TempDossier::DEFAULT_PATH.'/'.$dir,
+							["disk"=>tmpDisk()]),
                 'numero'=>Str::uuid(),
-                'data'=>"null",
+                'data'=>$file->getClientOriginalName(),
 					 "structure_id"=>auth(webGuard())->user()->structure->id
             ]);
             TempDossierDocument::query()->create([

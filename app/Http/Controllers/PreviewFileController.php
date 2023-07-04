@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
 use App\Models\TempDocument;
 use App\Models\TempDossier;
 use Illuminate\Http\Request;
@@ -11,11 +12,11 @@ class PreviewFileController extends Controller
 {
     function __invoke(Request $request,$id)
     {
-        $imageMimes = ['img', 'jpg', 'jif', 'png'];
-        // je selectionne le documents
+
+
         $tempDoc = TempDocument::query()->findOrFail($id);
         $pathToFile = $tempDoc->url;
-        $pathToFile = base_path("storage/app/").$pathToFile;
+        $pathToFile = storage_path(tmpDisk().DIRECTORY_SEPARATOR.$pathToFile);
 
 
         // dd($content);
@@ -28,14 +29,9 @@ class PreviewFileController extends Controller
 
     }
 
-    function previewFile($url){
-			$hashed = base64_decode($url);
-			$extParts = explode(".",$hashed);
-			$ext = \Arr::last($extParts);
-			$mime = $ext == "pdf"?"application/pdf":"image/$ext";
-			$file = Storage::disk("local")->get($hashed);
-			return  response($file)->withHeaders([
-				"Content-Type"=>$mime
-			]);
+    function previewFile($documentId){
+		 $tempDoc = Document::query()->findOrFail($documentId);
+		 $pathToFile = ($tempDoc->url);
+		 return response()->file($pathToFile,["Content-Disposition"=>"inline"]);
 	 }
 }

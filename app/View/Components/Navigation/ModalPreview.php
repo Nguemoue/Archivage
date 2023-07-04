@@ -7,25 +7,26 @@ use Illuminate\View\Component;
 
 class ModalPreview extends Component
 {
-	public $documentUrl;
+
 	public $id;
-	public $hash;
+//	public $hash;
 	public $nom;
+	public $document;
+
 	/**
 	 * ModalPreview constructor.
-	 * @param $documentUrl
+	 * @param $document
 	 * @param $id
 	 */
-	function __construct($documentUrl, $id,$nom)
+	function __construct($document, $id)
 	{
-			$this->id=$id;
-			$this->documentUrl=$documentUrl;
-		$this->hash = base64_encode($this->documentUrl);
-		$this->nom = $nom;
+		$this->id = $id;
+		$this->document = $document;
+
 	}
 
 	public function render(): View
-    {
-        return view('components.navigation.modal-preview');
-    }
+	{
+		return view('components.navigation.modal-preview');
+	}
 }

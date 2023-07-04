@@ -9,19 +9,14 @@ use Nette\Utils\Json;
 
 class Modal extends Component
 {
-    public $documentUrl;
     public $id;
     public $document = null;
     public $content = [];
-    public function __construct($documentUrl,$id)
+    public function __construct($document,$id)
     {
-        $this->documentUrl = $documentUrl;
+        $this->document = $document;
         $this->id = $id;
-        $this->document = Document::query()->where("url",'like',$this->documentUrl)->first();
-        $d= optional($this->document)->data;
-
-        #$d = (Json::decode($d,true));
-        $this->content= $d;
+        $this->content= $this->document->data;
     }
 
     public function render(): View

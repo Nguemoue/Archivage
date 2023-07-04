@@ -6,5 +6,10 @@ return [
 	"SHOW_STAT"=>"Voir statistique",
 	"NAV"=>"Navigation",
 	"CREATE_USER"=>"Creer utilisateur",
-	"MAN_USER"=>"Gerer utilisateur"
+	"MAN_USER"=>"Gerer utilisateur",
+	"MAN_CLASS"=>"Gerer Classement",
+	"MAN_TYPE"=>"Gerer Type",
+	"MAN_SOUSTYPE"=>"Gerer Sous Type",
+	"MAN_SOUSCLASS"=>"Gerer Sous Classement",
+	"MAN_STRUCTURE"=>"Gerer les Structures"
 ];

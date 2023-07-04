@@ -12,7 +12,7 @@
 				<input type="hidden" name="account_id" value="{{$item->id}}">
 				<div class="modal-body">
 					@foreach($permissions as $permission)
-						<div class="form-check form-check-inline">
+						<div class="form-check form-check-inline m-2 " style="cursor: pointer">
 							<input id="permission{{$item->id .'-'. $permission->id}}"
 									 {{$item->hasDirectPermission($permission->id)?'checked':''}}
 									 type="checkbox" name="permissions[]" value="{{$permission->id}}" class="form-check-input">

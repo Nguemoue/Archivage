@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SousClassement extends Model
 {
@@ -12,4 +13,8 @@ class SousClassement extends Model
     {
         return $this->belongsTo(Classement::class);
     }
+    public function dossiers(): HasMany
+	 {
+		 return $this->hasMany(Dossier::class, 'sous_classement_id');
+	 }
 }

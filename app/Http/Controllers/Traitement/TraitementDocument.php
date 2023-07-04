@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Traitement;
 
+use App\Events\FinishedTraitedDocumentEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Dossier;
 use App\Models\TempDocument;
+use App\Models\TempDossier;
 use Illuminate\Http\Request;
 
 class TraitementDocument extends Controller
@@ -12,32 +15,40 @@ class TraitementDocument extends Controller
     {
         $document = TempDocument::query()->findOrFail($id);
         $dossierId = $document->tempDossiers->first()->id;
-        // je demarre ma session sur le dossier contenant se dernier
-        session()->put("dossier-" . "$dossierId",
-            array_merge(session()->get("dossier-" . $dossierId, []), [
-                "document-" . "$document->id" => $this->getDefaultIntitData()
-            ]));
-        return view("traitement.documents.show", compact('document'));
+		 \TraitementProcessor::attachToFolder($dossierId)->addDocument($document);
+        return view("traitement.documents.show", compact('document','dossierId'));
     }
 
     private function getDefaultIntitData()
     {
         return [
-            "titre" => null,
+            "titre" => "",
             "updated_at" => now(),
             "created_at" => now(),
             "data" => [
-
             ],
-            'status'=>config('traitement.commencer')
+            'status'=>config('traitement.encours')
         ];
     }
 
 	function updateData($id,Request $request){
-        $allData = $request->except("_token");
+    	  $allData = $request->except("_token","dossierId");
 //        dd($allData);
         $data = json_encode($allData);
-        session()->put("dossier-".$allData['dossierId'].'.document-'.$id.".data",$data);
+        \TraitementProcessor::attachToFolder($request->input("dossierId"))->updateDocument($id,['data'=>$data]);
+      	$document = TempDocument::find($id);
+      	$dossier = TempDossier::find($request->input("dossierId"));
+      	$document->status = config('traitement.terminer');
+      	$document->save();
+      	event(new FinishedTraitedDocumentEvent($document));
+      	//je recupere le dossiers
+		   $tmpDocumentFinshCount = $dossier->tempDocuments()->where("status","=",config("traitement.terminer"))->count();
+			$tmpDocuments = $dossier->tempDocuments()->count();
+			if($tmpDocuments == $tmpDocumentFinshCount){
+				$dossier->status = config("traitement.terminer");
+				$dossier->save();
+			}
+
         return response()->json([
             'message'=>"ok",
         ]);

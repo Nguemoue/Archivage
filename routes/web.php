@@ -38,7 +38,7 @@ Route::group([
 			Route::get("sdda", [SDDAController::class, "index"])->name("sdda.index");
 			Route::resource("fichiers",FichierController::class);
 			Route::resource("fichiers.decision", FichierDecisionController::class);
-			Route::get("previewDocumentFile/{url}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
+			Route::get("previewDocumentFile/{documentId}",[PreviewFileController::class,"previewFile"])->name("previewFile.url");
 
 		});
 	});

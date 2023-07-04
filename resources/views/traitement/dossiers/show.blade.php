@@ -9,8 +9,7 @@
     <div>
         <div class="card p-2">
             <div class="card-header">
-                <h4 class="text-center">Traitement du dossier <em
-                            class="border p-2 rounded-lg code bg-dark rounded text-light">{{ $dossier->nom }}</em></h4>
+                <h4 class="text-center">Traitement du dossier <b >#{{ $dossier->nom }}</b></h4>
             </div>
             @foreach ($dossier->tempDocuments as $item)
                 <div class="border my-2 p-2 ">
@@ -19,23 +18,24 @@
                          width="30"/>
                     <span>{{ $item->numero }}</span>
                     {{-- si le dossier es en cours de traitement--}}
-                    @if($sess = session()->get("dossier-{$dossier->id}.document-{$item->id}"))
-                        {{--						 @dd($sess)--}}
-                        @if($sess['status'] == config('traitement.terminer'))
-                            <span class="float-right btn btn-outline-success text-lowercase"><i
+                    @if($item->status == config('traitement.terminer'))
+                            <span class="float-right text-success text-lowercase"><i
                                         class="fa fa-check"></i> Traiter avec success</span>
-                        @else
+						 @elseif($item->status == config('traitement.encours'))
                             <a href="{{ route('traitement.document.show',[$item->id]) }}"
-                               class="float-right text-lowercase border rounded btn btn-warning"> <span class="fa fa-play"></span>
-                                continuer
-                                le traitement</a>
-                        @endif
+                               class="float-right btn-sm text-lowercase border rounded btn btn-warning"> <span class="fa fa-play"></span>
+                                continuer le traitement
+									 </a>
                     @else
                         <a href="{{ route('traitement.document.show',[$item->id]) }}"
-                           class="float-right border p-2 btn text-lowercase btn-secondary">traiter ce fichier</a>
+                           class="float-right border p-2 btn btn-sm text-lowercase btn-secondary">
+									Traiter <i class="fa fa-hand-paper"></i>
+								</a>
                     @endif
                 </div>
             @endforeach
+			  @if($dossier->status == config('traitement.terminer'))
+
             <div class="card-footer">
                 <form id="validAllForm" method="post" action="{{route('traitement.dossier-traitement.finish',['id'=>$dossier->id])}}">
                     @csrf
@@ -45,7 +45,11 @@
                         Valider tous ses traitements</button>
                 </form>
             </div>
-        </div>
+			  @else
+				  <div class="alert alert-info alert-dismissible">Veuillez effectuer tous les traitement pour la validation finale!</div>
+			  @endif
+
+		  </div>
 
     </div>
 @endsection
