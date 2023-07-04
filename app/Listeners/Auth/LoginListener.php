@@ -30,7 +30,11 @@ class LoginListener
 				"profile_type"=>$user::class,
 				"profile_id"=>$user->id
 			],
-			["device"=>$currentDevice]
+			[
+				"device"=>$currentDevice,
+				"created_at"=>now(),
+				"updated_at"=>now()
+			]
 		 );
 		//je notifies mes super admin
 		 $superAdmins = SuperAdmin::query()->get();
