@@ -14,6 +14,16 @@ Route::group([
 		->middleware('guest:' . config('misc.guard.superAdmin'))
 		->name('password.request');
 
+	Route::get("/login", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "create"])
+		->middleware(['guest:superAdmin'])
+		->name("login");
+	Route::post("/login", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "store"])
+		->middleware(['guest:superAdmin'])
+		->name("login");
+	Route::post("/logout", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "destroy"])
+		->middleware(['auth:superAdmin'])
+		->name("logout");
+
 	Route::post('/forgot-password', [App\Http\Controllers\SuperAdmin\Auth\PasswordResetLinkController::class, 'store'])
 		->middleware('guest:' . config('misc.guard.superAdmin'))
 		->name('password.email');

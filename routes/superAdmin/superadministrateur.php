@@ -46,14 +46,5 @@ Route::group([
 	});
 
 
-	Route::middleware(["guest:superAdmin"])->group(function () {
-		/**
-		 * Route pour les page de connexions et autres
-		 */
-		Route::get("/login", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "create"])->name("login");
-		Route::post("/login", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "store"])->name("login");
-		Route::post("/logout", [App\Http\Controllers\SuperAdmin\Auth\AuthenticatedSessionController::class, "destroy"])->name("logout");
-	});
-
 });
 require __DIR__ . '/auth.php';
