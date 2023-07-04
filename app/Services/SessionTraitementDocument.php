@@ -46,6 +46,7 @@ class SessionTraitementDocument implements TraitementDocumentContract
 
 	public function addDocument(array|\App\Models\TempDocument $fileData)
 	{
+
 		if ($fileData instanceof TempDocument) {
 			Session::put($this->getDocumentKey($this->folderId, $fileData->id), $fileData->toArray());
 		} elseif (is_array($fileData)) {

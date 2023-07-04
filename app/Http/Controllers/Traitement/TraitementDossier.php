@@ -20,10 +20,6 @@ class TraitementDossier extends Controller
 	function show($id)
 	{
 		$dossier = TempDossier::query()->findOrFail($id);
-		$documentId = $dossier->tempDocuments->first()->id;
-		$processor = \TraitementProcessor::attachToFolder($dossier->id);
-		$processor->updateDocument($documentId, ["titre" => "lucas"]);
-
 		return view("traitement.dossiers.show", compact('dossier'));
 	}
 
