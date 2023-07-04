@@ -14,8 +14,10 @@ class UserAccountController extends Controller
 {
     public function index(Request $request)
     {
-    	$accountList = User::query()->with("structure")->get();
-    	$structure = adminAuth()->user()->structure;
+		 $structure = adminAuth()->user()->structure;
+		 $accountList = User::query()->with("structure")
+			->whereStructureId($structure->id)
+			->get();
     	$permissions = Permission::query()->where("guard_name",webGuard())->get();
 
     	return view("admin.userAccount.index",[

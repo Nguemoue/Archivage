@@ -24,7 +24,7 @@
                     <div>
                         <label for="sousType">Selectionner le Document Contextuele Rattacher</label>
                         <select name="sousType" id="sousType" class="form-control border">
-                            <option value=""  selected >selectionner un element</option>
+                            <option hidden  selected >selectionner un element</option>
                             @foreach($sousTypes as $sousType)
                                 <option value="{{$sousType->id}}">{{$sousType->nom}}</option>
                             @endforeach
