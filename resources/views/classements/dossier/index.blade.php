@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        @livewire("classement-view",['dossierId' => $dossier->id])
+        @livewire("classement-view",['dossierId' => $dossier->id,'classements' => $classements])
     </div>
 @endsection
 

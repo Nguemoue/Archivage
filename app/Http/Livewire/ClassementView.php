@@ -14,7 +14,6 @@ use Livewire\Component;
 class ClassementView extends Component
 {
     public $classements = null;
-
     public $depth = 1;
     public $dossierId;
     public $sousDepth = false;
@@ -32,7 +31,7 @@ class ClassementView extends Component
 
     public function mount()
     {
-        $this->classements = Classement::query()->get();
+        //$this->classements = $classement?Classement::query()->get();
         //je verifie si mes ordre de classent correspondent
 		 	foreach ($this->classements as $classement){
 		 		if(!Storage::disk("local")->exists($classement->nom)){
@@ -105,5 +104,6 @@ class ClassementView extends Component
         $dossier->is_classed = true;
         $dossier->save();
 		 session()->flash("success","Enregistre avec success");
+		 $this->redirect(route('traitement.index'));
 	 }
 }

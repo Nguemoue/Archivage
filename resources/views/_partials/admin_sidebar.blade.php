@@ -4,7 +4,7 @@
 		<div class="pcoded-navigation-label">Panel</div>
 		<ul class="pcoded-item pcoded-left-item">
 			<li class="">
-				<a href="#" class="waves-effect waves-dark">
+				<a href="{{route('admin.home')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-bar-chart-alt"></i><b>C</b></span>
 					<span class="pcoded-mtext">Dashboard</span>
 					<span class="pcoded-mcaret"></span>

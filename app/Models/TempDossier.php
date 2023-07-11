@@ -14,9 +14,7 @@ class TempDossier extends Model
     use HasFactory;
     public const DEFAULT_PATH = "temp_dossiers";
 
-    protected $fillable = [
-        'nom',"structure_id"
-    ];
+    protected $guarded = [];
 
     function tempDocuments(){
         return $this->belongsToMany(TempDocument::class,TempDossierDocument::class);

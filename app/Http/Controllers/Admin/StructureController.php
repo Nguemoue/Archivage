@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classement;
 use App\Models\Structure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -52,5 +53,24 @@ class StructureController extends Controller
 		]);
 
 		return redirect()->back()->with("success",__("response.create.success"));
+	}
+
+	public function navigateOwn(){
+
+		$structure = adminAuth()->user()->structure;
+		$classements = Classement::query()->whereStructureId($structure->id)->get();
+		if($classements->isEmpty()){
+			return redirect()->back()->with("danger","cette structre n'as pas encore de dossier traité");
+		}
+		return view("admin.navigate.own",['structure' => $structure,'classements' => $classements]);
+	}
+
+	public function navigateOther(int $structureId){
+		$structure = Structure::query()->find($structureId);
+		$classements = Classement::query()->whereStructureId($structure->id)->get();
+		if($classements->isEmpty()){
+			return redirect()->back()->with("danger","cette structre n'as pas encore de dossier traité");
+		}
+		return view("admin.navigate.own",['structure' => $structure,'classements' => $classements]);
 	}
 }

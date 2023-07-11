@@ -27,7 +27,7 @@ Route::group([
 	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
 ],function(){
 
-	Route::middleware(["auth","passwordChanged:web"])->group(function(){
+	Route::middleware(["auth:web","passwordChanged:web"])->group(function(){
 		Route::get('/', function () {
 			return view('index');
 		})->name("home");
@@ -43,7 +43,9 @@ Route::group([
 		});
 	});
 
-	Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])->name("file.preview");
+	Route::get("/preview-file/{id}", [PreviewFileController::class,"__invoke"])
+		->name("file.preview");
+
 	Route::get('/dashboard', function () {
 		return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');

@@ -33,7 +33,8 @@ class TraitementDossier extends Controller
 	public function finish($id, Request $request)
 	{
 
-
+$structure = webAuth()->user()->structure;
+$user = webAuth()->user();
 		$method = "move";
 		$method = $request->input("copy") == '1' ? "copy" : $method;
 		$tempDossier = TempDossier::query()->find($id);
@@ -43,6 +44,8 @@ class TraitementDossier extends Controller
 		$sessionsDoc = \TraitementProcessor::getAll($tempDossier->id);
 		$doc = Dossier::query()->updateOrCreate([
 			"nom"=>$tempDossier->nom,
+			'structure_id'=>$structure->id,
+			"user_id"=>$user->id
 		],[
 			"numero"=>Str::uuid()
 		]);
@@ -57,8 +60,9 @@ class TraitementDossier extends Controller
 			$document->created_at = $item["created_at"];
 			$document->updated_at = $item["updated_at"];
 			$document->data = Json::decode($item["data"], true);
-			$document->structure_id = auth(webGuard())->user()->structure->id;
+			$document->structure_id = $structure->id;
 			$document->numero = Str::uuid();
+			$document->user_id = $user->id;
 			$ext = explode(".", $tmpDoc->url)[1];
 			$newUrl = Storage::disk("local")->path($doc->nom . "/" . $document->numero . '.' . $ext);
 			if (Storage::disk(tmpDisk())->exists($tmpDoc->url)) {

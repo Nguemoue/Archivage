@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classement extends Model
 {
-    protected $fillable = ['nom','ordre'];
+    protected $guarded = [];
 
     public function sousCLassements(): HasMany
     {

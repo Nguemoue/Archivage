@@ -28,11 +28,15 @@ class ClassementController extends Controller
         $request->validate([
             'nom'=>"required|string|unique:classements,nom"
         ]);
+        $user = webAuth()->user();
+        $structure = $user->structure;
         $ordre = Classement::query()->max("ordre");
         $nom = $request->input("nom");
         Classement::query()->create([
             'nom'=>$nom,
-            'ordre'=>$ordre+1
+            'ordre'=>$ordre+1,
+			  'user_id'=>$user->id,
+			  'structure_id'=>$structure->id
         ]);
         return redirect()->back()->with("success","Donnes enregistre avec success !");
     }
@@ -70,8 +74,13 @@ class ClassementController extends Controller
         return redirect()->back()->with("success","suppression reussi");
     }
 
-    function  classDossier(Request $request,$dossierId){
+    function  classDossier(Request $request, $dossierId){
         $dossier = Dossier::find($dossierId);
-        return view("classements.dossier.index",compact("dossier"));
+        $structure = webAuth()->user()->structure;
+        $classements = Classement::query()->whereStructureId($structure->id)->get();
+        if($classements->isEmpty()){
+        	return redirect()->route("home")->withDanger("vous devez cree des dossier de classements ");
+		  }
+        return view("classements.dossier.index",compact("dossier","classements"));
     }
 }

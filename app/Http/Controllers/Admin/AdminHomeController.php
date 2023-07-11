@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Structure;
 
 class AdminHomeController extends Controller
 {
@@ -13,6 +14,11 @@ class AdminHomeController extends Controller
 
     public function home(){
 
-    	return view("admin.index");
+    	$structures = Structure::query()->get();
+    	$data = [
+    		"structures"=>$structures,
+			"auth"=>adminAuth()->user()
+		];
+    	return view("admin.index",$data);
 	 }
 }

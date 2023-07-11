@@ -10,19 +10,24 @@ class PermissionSeeder extends Seeder
     public function run()
     {
     	$webPermissions = [
-    		"Scanner document",
-			"Traiter document",
-			"Voir statistique",
-			"Navigation",
-			"Gerer Classement",
-			"Gerer Type",
-			"Gerer Sous Type",
-			"Gerer Sous Classement"
+    		config('perm_names.SCAN_DOC'),
+			config('perm_names.TRAIT_DOC'),
+
+			config('perm_names.SHOW_STAT'),
+			config('perm_names.NAV'),
+			config('perm_names.MAN_CLASS'),
+			config('perm_names.MAN_TYPE'),
+			config('perm_names.MAN_SOUSTYPE'),
+			config('perm_names.MAN_SOUSCLASS')
+
 		];
     	$adminPermissions = [
-    		"Creer utilisateur",
-			"Gerer utilisateur",
-			"Gerer les Structures"
+			config('perm_names.CREATE_USER'),
+			config('perm_names.MAN_USER'),
+			config('perm_names.MAN_STRUCTURE'),
+			config('perm_names.NAV_STRUCTURE'),
+			config('perm_names.NAV_STRUCTURE_ALL')
+
 		];
 
     	foreach ($webPermissions as $permission){

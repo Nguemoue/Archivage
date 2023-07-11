@@ -33,13 +33,13 @@ class NavigationClassement extends Component
 
     public function mount()
     {
-        $this->classements = Classement::all();
+    	$structure = webAuth()->user()->structure;
+    	//$this->classements = Classement::query()->where('structure_id','=',$structure->id);
     }
 
     function loadSousClassement($id)
     {
-//        dd($id);
-        $this->currentClassement = Classement::find($id);
+        $this->currentClassement = Classement::query()->with('sousCLassements')->find($id);
         $this->sousClassements = $this->currentClassement->sousCLassements;
         $this->depth = 2;
     }

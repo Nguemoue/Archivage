@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath",
-		"permission:".config('perm_names.MAN_CLASS').','.config('perm_names.MAN_SOUSCLASS')]
+	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath",'auth:web']
 ],function() {
 
 
