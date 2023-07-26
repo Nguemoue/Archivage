@@ -3,8 +3,8 @@
 	<div class="pcoded-inner-navbar main-menu">
 		<div class="pcoded-navigation-label">Panel</div>
 		<ul class="pcoded-item pcoded-left-item">
-			<li >
-				<a href="#" class="waves-effect waves-dark">
+			<li @class(["active"=>Route::is("superAdmin.home")])>
+				<a href="{{route('superAdmin.home')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-bar-chart-alt"></i><b>C</b></span>
 					<span class="pcoded-mtext">Dashboard</span>
 					<span class="pcoded-mcaret"></span>
@@ -23,7 +23,11 @@
 		<ul class="pcoded-item pcoded-left-item">
 			<li  @class(["pcoded-hasmenu",
 								"active pcoded-trigger"=>
-								\Route::is(["superAdmin.connection.index","superAdmin.admin.account.list","superAdmin.user.account.list","superAdmin.structure.list"])])>
+								\Route::is(["superAdmin.connection.index",
+								"superAdmin.admin.account.list","superAdmin.user.account.list",
+								"superAdmin.structure.list","superAdmin.log.*"
+								]
+								)])>
 				<a href="javascript:void(0)" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-id-badge"></i><b>A</b></span>
 					<span class="pcoded-mtext">Resources</span>
@@ -55,6 +59,13 @@
 						<a href="{{route('superAdmin.structure.list')}}" class="waves-effect waves-dark">
 							<span class="pcoded-micon"><i class="fa fa-print"></i></span>
 							<span class="pcoded-mtext"> Structures</span>
+							<span class="pcoded-mcaret"></span>
+						</a>
+					</li>
+					<li @class(["active"=>\Route::is("superAdmin.log.list")])>
+						<a href="{{route('superAdmin.log.list')}}" class="waves-effect waves-dark">
+							<span class="pcoded-micon"><i class="fa fa-paperclip"></i></span>
+							<span class="pcoded-mtext"> Log | Audit</span>
 							<span class="pcoded-mcaret"></span>
 						</a>
 					</li>

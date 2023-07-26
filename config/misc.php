@@ -14,5 +14,10 @@ return [
 	"prefix"=>[
 		"dossier"=>"dossier-",
 		"document"=>"document-"
+	],
+	"log_action_label"=>[
+		"create"=>"creation",
+		"delete"=>"suppression",
+		"update"=>"mis à jour"
 	]
 ];

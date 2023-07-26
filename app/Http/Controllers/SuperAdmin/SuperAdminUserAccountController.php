@@ -14,7 +14,8 @@ class SuperAdminUserAccountController extends Controller
 {
 	public function index(Request $request)
 	{
-		$accountList = User::query()->with("structure")->get();
+
+		$accountList = User::query()->with(["structure","permissions"])->get();
 		$structures = Structure::query()->get();
 		$permissions = Permission::query()->where("guard_name",webGuard())->get();
 
@@ -32,7 +33,7 @@ class SuperAdminUserAccountController extends Controller
 			"structure_id"=>['required','int',Rule::exists("structures","id")]
 		]);
 		//
-		User::query()->create([
+		User::create([
 			"name"=>$request->input("nom"),
 			"email"=>$request->input("email"),
 			"structure_id"=>$request->input("structure_id"),
@@ -45,7 +46,7 @@ class SuperAdminUserAccountController extends Controller
 		\Validator::make(['userId'=>$userId],[
 			"userId"=>["int",Rule::exists("users","id")]
 		])->validate();
-		User::query()->where("id",'=',$userId)->delete();
+		User::where("id",'=',$userId)->delete();
 		return redirect()->back()->with("success",__("response.delete.success"));
 
 	}
@@ -55,7 +56,7 @@ class SuperAdminUserAccountController extends Controller
 			"nom"=>"required|string",
 			"structure_id"=>['required','int',Rule::exists("structures","id")]
 		]);
-		User::query()->where("id","=",$userId)->update([
+		User::whereKey($userId)->update([
 			"name"=>$request->input("nom"),
 			"email"=>$request->input("email"),
 			"structure_id"=>$request->input("structure_id"),

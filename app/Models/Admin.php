@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\LoggableActor;
+use App\Traits\LoggableTarget;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
-	use Notifiable,HasFactory,HasPermissions,HasRoles;
+	use Notifiable,HasFactory,HasPermissions,HasRoles,LoggableActor,LoggableTarget;
 
 	protected $guarded = [];
 
