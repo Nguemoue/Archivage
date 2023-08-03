@@ -9,7 +9,8 @@ class NavigateController extends Controller
     public function __invoke()
     {
     	$user = webAuth()->user();
-    	$classements = Classement::query()->whereUserId($user->id)->get();
+    	$structureId = $user->structure_id;
+    	$classements = Classement::query()->whereStructureId($structureId)->get();
         return view("navigate.index",[
         	"classements" => $classements
 		  ]);

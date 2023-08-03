@@ -1,66 +1,68 @@
 @extends('template')
-
+@push("styles")
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
+@push("scripts")
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@endpush
 @section('content')
-    <div class="container-fluid">
-        <h2 class="text-center">Filtre pour Les Statistique</h2>
-        <hr>
-        <div class="card">
-            <div class="card-footer">
-                Formulaire de PreStatistique
-            </div>
-            <hr>
+	<div class="container-fluid">
+		<h2 class="text-center">Filtre pour Les Statistique</h2>
+		<hr>
+		<div class="card">
+			<div class="card-footer">
+				Formulaire de PreStatistique
+			</div>
+			<hr>
 
-            <div class="card-body">
-                <form action="{{route('statistique.home')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="periode">Choisissez la periode</label>
-                        <select name="periode" class="form-control border" id="periode">
-                            <option value="jour">jour</option>
-                            <option value="jour">mois</option>
-                            <option value="jour">annees</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="sousType">Selectionner le Document Contextuele Rattacher</label>
-                        <select name="sousType" id="sousType" class="form-control border">
-                            <option hidden  selected >selectionner un element</option>
-                            @foreach($sousTypes as $sousType)
-                                <option value="{{$sousType->id}}">{{$sousType->nom}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="my-2">
-                        <label for="champ">champ</label>
-                        <select name="champ" class="form-control border" id="champ">
-                        </select>
-                    </div>
-                    <div class="my-2">
-                        <label for="champ">Type de donnees du champ</label>
-                        <select name="type" class="form-control border" id="type">
-                            <option value="int">Nombre</option>
-                            <option value="string">texte</option>
-                        </select>
-                    </div>
-                    <hr class="my-4">
-						 <div class="my-2">
-							 <label for="champTab">champ pour le tableau de statistique</label>
-							 <div id="chamTab">
+			<div class="card-body">
+				<form action="{{route('statistique.home')}}" method="post">
+					@csrf
+					<div class="form-group">
+						<label for="periode">Choisissez la periode</label>
+						<input type="date" name="periode" id="periode" class="form-control flatpickr">
+					</div>
+					<div>
+						<label for="sousType">Selectionner le Document Contextuele Rattacher</label>
+						<select name="sousType" id="sousType" class="form-control border select2">
+							<option value="-1" selected>-----------------------</option>
+							@foreach($sousTypes as $sousType)
+								<option value="{{$sousType->id}}">{{$sousType->nom}}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="my-2">
+						<label for="champ">champ</label>
+						<select name="champ" class="form-control form-select select2" id="champ">
+							<option value="-1">-------------------------</option>
+						</select>
+					</div>
+					<div class="my-2">
+						<label for="type">Type de donnees du champ</label>
+						<select name="type" class="form-control border" id="type">
+							<option value="int">Nombre</option>
+							<option value="string">texte</option>
+						</select>
+					</div>
+					<hr class="my-4">
+					<div class="my-2">
+						<label for="champTab">champ pour le tableau de statistique</label>
+						<div id="chamTab">
 
-							 </div>
-						 </div>
-                    <button class="btn btn-success btn-sm">
-                        soumettre <i class="fa fa-send"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
+						</div>
+					</div>
+					<button class="btn btn-success btn-sm">
+						soumettre <i class="fa fa-send"></i>
+					</button>
+				</form>
+			</div>
+		</div>
 
-    </div>
+	</div>
 @endsection
 
 @push('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
+	<script src="{{ mix('js/app.js') }}"></script>
 
     <script >
         console.log($)
@@ -78,6 +80,7 @@
 					$("#chamTab").html(champTab)
             });
         })
+		  $(".flatpickr").flatpickr({mode:'range',dateFormat:'Y-m-d',altFormat:'d-m-Y', date:['{{now()->format("Y-m-d")}}','{{now()->addDays(4)->format("Y-m-d")}}']})
     </script>
 @endpush
 

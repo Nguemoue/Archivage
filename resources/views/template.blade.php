@@ -22,6 +22,8 @@
 	<!-- Favicon icon -->
 	<link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
 	<link rel="stylesheet" href="{{asset('assets/css/file-input-preview.css')}}">
+@livewireScripts
+
 	@livewireStyles
 
 	<!-- Google font-->
@@ -145,7 +147,6 @@
 
 <!-- slimscroll js -->
 <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-@livewireScripts
 
 <!-- menu js -->
 <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>

@@ -1,6 +1,5 @@
-@extends("template_password")
+<x-guest-stisla-layout>
 
-@section("content")
 <div class="card w-75 mx-auto">
 	<div class="card-header">
 		Reinitialisation du mot de passe
@@ -29,4 +28,6 @@
 		</form>
 	</div>
 </div>
-@endsection
+
+
+</x-guest-stisla-layout>

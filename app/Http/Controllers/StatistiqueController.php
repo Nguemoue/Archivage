@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Barryvdh\DomPDF\Facade\Pdf;
+
 use App\Models\Document;
 use App\Models\SousTypeDocument;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
@@ -10,7 +10,6 @@ use Asantibanez\LivewireCharts\Models\PieChartModel;
 use Barryvdh\Snappy\Facades\SnappyPdf;
 use Faker\Factory;
 use Illuminate\Http\Request;
-use PhpParser\Comment\Doc;
 
 class StatistiqueController extends Controller
 {
@@ -40,16 +39,20 @@ class StatistiqueController extends Controller
 		$periode = $request->input("periode");
 		$gp = $this->getGp($periode);
 		$champ = $request->input("champ");
+		$parts = explode("to",$periode);
+		$part1 = trim($parts[0]);
+		$part2 = trim($parts[1]);
 		#je selectionne en function de
-		$data = Document::query()->selectRaw("$gp(created_at) as date")
+		$data = Document::query()
+			->selectRaw("$gp(created_at) as date,DATE_FORMAT(created_at,'%Y-%m-%d') as formated")
 			->addSelect("data->{$champ} as field")
-			->groupByRaw("$gp(created_at),data")
+			->whereBetween(\DB::raw("DATE_FORMAT(created_at,'%Y-%m-%d')"), [$part1,$part2])
+			->groupByRaw("$gp(created_at),data,formated")
 			->get();
 
 		$data = $data->groupBy('date');
 		$data = $data->map(function ($elt) use ($operateur) {
 			$sum = 0;
-
 			foreach ($elt as $e) {
 				if ($operateur == 'sum') {
 					$sum += (int)$e->field;
@@ -73,16 +76,17 @@ class StatistiqueController extends Controller
 			$pieChart->addSlice($periode . ' ' . $k, $v, $color);
 			$histogrameChart->addPoint($periode . ' ' . $k, $v, $color);
 		}
-		$sousType = (int) $request->input("sousType");
+		$sousType = (int)$request->input("sousType");
 		$documents = Document::query()
-						->where("sous_type_document_id","=",$sousType)
-						->get();
+			->where("sous_type_document_id", "=", $sousType)
+			->whereBetween(\DB::raw("DATE_FORMAT(created_at,'%Y-%m-%d')"), [$part1,$part2])
+			->get();
 		$champTab = $request->input("champTab");
 
-		$sousType=$request->input("sousType");
+		$sousType = $request->input("sousType");
 		return view("statistique.home",
-			compact("lineChart", "histogrameChart", "pieChart","documents","champTab"
-			,"champ","operateur","sousType")
+			compact("lineChart", "histogrameChart", "pieChart", "documents", "champTab"
+				, "champ", "operateur", "sousType")
 		);
 	}
 
@@ -97,24 +101,26 @@ class StatistiqueController extends Controller
 		}
 	}
 
-	public function filePdf($sousType){
+	public function filePdf($sousType)
+	{
 
-		$options =[
+		$options = [
 //			"enable-forms"=>true,
-			"enable-javascript"=>true,
+			"enable-javascript" => true,
 //			"javascript-delay"=>400,
 //			"enable-local-file-access"=>true
 		];
-		$file = SnappyPdf::loadView("statistique.pdfFile",[]);
+		$file = SnappyPdf::loadView("statistique.pdfFile", []);
 		$file->setOptions($options)->setTemporaryFolder(base_path('resources/tempDir/pdf'));
-		$content =  $file->output();
+		$content = $file->output();
 		return response($content)->withHeaders([
-			"Content-Type"=>"application/pdf",
-			"Content-Disposition"=>"inline"
+			"Content-Type" => "application/pdf",
+			"Content-Disposition" => "inline"
 		]);
 	}
 
-	public function file($sousType){
+	public function file($sousType)
+	{
 		return view("statistique.pdfFile");
 	}
 

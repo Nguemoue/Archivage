@@ -30,7 +30,7 @@
 
 
 		<div class="col-sm-6 col-12 my-3">
-			<a href="{{route('superAdmin.permission.home')}}" style="line-height: 100px;" class="w-100 btn btn-outline-success">
+			<a href="{{route('superAdmin.log.list')}}" style="line-height: 100px;" class="w-100 btn btn-outline-success">
 				<span class="fa fa-user-secret fa-2x"></span>
 				Gerer l'audit
 			</a>

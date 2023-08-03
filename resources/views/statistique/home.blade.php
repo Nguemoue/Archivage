@@ -74,7 +74,7 @@
 					Diagramme #1
 				</div>
 				<div class="card-body">
-					<livewire:livewire-column-chart :column-chart-model="$lineChart"/>
+					<livewire:livewire-column-chart  :column-chart-model="$lineChart"/>
 				</div>
 			</div>
 			<hr class="my-4">
@@ -97,13 +97,14 @@
 		</div>
 	</section>
 @endsection
-@push("styles")
-	@livewireChartsScripts
+@push("scripts")
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	@livewireChartsScripts
 @endpush
 
 @push("scripts")
 	<script src="{{ mix('js/app.js') }}"></script>
+
 	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
@@ -121,4 +122,5 @@
 			})
 		});
 	</script>
+
 @endpush

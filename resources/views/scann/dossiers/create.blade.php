@@ -42,7 +42,8 @@
                 <div class="mb-3">
 						 <div class="selected-files-container">
 							 <label for="url" class="file-input-label">
-								 <span class="button-label">Choose Files</span>
+								 <span class="button-label">Choisir les fichiers</span>
+								 <i class="fa fa-hand-paper"></i>
 							 </label>
 						 </div>
                     <input required type="file" class="d-none input-file-preview" id="url" name="files[]" multiple accept="application/pdf,image/*"/>

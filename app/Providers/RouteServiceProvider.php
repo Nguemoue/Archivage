@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
 			$this->bootSuperAdminRoutes();
 			$this->bootAdminRoutes();
 			$this->bootWebRoutes();
+			$this->bootTestRoutes();
 		});
 
 	}
@@ -97,5 +98,12 @@ class RouteServiceProvider extends ServiceProvider
 			->middleware(["web"])
 			->namespace($this->namespace)
 			->group(base_path("routes/superAdmin/superadministrateur.php"));
+	}
+
+	private function bootTestRoutes()
+	{
+		Route::middleware(["web"])
+			->namespace($this->namespace)
+			->group(base_path("routes/test.php"));
 	}
 }

@@ -1,12 +1,11 @@
-@extends('template')
-
-@section('content')
+@extends('layouts.stisla.stisla_top_navigation')
+@section('main-content')
+	<section class="section">
 	<div class="text-center">
 		<h2 class="text-underline">Page D'accueil</h2>
 	</div>
 	<hr>
-	<div class="row"
-		  style="font-family: 'Algerian',serif;letter-spacing: 2px;font-size: 5em;font-weight: bolder">
+	<div class="row">
 		@can(config('perm_names.SCAN_DOC'))
 			<div class="col-md-6  col-sm-12 my-2">
 				<a href="{{ route('scan.index') }}" style="line-height: 100px;" class="w-100 btn btn-outline-success">
@@ -26,7 +25,7 @@
 		@endcan
 
 	</div>
-	<div class="row">
+	<div class="row" >
 		@can(config('perm_names.NAV'))
 
 			<div class="col-md-6  col-sm-12 my-2">
@@ -46,4 +45,5 @@
 		@endcan
 
 	</div>
+	</section>
 @endsection
