@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-	<title>Layout &rsaquo; Top Navigation &mdash; Stisla</title>
+	<title>{{config('app.name')}}</title>
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="{{asset('stisla/assets/modules/bootstrap/css/bootstrap.css')}}">
@@ -16,26 +16,14 @@
 	<!-- Template CSS -->
 	<link rel="stylesheet" href="{{asset('stisla/assets/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('stisla/assets/css/components.css')}}">
-	<!-- Start GA -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
 
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-
-		gtag('js', new Date());
-
-		gtag('config', 'UA-94034622-3');
-	</script>
 	<!-- /END GA --></head>
 {{--remove class layout-3--}}
 <body class="layout-3">
 <div id="app">
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
-		<nav class="navbar navbar-expand-lg main-navbar">
+		<nav class="navbar navbar-expand-lg main-navbar justify-content-between">
 			<a href="/" class="navbar-brand sidebar-gone-hide">{{config("app.name")}}</a>
 			@if(!View::hasSection("top_navigation"))
 				<a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
@@ -125,7 +113,7 @@
 
 	<!-- Main Content -->
 		<div class="main-content">
-			@yield("main-content")
+			@yield("content")
 		</div>
 
 		@if(!View::hasSection("footer"))

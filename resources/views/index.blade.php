@@ -1,5 +1,5 @@
 @extends('layouts.stisla.stisla_top_navigation')
-@section('main-content')
+@section('content')
 	<section class="section">
 	<div class="text-center">
 		<h2 class="text-underline">Page D'accueil</h2>

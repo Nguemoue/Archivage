@@ -41,7 +41,7 @@ class SessionTraitementDocument implements TraitementDocumentContract
 		if($this->folderId==null){
 			throw new Exception("Le Document doit etre attâcher a un dossier");
 		}
-		return Session::get(prefixDossier() . $this->folderId . "." . prefixDocument() . $fileId, null);
+		return Session::get($this->getDocumentKey($this->folderId, $fileId), null);
 	}
 
 	public function addDocument(array|\App\Models\TempDocument $fileData)
