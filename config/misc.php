@@ -2,7 +2,7 @@
 
 return [
     'guard'=>[
-    	'web'=>"web",
+    	 'web'=>"web",
 		 "admin"=>"admin",
 		 "superAdmin"=>"superAdmin"
 	 ],
@@ -19,5 +19,12 @@ return [
 		"create"=>"creation",
 		"delete"=>"suppression",
 		"update"=>"mis à jour"
+	],
+	/**
+	 * liste des options de configuration après le traitement d'un fichier
+	*/
+	"traitement_after_scan"=>[
+		"skip"    =>0,
+		"continue"=>1
 	]
 ];

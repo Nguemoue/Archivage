@@ -1,4 +1,4 @@
-@extends('template')
+@extends('layouts._materializev2._materializev2')
 
 @section('header')
     {{-- <x-dashboard-header/> --}}

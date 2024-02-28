@@ -40,7 +40,6 @@ return [
         'options' => [],
         'env'     => [],
     ],
-
     'image' => [
         'enabled' => true,
         'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),

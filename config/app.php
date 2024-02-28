@@ -177,6 +177,7 @@ return [
 
 		 App\Providers\UrlServiceProvider::class,
 		 App\Providers\TraitementProcessorServiceProvider::class,
+		 App\Providers\CustomDirectiveServiceProvider::class
 	 ],
 
     /*
@@ -231,7 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-		  "TraitementProcessor"=>\App\Facades\TraitementDocumentFacade::class
+		  "TraitementProcessor"=>\App\Facades\TraitementDocumentFacade::class,
+		 "ReturnStatus"=>\App\Constant\ReturnStatus::class
 
     ],
 

@@ -1,4 +1,4 @@
-@extends('layouts.stisla.stisla_top_navigation')
+@extends('layouts._materializev2._materializev2')
 @section('content')
 	<section class="section">
 	<div class="text-center">
@@ -43,7 +43,6 @@
 				</a>
 			</div>
 		@endcan
-
 	</div>
 	</section>
 @endsection

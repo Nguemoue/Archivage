@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\core\PdfFiscalController;
 use App\Http\Controllers\FichierDecisionController;
 use App\Http\Controllers\Metier\FichierController;
 use App\Http\Controllers\PreviewFileController;
@@ -50,6 +51,8 @@ Route::group([
 		return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');
 	//route pour changer de mot de passe
+	Route::get("pdf-fiscal",[PdfFiscalController::class,"index"])->name('fiscal-pdf.index');
+	Route::post("pdf-fiscal",[PdfFiscalController::class,"store"])->name('fiscal-pdf.store');
 
 });
 
