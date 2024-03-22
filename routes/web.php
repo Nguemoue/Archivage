@@ -4,11 +4,7 @@ use App\Http\Controllers\core\PdfFiscalController;
 use App\Http\Controllers\FichierDecisionController;
 use App\Http\Controllers\Metier\FichierController;
 use App\Http\Controllers\PreviewFileController;
-use App\Http\Controllers\ScannController;
 use App\Http\Controllers\SDDAController;
-use App\Http\Livewire\Scann\ScannElement;
-use App\Http\Livewire\Scann\ScannGroup;
-use App\Models\TempDocument;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +24,9 @@ Route::group([
 	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath"]
 ],function(){
 
+	Livewire::setUpdateRoute(function ($handle) {
+		return Route::post('/custom/livewire/update', $handle);
+	});
 	Route::middleware(["auth:web","passwordChanged:web"])->group(function(){
 		Route::get('/', function () {
 			return view('index');

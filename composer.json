@@ -8,25 +8,21 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0",
-        "barryvdh/laravel-elfinder": "*",
         "barryvdh/laravel-snappy": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "hisorange/browser-detect": "^4.5",
-        "inertiajs/inertia-laravel": "^0.4.3",
-        "laravel/framework": "^9.0",
-        "laravel/sanctum": "^2.8",
+        "laravel/framework": "^10.0",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.12",
+        "livewire/livewire": "^3.4",
         "mcamara/laravel-localization": "~1.8.0",
         "outhebox/blade-flags": "^1.2",
-        "spatie/laravel-medialibrary": "^9.12",
+        "spatie/laravel-medialibrary": "^10.15",
         "spatie/laravel-permission": "^5.5",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
-		 "spatie/laravel-ignition": "^1.0",
+		 "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.6",
         "laravel/sail": "^1.0.1",
@@ -76,6 +72,5 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }

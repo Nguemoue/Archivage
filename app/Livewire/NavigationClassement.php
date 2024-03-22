@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Classement;
-use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\SousClassement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
-use Illuminate\Support\Str;
-use stdClass;
 
 class NavigationClassement extends Component
 {

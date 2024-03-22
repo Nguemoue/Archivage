@@ -23,17 +23,18 @@
 				{{-- Operations --}}
 				<x-ui.sidebar.sidebar-item icon="ti ti-folder" text="Operations" is-group>
 					<x-slot name="groupItem">
-						<x-ui.sidebar.sidebar-item text="Scan"/>
-						<x-ui.sidebar.sidebar-item text="Traitement"/>
-						<x-ui.sidebar.sidebar-item  text="Analyse"/>
+						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Scan"/>
+						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Traitement"/>
+						<x-ui.sidebar.sidebar-item  :url="route('navigation.index')" text="Navigation"/>
+						<x-ui.sidebar.sidebar-item :url="route('statistique.index')" text="Statistique"/>
 					</x-slot>
 				</x-ui.sidebar.sidebar-item>
 
 				{{-- domaines --}}
 				<x-ui.sidebar.sidebar-item icon="ti ti-world" text="Espaces" is-group>
 					<x-slot name="groupItem">
-						<x-ui.sidebar.sidebar-item text="Administrateur"/>
-						<x-ui.sidebar.sidebar-item text="Super Administrateur"/>
+						<x-ui.sidebar.sidebar-item :url="route('admin.home')" text="Administrateur"/>
+						<x-ui.sidebar.sidebar-item :url="route('superAdmin.home')" text="Super Administrateur"/>
 					</x-slot>
 				</x-ui.sidebar.sidebar-item>
 

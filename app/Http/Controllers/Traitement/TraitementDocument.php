@@ -59,7 +59,7 @@ class TraitementDocument extends Controller
         $dossier = $document->tempDossiers()->first();
         session()->put("dossier-{$dossier->id}".'.document-'.$document->id.'.status', config('traitement.terminer'));
         //si on est connecte je le notifier
-        return redirect()->route("traitement.dossier.show",[$dossier->id])->with("success","Document traiter avec sucesss");
+			  return redirect()->route("traitement.dossier.show",[$dossier->id])->with("success","Document traiter avec sucesss");
     }
 }
 

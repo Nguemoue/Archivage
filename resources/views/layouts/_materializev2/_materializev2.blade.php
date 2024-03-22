@@ -46,11 +46,10 @@
 	<!--  Sidebar End -->
 	<!--  Main wrapper -->
 	<div class="body-wrapper">
-		<div class="container-fluid">
+		<div class="container-fluid p-0 w-100">
 			@yield("content")
+			@stack("body-end")
 		</div>
-		@stack("body-end")
-
 	</div>
 	<div class="dark-transparent sidebartoggler"></div>
 </div>

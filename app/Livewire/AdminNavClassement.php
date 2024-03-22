@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Classement;
-use App\Models\Dossier;
 use App\Models\SousClassement;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class AdminNavClassement extends Component

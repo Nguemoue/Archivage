@@ -1,18 +1,30 @@
 @extends("templates.templateUser.templateUser")
 
 @section("title")
-    Edition
+	Edition
 @endsection
 
 @section("content")
-    <a href="{{ route('traitement.index') }}" class="btn btn-success btn-sm mb-2">Retour</a>
-    <div>
+	@routes('traitement.document.*')
+	<livewire:traitement.traitement-document :dossier-id="$dossierId" :document="$document"/>
 
-		 <livewire:traitement.traitement-document :dossier-id="$dossierId" :document="$document"/>
-    </div>
 @endsection
 
 
 @push("scripts")
-    <script src="{{asset('js/app.js')}}"></script>
+	@vite('resources/js/app.js')
+	<script>
+		function prepareValidation(form){
+			let data = $(form).serializeArray();
+			let result = [];
+			for(let item of data){
+				let objectName = item.name;
+				if( objectName !=='_token' || objectName !== '' ){
+					result.push(item)
+				}
+			}
+			result = JSON.stringify(result);
+			form.querySelector('#documentFieldData').value = result
+		}
+	</script>
 @endpush

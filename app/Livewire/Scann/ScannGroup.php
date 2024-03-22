@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Scann;
+namespace App\Livewire\Scann;
 
 use App\Models\Fichier;
 use Livewire\Component;
@@ -8,7 +8,7 @@ use Livewire\Component;
 class ScannGroup extends Component
 {
     public $isElementCreated = false;
-    
+
     function  createScannElement(){
         $this->isElementCreated = true;
         dd('yes');

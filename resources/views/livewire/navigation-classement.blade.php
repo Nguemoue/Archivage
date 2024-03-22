@@ -8,7 +8,7 @@
 				@foreach($classements as $classement)
 					<div class="d-flex px-2 flex-column m-3">
 						<a wire:click='loadSousClassement({{$classement->id}})' href="#!">
-							<span class="fa fa-folder fa-4x text-warning"></span>
+							<span class="ti ti-folder fa-4x text-warning"></span>
 						</a>
 						<h6 class="font-bold">{{$classement->nom}}</h6>
 					</div>
@@ -49,7 +49,7 @@
 												<a data-toggle="collapse" class=""
 													data-target="#dropDownMenu{{$dossier->id}}">
 													<i class="fa fa-folder fa-2x text-warning mx-2"></i>
-													<span class="text-wrap" style="max-width: 100px;overflow-x: wrap">
+													<span class="text-wrap" style="max-width: 100px;">
                                                     {{$dossier->nom}}
                                                     <b class="text-bold font-bold"> ({{($dossier->documents->count())}}</b> Fichiers)
                                                     </span>

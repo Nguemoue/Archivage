@@ -1,9 +1,7 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container">
-        <h2 class="text-center">Editer Un Nouveau Dossier type de Classement</h2>
-        <hr>
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Formulaire d'edition d'un nouveau type de classement</h4>
@@ -29,17 +27,13 @@
                                 @endforeach
                             </select>
                         </div>
-       
+
                         <button type="submit" class="btn btn-success">
-                            <span class="fa fa-send"></span>
+                            <span class="ti ti-send"></span>
                             Metre a jour
                         </button>
-
                     </form>
                 </fieldset>
-            </div>
-            <div class="card-footer">
-
             </div>
         </div>
     </div>

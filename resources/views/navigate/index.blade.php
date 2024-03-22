@@ -1,8 +1,8 @@
-@extends('layouts._materializev2._materializev2')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container-fluid">
-        @livewire("navigation-classement",['classements' => $classements])
+        <livewire:navigation-classement :classements="$classements"])/>
     </div>
 @endsection
 

@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\Scan\ScanDocumentController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Scann\ScannGroup;
-use App\Http\Controllers\ScannController;
 use App\Http\Controllers\Scan\ScanDossierController;
+use App\Http\Controllers\ScannController;
+use Illuminate\Support\Facades\Route;
 
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),

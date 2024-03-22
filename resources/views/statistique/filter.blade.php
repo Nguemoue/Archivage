@@ -1,4 +1,4 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 @push("styles")
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endpush
@@ -18,12 +18,12 @@
 			<div class="card-body">
 				<form action="{{route('statistique.home')}}" method="post">
 					@csrf
-					<div class="form-group">
-						<label for="periode">Choisissez la periode</label>
+					<div class="form-group mb-2">
+						<label class="form-label" for="periode">Choisissez la periode</label>
 						<input type="date" name="periode" id="periode" class="form-control flatpickr">
 					</div>
-					<div>
-						<label for="sousType">Selectionner le Document Contextuele Rattacher</label>
+					<div class="mb-2 form-group">
+						<label class="form-label" for="sousType">Selectionner le Document Contextuele Rattacher</label>
 						<select name="sousType" id="sousType" class="form-control border select2">
 							<option value="-1" selected>-----------------------</option>
 							@foreach($sousTypes as $sousType)
@@ -31,28 +31,28 @@
 							@endforeach
 						</select>
 					</div>
-					<div class="my-2">
-						<label for="champ">champ</label>
+					<div class="form-group mb-2">
+						<label class="form-label" for="champ">champ</label>
 						<select name="champ" class="form-control form-select select2" id="champ">
 							<option value="-1">-------------------------</option>
 						</select>
 					</div>
-					<div class="my-2">
-						<label for="type">Type de donnees du champ</label>
+					<div class="mb-2 form-group" >
+						<label class="form-label" for="type">Type de donnees du champ</label>
 						<select name="type" class="form-control border" id="type">
 							<option value="int">Nombre</option>
 							<option value="string">texte</option>
 						</select>
 					</div>
 					<hr class="my-4">
-					<div class="my-2">
-						<label for="champTab">champ pour le tableau de statistique</label>
+					<div class="mb-2 form-groip">
+						<label class="form-label" for="champTab">champ pour le tableau de statistique</label>
 						<div id="chamTab">
 
 						</div>
 					</div>
-					<button class="btn btn-success btn-sm">
-						soumettre <i class="fa fa-send"></i>
+					<button class="btn btn-success">
+						soumettre <i class="ti ti-send"></i>
 					</button>
 				</form>
 			</div>

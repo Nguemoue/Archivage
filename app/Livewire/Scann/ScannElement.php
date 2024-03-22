@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Scann;
+namespace App\Livewire\Scann;
 
 use App\Models\Fichier;
 use Illuminate\Support\Str;
@@ -36,7 +36,7 @@ class ScannElement extends Component
     function updated($field,$newVal){
         if($field == 'titre')
             $this->validateOnly($field);
-     
+
     }
     public function render()
     {
