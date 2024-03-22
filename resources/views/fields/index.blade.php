@@ -1,4 +1,4 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container-fluid">
@@ -15,7 +15,7 @@
                 @includeIf('_partials.errors')
             </div>
             <div class="card-body">
-                <table class="table table-hover  table-bordered">
+                <table class="table  table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -33,12 +33,12 @@
                                 <td>{{ $item->nom }}</td>
                                 <td class="text-center">
                                     @if ($item->nom != "textarea")
-                                    <span class="badge bg-secondary badge-md">  
+                                    <span class="badge bg-secondary badge-md">
                                         {{ $item->type }}
                                     </span>
                                     @endif
                             </td>
-                                <td ><span class="border bg-light rounded p-1">{{ $item->min }}</span> | 
+                                <td ><span class="border bg-light rounded p-1">{{ $item->min }}</span> |
                                     <span class="border bg-light rounded p-1">{{ $item->value }}</span> |
                                     <span class="border bg-light rounded p-1">{{ $item->max }}</span></td>
                                 <td> <x-field :item="$item"/> </td>

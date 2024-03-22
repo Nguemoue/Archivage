@@ -1,4 +1,4 @@
-@extends("template")
+@extends("templates.templateUser.templateUser")
 
 @section("title")
     Edition
@@ -6,7 +6,8 @@
 
 @section("content")
     <a href="{{ route('traitement.index') }}" class="btn btn-success btn-sm mb-2">Retour</a>
-    <div >
+    <div>
+
 		 <livewire:traitement.traitement-document :dossier-id="$dossierId" :document="$document"/>
     </div>
 @endsection

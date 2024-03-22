@@ -1,4 +1,4 @@
-@extends("template_super_admin")
+@extends('templates.templateSuperAdmin.templateSuperAdmin')
 
 @section("content")
 	<h5 class="text-center my-3">
@@ -15,7 +15,7 @@
 					</div>
 					<hr>
 					<div class="card-footer">
-						<button class="btn btn-sm btn-secondary rounded">gerer</button>
+						<button class="btn btn-sm btn-secondary rounded">Manage</button>
 						<button class="btn btn-outline-dark btn-sm">{{$permission->users_count}} Affecté(s)</button>
 					</div>
 				</div>

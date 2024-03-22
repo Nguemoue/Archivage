@@ -1,8 +1,6 @@
-@extends('layouts._materializev2._materializev2')
+@extends('templates.templateUser.templateUser')
 
-@section('header')
-    {{-- <x-dashboard-header/> --}}
-@endsection
+
 
 @section('content')
     <h4 class="text-center">SCANNER UN OU DES DOCUMENTS / DOSSIERS</h4>

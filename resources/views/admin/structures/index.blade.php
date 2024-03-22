@@ -1,4 +1,4 @@
-@extends("template_admin")
+@extends("templates.templateSuperAdmin.templateSuperAdmin")
 
 @section("content")
 	<h5 class="text-center my-3">

@@ -1,50 +1,50 @@
 <script>
-    @if($errors->any())
-    iziToast.error({
-        message: `<ul>
+	@if($errors->any())
+	iziToast.error({
+		message: `<ul>
             @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
+		<li>{{$error}}</li>
             @endforeach</ul>`,
-        toast: true,
-        timeout: {{config('misc.izitoast_delay')}},
-        position: "{{config('misc.izitoast_position')}}"
-    });
-    @endif
+		toast: true,
+		timeout: {{config('setup.toast_timeout')}},
+		position: "{{config('setup.toast_position')}}"
+	});
+	@endif
 
-    @if(session()->has(ReturnStatus::SUCCESS))
-    iziToast.success({
-        message: `<li>{{session()->get(ReturnStatus::SUCCESS)}}</li>`,
-        toast: true,
-        timeout: {{config('misc.izitoast_delay')}},
-        position: "{{config('misc.izitoast_position')}}"
-    });
-    @endif
+	@if(session()->has('success'))
+	iziToast.success({
+		message: `<li>{{session()->get('success')}}</li>`,
+		toast: true,
+		timeout: {{config('setup.toast_timeout')}},
+		position: "{{config('setup.toast_position')}}"
+	});
+	@endif
 
-    @if(session()->has('status'))
-    iziToast.success({
-        message: `<li>{{session('status')}}</li>`,
-        toast: true,
-        timeout: {{config('misc.izitoast_delay')}},
-        position: "{{config('misc.izitoast_position')}}"
-    });
-    @endif
+	@if(session()->has('status'))
+	iziToast.success({
+		message: `<li>{{session('status')}}</li>`,
+		toast: true,
+		timeout: {{config('setup.toast_timeout')}},
+		position: "{{config('setup.toast_position')}}"
+	});
+	@endif
 
-    @if(session()->has(ReturnStatus::WARNING))
-    iziToast.warning({
-        message: `<li>{{session()->get(ReturnStatus::WARNING)}}</li>`,
-        toast: true,
-        timeout: {{config('misc.izitoast_delay')}},
-        position: "{{config('misc.izitoast_position')}}"
-    });
+	@if(session()->has('warning'))
+	iziToast.warning({
+		message: `<li>{{session()->get('warning')}}</li>`,
+		toast: true,
+		timeout: {{config('setup.toast_timeout')}},
+		position: "{{config('setup.toast_position')}}"
+	});
 
-    @endif
+	@endif
 
-    @if(session()->has(ReturnStatus::INFO))
-    iziToast.info({
-        message: `<li>{{session()->get(ReturnStatus::INFO)}}</li>`,
-        toast: true,
-        timeout: {{config('misc.izitoast_delay')}},
-        position: "{{config('misc.izitoast_position')}}"
-    });
-    @endif
+	@if(session()->has(ReturnStatus::INFO))
+	iziToast.info({
+		message: `<li>{{session()->get(ReturnStatus::INFO)}}</li>`,
+		toast: true,
+		timeout: {{config('setup.toast_timeout')}},
+		position: "{{config('setup.toast_position')}}"
+	});
+	@endif
 </script>

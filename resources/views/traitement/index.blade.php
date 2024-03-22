@@ -1,12 +1,12 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
-	<div class="">
+	<div class="container container-fluid">
 		<h4 class="text-center mb-2">Les Dossiers</h4>
 		<hr>
 		<div class="w-100">
 			@if ($temp_dossiers->count() > 0)
-				<table class="table table-borderless">
+				<table class="table w-100 table-borderless">
 					<thead>
 					<tr>
 						<th>#</th>
@@ -21,7 +21,7 @@
 					<tbody>
 					@foreach ($temp_dossiers as $key=>$dossier)
 						<tr>
-							<td><i style="color: rgba(210,210,10,.9)" class="fa fa-folder fa-2x"></i> </td>
+							<td><i style="color: rgba(210,210,10,.9)" class="ti ti-folder fs-4"></i> </td>
 							<td> {{$dossier->nom}} </td>
 
 							<td>
@@ -35,12 +35,12 @@
 									traiter
 									<i class="fa fa-edit"></i>
 								</a>
-								<button role="button" data-toggle="modal" data-target="#dossierModal{{$dossier->id}}"
+								<button role="button" data-bs-toggle="modal" data-bs-target="#dossierModal{{$dossier->id}}"
 									class="btn btn-outline-secondary">
-									<span class="fa fa-eye"></span>
+									<span class="ti ti-eye"></span>
 								</button>
 								{{--	modal --}}
-								<x-modal-component id="dossierModal{{$dossier->id}}" title="Liste des document du dossiers">
+								<x-modal-component full-screen id="dossierModal{{$dossier->id}}" title="Liste des document du dossiers">
 									@foreach ($dossier->tempDocuments as $doc)
 										@php
 											$url = $doc->url;
@@ -66,7 +66,7 @@
 									@endforeach
 								</x-modal-component>
 								<a href="#" class="btn btn-danger">
-									<i class="fa fa-trash"></i>
+									<i class="ti ti-trash"></i>
 								</a>
 							</td>
 						</tr>

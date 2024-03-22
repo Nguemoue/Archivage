@@ -1,4 +1,4 @@
-@extends('layouts._materializev2._materializev2')
+@extends('templates.templateUser.templateUser')
 @section('content')
 	<section class="section">
 	<div class="text-center">

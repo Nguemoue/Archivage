@@ -1,4 +1,4 @@
-@extends("template_super_admin")
+@extends("templates.templateSuperAdmin.templateSuperAdmin")
 
 @section("content")
 	<h5 class="text-center my-3">
@@ -30,10 +30,8 @@
 				<td>{{$connection->guard}}</td>
 				<td>{{$connection->ip_address}}</td>
 				<td>{{$connection->created_at->isoFormat("ll")}}</td>
-				<td  class="d-flex justify-content-around">
-					<button class="btn btn-success btn-sm"><i class="fa fa-edit"></i></button>
-					|
-					<button class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>
+				<td>
+					<button class="btn btn-danger btn-sm"><i class="ti ti-trash"></i></button>
 				</td>
 			</tr>
 		@endforeach

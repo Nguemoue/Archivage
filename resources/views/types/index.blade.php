@@ -1,15 +1,19 @@
-@extends('layouts._materializev2._materializev2')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container-fluid">
         <h2 class="text-center">Creer Un Nouveau type</h2>
         <hr>
         <div class=" text-right mb-2">
-            <a href="{{ route('type.create') }}" class="btn btn-success">Ajouter un nouveau type</a>
+			  <button data-bs-target="#addModal" data-bs-toggle="modal" class="btn btn-success">Ajouter <i class="ti ti-plus"></i></button>
+			  <x-app.modal modal-id="addModal">
+				  <x-slot name="header"><h4>Nouveau type</h4></x-slot>
+				  @include('types.createModal')
+			  </x-app.modal>
         </div>
         <div class="card ">
             <div class="card-header">
-                <h4 class="card-title text-center">Liste des types enregistrees</h4>
+                <h4 class="card-title  text-center">Liste des types enregistrees</h4>
             </div>
             <div class="card-footer">
                 @includeIf('_partials.errors')
@@ -27,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($types as $item)
+                        @foreach ($types as $item)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $item->nom }}</td>
@@ -46,11 +50,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <div class="alert alert-warning">
-                                acucune donnes trouvee
-                            </div>
-                        @endforelse
+                        @endforeach
 
                     </tbody>
                 </table>

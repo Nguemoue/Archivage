@@ -1,11 +1,11 @@
-@extends("template_super_admin")
+@extends("templates.templateSuperAdmin.templateSuperAdmin")
 
 @section("content")
 	<h5 class="text-center my-3">
 		Permissions pour les Administrateurs
 	</h5>
-	<div class="card-footer text-right">
-		<button class="btn btn-success" href="#"><i class="fa fa-plus-circle"></i> </button>
+	<div class="mb-3">
+		<button class="btn btn-success" href="#"><i class="ti ti-arrow-left"></i> </button>
 	</div>
 	<div class="row gap-1 ">
 		@foreach($permissions as $permission)

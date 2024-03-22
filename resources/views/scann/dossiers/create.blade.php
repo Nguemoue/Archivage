@@ -1,4 +1,4 @@
-@extends("layouts._materializev2._materializev2")
+@extends("templates.templateUser.templateUser")
 @push("styles")
 	<style>
 		.selected-files{
@@ -25,11 +25,11 @@
 	</style>
 @endpush
 @section("content")
-<a href="{{ route('scan.index') }}" class="btn btn-success">retour</a>
+<a href="{{ route('scan.index') }}" class="btn btn-success"><i class="ti ti-arrow-left"></i> Retour</a>
     <h2 class="text-center my-4">Scann Des Dossiers</h2>
     <hr>
     <div class="card">
-        <div class="card-header">Formulaire de scann</div>
+        <div class="card-header"><h4>Formulaire de scann</h4></div>
         <div class="card-body">
             @includeIf("_partials.errors")
 
@@ -41,15 +41,15 @@
                 </div>
                 <div class="mb-3">
 						 <div class="selected-files-container">
-							 <label for="url" class="file-input-label">
+							 <label for="url" class="btn btn-outline-secondary file-input-label">
 								 <span class="button-label">Choisir les fichiers</span>
-								 <i class="fa fa-hand-paper"></i>
+								 <i class="ti ti-hand-move"></i>
 							 </label>
 						 </div>
                     <input required type="file" class="d-none input-file-preview" id="url" name="files[]" multiple accept="application/pdf,image/*"/>
 
 					 </div>
-                <button type="submit" class="btn btn-primary btn-sm p-2"><i class="fa fa-send-o"></i> transferer</button>
+                <button type="submit" class="btn btn-primary btn-sm p-2"><i class="ti ti-send"></i> transferer</button>
             </form>
         </div>
     </div>

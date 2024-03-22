@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class AdminFactory extends Factory
 {
@@ -18,7 +19,7 @@ class AdminFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('password'),
-            'role' => $this->faker->word(),
+            'role' => \Arr::random(['super','simple']),
             'remember_token' => Str::random(10),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

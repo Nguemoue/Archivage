@@ -7,9 +7,9 @@
 				</a>
 			</li>
 			<li class="nav-item d-none d-xl-block">
-				<a href="index.html" class="text-nowrap nav-link">
-					<img src="{{asset('logo.jpg')}}" class="dark-logo" width="80" alt="" />
-					<img src="{{asset('logo.jpg')}}" class="light-logo"  width="80" alt="" />
+				<a href="{{route('superAdmin.home')}}" class="text-nowrap nav-link">
+					<img src="{{asset('logo.jpg')}}" class="dark-logo" width="60" alt="" />
+					<img src="{{asset('logo.jpg')}}" class="light-logo"  width="60" alt="" />
 				</a>
 			</li>
 			<li class="nav-item d-none d-xl-block">
@@ -20,14 +20,13 @@
 		</ul>
 		<ul class="navbar-nav quick-links d-none d-xl-flex">
 			<li class="nav-item dropdown-hover d-none d-xl-block">
-				<a class="nav-link" href="app-chat.html">Chat</a>
+				<a class="nav-link" href="javascript:void(0)">{{config('app.name')}}</a>
+			</li>
+			<li class="nav-item dropdown-hover d-none d-xl-block">
+				<a class="nav-link" href="javascript:void(0)">Teledeclaration</a>
 			</li>
 		</ul>
-		<div class="d-block d-xl-none">
-			<a href="index.html" class="text-nowrap nav-link">
-				<img src="{{asset('_materialize_v2/dist/images/logos/dark-logo.svg')}}" width="180" alt="" />
-			</a>
-		</div>
+
 		<button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="p-2">
               <i class="ti ti-dots fs-7"></i>
@@ -41,34 +40,19 @@
 				<ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
 					<li class="nav-item dropdown">
 						<a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="{{asset('_materialize_v2/dist/images/svgs/icon-flag-en.svg')}}" alt="" class="rounded-circle object-fit-cover round-20">
+							<img src='{{asset("_materialize_v2/dist/images/svgs/icon-flag-".app()->getLocale().".svg")}}' alt="" class="rounded-circle object-fit-cover round-20">
 						</a>
 						<div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
 							<div class="message-body" data-simplebar>
-								<a href="javascript:void(0)" class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
+								@foreach($supportedlocales as $key=>$locale)
+								<a href="{{\LaravelLocalization::getLocalizedURL($key)}}" class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
 									<div class="position-relative">
-										<img src="{{asset('_materialize_v2/dist/images/svgs/icon-flag-en.svg')}}" alt="" class="rounded-circle object-fit-cover round-20">
+										<img src="{{asset(sprintf('_materialize_v2/dist/images/svgs/icon-flag-%s.svg',$key))}}" alt="" class="rounded-circle object-fit-cover round-20">
 									</div>
-									<p class="mb-0 fs-3">English (UK)</p>
+									<p class="mb-0 fs-3">{{$locale['native']}} ({{$key}})</p>
 								</a>
-								<a href="javascript:void(0)" class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
-									<div class="position-relative">
-										<img src="{{asset('_materialize_v2/dist/images/svgs/icon-flag-cn.svg')}}" alt="" class="rounded-circle object-fit-cover round-20">
-									</div>
-									<p class="mb-0 fs-3">中国人 (Chinese)</p>
-								</a>
-								<a href="javascript:void(0)" class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
-									<div class="position-relative">
-										<img src="{{asset('_materialize_v2/dist/images/svgs/icon-flag-fr.svg')}}" alt="" class="rounded-circle object-fit-cover round-20">
-									</div>
-									<p class="mb-0 fs-3">français (French)</p>
-								</a>
-								<a href="javascript:void(0)" class="d-flex align-items-center gap-2 py-3 px-4 dropdown-item">
-									<div class="position-relative">
-										<img src="{{asset('_materialize_v2/dist/images/svgs/icon-flag-sa.svg')}}" alt="" class="rounded-circle object-fit-cover round-20">
-									</div>
-									<p class="mb-0 fs-3">عربي (Arabic)</p>
-								</a>
+								@endforeach
+
 							</div>
 						</div>
 					</li>
@@ -78,24 +62,7 @@
 							<div class="notification bg-primary rounded-circle"></div>
 						</a>
 						<div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-							<div class="d-flex align-items-center justify-content-between py-3 px-7">
-								<h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-								<span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
-							</div>
-							<div class="message-body" data-simplebar>
-								<a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                          <span class="me-3">
-                            <img src="{{asset('_materialize_v2/dist/images/profile/user-1.jpg')}}" alt="user" class="rounded-circle" width="48" height="48" />
-                          </span>
-									<div class="w-75 d-inline-block v-middle">
-										<h6 class="mb-1 fw-semibold">Roman Joined the Team!</h6>
-										<span class="d-block">Congratulate him</span>
-									</div>
-								</a>
-							</div>
-							<div class="py-6 px-7 mb-1">
-								<button class="btn btn-outline-primary w-100"> See All Notifications </button>
-							</div>
+							<x-notification-component :user="auth(superAdminGuard())->user()"/>
 						</div>
 					</li>
 					<li class="nav-item dropdown">

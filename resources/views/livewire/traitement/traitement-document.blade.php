@@ -14,11 +14,11 @@
         @if ($step == 1)
             <form wire:submit.prevent='firstStep'>
                 <div class="mb-4">
-                    <label for="titre">Titre du Document</label>
+                    <label class="form-label" for="titre">Titre du Document</label>
                     <input type="text"  class="form-control" placeholder="nom du document" wire:model.defer='titre'>
                 </div>
                 <div class="mb-4">
-                    <label for="type">Type de Document</label>
+                    <label class="form-label" for="type">Type de Document</label>
                     <select wire:model.defer='typeId' id="type" class="form-control" wire:change='updateSousType'>
 							  <option selected hidden="">---Selectionner une valeur ----</option>
                         @foreach ($type as $item)
@@ -27,7 +27,7 @@
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label for="soustype">Sous Type de Document</label>
+                    <label class="form-label" for="soustype">Sous Type de Document</label>
                     <select wire:model.defer='sousTypeId' id="soustype" class="form-control">
 							  <option selected hidden="">---Selectionner une valeur ----</option>
                         @foreach ($soustype as $item)
@@ -35,7 +35,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm mt-3"> suivant </button>
+                <button type="submit" class="btn btn-primary  mt-3"> suivant <i class="ti ti-arrow-right"></i> </button>
             </form>
         @elseif ($step == 2)
 

@@ -1,4 +1,4 @@
-@extends("template_super_admin")
+@extends("templates.templateSuperAdmin.templateSuperAdmin")
 
 @section("content")
 	<h5 class="text-center my-3">
@@ -29,11 +29,11 @@
 						<td>{{$item->created_at->isoFormat("lll")}}</td>
 						<td>
 							<div class="d-flex">
-								<a href="#" data-toggle="modal" class="btn btn-outline-info btn-sm" data-target="#modalShow{{$item->id}}"><i class="fa fa-eye"></i></a>
+								<a href="#" data-bs-toggle="modal" class="btn btn-outline-info btn-sm" data-bs-target="#modalShow{{$item->id}}"><i class="ti ti-eye"></i></a>
 								@includeIf("superAdmin.logs.includes.modalShow",['item'=>$item])
 								<form action="{{route('superAdmin.log.destroy',['key'=>$item->id])}}" method="post">
 									@csrf
-									<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+									<button type="submit" class="btn btn-sm btn-outline-danger"><i class="ti ti-trash"></i></button>
 								</form>
 							</div>
 						</td>

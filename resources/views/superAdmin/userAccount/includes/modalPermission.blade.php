@@ -3,31 +3,26 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Permissions Associé au Compte</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<form action="{{route('superAdmin.user.permission.update',['userId'=>$item->id])}}" method="post">
 				@csrf
 				<input type="hidden" name="account_id" value="{{$item->id}}">
 				<div class="modal-body">
 					@foreach($permissions as $permission)
-						<div class="form-check form-check-inline">
+						<div class="form-check form-check-inline m-1">
 							<input id="permission{{$item->id .'-'. $permission->id}}"
 									 {{$item->hasDirectPermission($permission->id)?'checked':''}}
 									 type="checkbox" name="permissions[]" value="{{$permission->id}}" class="form-check-input">
-							<label for="permission{{$item->id .'-'. $permission->id}}" class="form-check-label">{{$permission->name}}</label>
+							<label for="permission{{$item->id .'-'. $permission->id}}"
+									 class="form-check-label">{{$permission->name}}</label>
 						</div>
 					@endforeach
 				</div>
-				<div class="modal-footer justify-content-around">
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
-						close
-						<i class="fa fa-close"></i>
-					</button>
-					<button type="submit" class="btn btn-primary btn-sm">
-						mettre a jour
-						<i class="fa fa-plus-circle"></i>
+				<div class="modal-footer justify-content-end">
+					<button type="submit" class="btn btn-primary">
+						Mettre a jour
+						<i class="ti ti-upload"></i>
 					</button>
 				</div>
 			</form>

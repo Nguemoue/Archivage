@@ -1,4 +1,4 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container">
@@ -25,7 +25,7 @@
                             </label>
                             <textarea name="description" class="form-control" id="description" cols="10" rows="10">{{ $type->description }}</textarea>
                         </div>
-       
+
                         <button type="submit" class="btn btn-success">
                             <span class="fa fa-send"></span>
                             Metre a jour

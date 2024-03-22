@@ -1,12 +1,12 @@
-@extends("template_super_admin")
+@extends("templates.templateSuperAdmin.templateSuperAdmin")
 
 @section("content")
 	<h5 class="text-center my-3">
-		Liste des comptes Utilisateurs
+		Liste des comptes utilisateurs
 	</h5>
 	<hr>
-	<div class="d-flex justify-content-end">
-		<a href="#" data-toggle="modal" data-target="#createUserAccountModal" class="btn btn-primary"><i
+	<div class="d-flex justify-content-end mb-2">
+		<a href="#" data-bs-toggle="modal" data-bs-target="#createUserAccountModal" class="btn btn-primary"><i
 				class="fa fa-plus-circle"></i> Creer un compte</a>
 	</div>
 	<div class="card">
@@ -32,13 +32,13 @@
 						<td>{{$item->created_at->IsoFormat("lll")}}</td>
 						<td >
 							<div class="d-flex">
-								<a href="#" data-toggle="modal" class="btn btn-outline-info btn-sm" data-target="#modalEdit{{$item->id}}"><i class="fa fa-pencil"></i></a>
+								<a href="#" data-bs-toggle="modal" class="btn btn-outline-info btn-sm" data-bs-target="#modalEdit{{$item->id}}"><i class="ti ti-pencil"></i></a>
 								@includeIf("superAdmin.userAccount.includes.modalEdit",['item'=>$item])
 								<form action="{{route('superAdmin.user.account.delete',['userId'=>$item->id])}}" method="post">
 									@csrf
-									<button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
+									<button type="submit" class="btn btn-sm btn-outline-danger"><i class="ti ti-trash"></i></button>
 								</form>
-								<a href="#" data-toggle="modal" class="btn btn-outline-info btn-sm" data-target="#modalPermission{{$item->id}}"><i class="fa fa-key"></i></a>
+								<a href="#" data-bs-toggle="modal" class="btn btn-outline-info btn-sm" data-bs-target="#modalPermission{{$item->id}}"><i class="ti ti-key"></i></a>
 								@includeIf("superAdmin.userAccount.includes.modalPermission",['item'=>$item])
 
 							</div>
@@ -55,25 +55,22 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Création d'un nouveau compte Utilisateur</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<form action="{{route('superAdmin.user.account.store')}}" method="post">
 					@csrf
 					<div class="modal-body">
-
-						<div class="form-group">
+						<div class="form-group mb-2">
 							<label for="nom">Nom</label>
 							<input id="nom" type="text" name="nom" class="form-control">
 						</div>
-						<div class="form-group">
+						<div class="form-group mb-2">
 							<label for="email">Email</label>
 							<input id="email" type="email" name="email" class="form-control">
 						</div>
-						<div class="form-group">
+						<div class="form-group mb-2">
 							<label for="structure" class="control-label">Structure</label>
-							<select style="width: 100%;display: block;padding: 4px"  required name="structure_id" id="structure"
+							<select  required name="structure_id" id="structure"
 									  class="form-control form-select select2">
 								@foreach($structures as $structure)
 									<option value="{{$structure->id}}">{{$structure->nom}}</option>
@@ -81,14 +78,10 @@
 							</select>
 						</div>
 					</div>
-					<div class="modal-footer justify-content-around">
-						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
-							close
-							<i class="fa fa-close"></i>
-						</button>
-						<button type="submit" class="btn btn-primary btn-sm">
+					<div class="modal-footer ">
+						<button type="submit" class="btn btn-primary">
 							Creer
-							<i class="fa fa-plus-circle"></i>
+							<i class="ti ti-plus"></i>
 						</button>
 					</div>
 				</form>
