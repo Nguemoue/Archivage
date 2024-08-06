@@ -2,88 +2,69 @@
 
 namespace App\Http\Controllers\Traitement;
 
+use App\Actions\Traitement\TerminateMoveTempDocumentAction;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\DossierDocument;
 use App\Models\TempDocument;
 use App\Models\TempDossier;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
+use TraitementProcessor;
 
 class TraitementDossier extends Controller
 {
-	function show($id)
+	public function __construct(public TerminateMoveTempDocumentAction $action)
 	{
-		$dossier = TempDossier::query()->findOrFail($id);
-		return view("traitement.dossiers.show", compact('dossier'));
+	}
+
+	/**
+	 * Show a file shared for a single treatment of temp_documents.
+	 * @param int $id id of temp_dossier.
+	 * @return View
+	 */
+	public function show(int $id)
+	{
+		$tempDossier = TempDossier::with(['tempDocuments'])->findOrFail($id);
+		return view("traitement.dossiers.show", [
+			'tempDossier' => $tempDossier
+		]);
 	}
 
 
 	/**
-	 * fonction qui effectue le traitement final du dossier
-	 * @param $id
-	 * @param \Illuminate\Http\Request $request
-	 * @throws \Throwable
+	 * Fonction qui effectue le traitement final du dossier
+	 * @param int $id
+	 * @param Request $request
+	 * @return RedirectResponse
 	 */
-	public function finish($id, Request $request)
+	public function finish(Request $request,int $id): RedirectResponse
 	{
-
-$structure = webAuth()->user()->structure;
-$user = webAuth()->user();
-		$method = "move";
-		$method = $request->input("copy") == '1' ? "copy" : $method;
-		$tempDossier = TempDossier::query()->find($id);
-		abort_if($tempDossier == null, new Response("model non trouve", 404));
-		$tempDocuments = $tempDossier->tempDocuments;
-
-		$sessionsDoc = \TraitementProcessor::getAll($tempDossier->id);
-		$doc = Dossier::query()->updateOrCreate([
-			"nom"=>$tempDossier->nom,
-			'structure_id'=>$structure->id,
-			"user_id"=>$user->id
-		],[
-			"numero"=>Str::uuid()
+		$request->validate([
+			'copy'=>['nullable','int'],
 		]);
-
-		foreach ($sessionsDoc as $key => $item) {
-			$tempDocumentKey = Str::after($key,prefixDocument());
-			$tmpDoc = TempDocument::find($tempDocumentKey);
-			//je cree un dossiers
-			$storage = Storage::disk("local")->createDir($doc->nom);
-			$document = new Document();
-			$document->nom = $item["titre"];
-			$document->created_at = $item["created_at"];
-			$document->updated_at = $item["updated_at"];
-			$document->data = Json::decode($item["data"], true);
-			$document->structure_id = $structure->id;
-			$document->numero = Str::uuid();
-			$document->user_id = $user->id;
-			$ext = explode(".", $tmpDoc->url)[1];
-			$newUrl = Storage::disk("local")->path($doc->nom . "/" . $document->numero . '.' . $ext);
-			if (Storage::disk(tmpDisk())->exists($tmpDoc->url)) {
-
-				File::$method(Storage::disk(tmpDisk())->path($tmpDoc->url), $newUrl);
-			}
-			$newUrl = str_replace(DIRECTORY_SEPARATOR, "/", $newUrl);
-			$document->url = $newUrl;
-			$document->sous_type_document_id = $item["sousTypeId"];
-			$document->save();
-			//je cree le
-			$dossierDocument = new DossierDocument();
-			$dossierDocument->document_id = $document->id;
-			$dossierDocument->dossier_id = $doc->id;
-			$dossierDocument->save();
+		//$tempDossier = TempDossier::find($id);
+		$result = $this->action->handle(request: $request,tempDossierId: $id);
+		$tempDossier = TempDossier::find($id);
+		$dossier  = Dossier::create([
+			'nom'=>$tempDossier->nom,
+			'is_classed'=>0,
+			'user_id'=>auth('web')->id(),
+			'structure_id' => auth('web')->user()->structure_id,
+			'numero'=>Str::uuid()
+		]);
+		if ($result) {
+			$tempDossier->delete();
 		}
-
-		$tempDossier->tempDocuments()->delete();
-		$tempDossier->delete();
-		\TraitementProcessor::deleteAll($tempDossier->id);
-
-		return redirect()->route("classement.dossier.post", [$doc->id]);
+		return redirect()->route("classement.dossier.post", [$dossier->id]);
 	}
 }

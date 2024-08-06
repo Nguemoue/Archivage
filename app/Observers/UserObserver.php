@@ -13,7 +13,7 @@ class UserObserver
 
     public function updated(User $user)
     {
-    	dd($user);
+
     }
 
     public function deleted(User $user)

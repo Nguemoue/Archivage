@@ -5,7 +5,7 @@
 		<h4 class="text-center mb-2">Les Dossiers</h4>
 		<hr>
 		<div class="w-100">
-			@if ($temp_dossiers->count() > 0)
+			@if ($tempDossiers->count() > 0)
 				<table class="table w-100 table-borderless">
 					<thead>
 					<tr>
@@ -14,53 +14,51 @@
 						<th>status</th>
 						<th>Cree le</th>
 						<th>Fichiers</th>
-						<th>Taille (Mo) </th>
+						<th>Taille (Mo)</th>
 						<th>Actions</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach ($temp_dossiers as $key=>$dossier)
+					@foreach ($tempDossiers as $key=>$tempDossier)
 						<tr>
-							<td><i style="color: rgba(210,210,10,.9)" class="ti ti-folder fs-4"></i> </td>
-							<td> {{$dossier->nom}} </td>
-
+							<td><i style="color: rgba(210,210,10,.9)" class="ti ti-folder fs-4"></i></td>
+							<td> {{$tempDossier->nom}} </td>
 							<td>
-								<span class="bage badge-danger rounded p-1"> {{$dossier->status}}</span>
+								<span class="bage badge-danger rounded p-1"> {{$tempDossier->status}}</span>
 							</td>
-							<td>{{$dossier->created_at->isoFormat("ll")}}</td>
-							<td>{{$dossier->temp_documents_count}} Fichiers</td>
-							<td> {{round($dossier->size,2)}} </td>
+							<td>{{$tempDossier->created_at->isoFormat("ll")}}</td>
+							<td>{{$tempDossier->temp_documents_count}} Fichiers</td>
+							<td> {{ round(megaOctet($tempDossier->tempDocuments->sum(fn($item)=>$item->data['size'])) ,2) }} </td>
 							<td class="btn-group btn-group-sm">
-								<a href="{{route('traitement.dossier.show',[$dossier->id])}}" class="btn btn-success">
+								<a href="{{route('traitement.dossier.show',[$tempDossier->id])}}" class="btn btn-success">
 									traiter
-									<i class="fa fa-edit"></i>
+									<i class="ti ti-pencil"></i>
 								</a>
-								<button role="button" data-bs-toggle="modal" data-bs-target="#dossierModal{{$dossier->id}}"
-									class="btn btn-outline-secondary">
+								<button role="button" data-bs-toggle="modal" data-bs-target="#dossierModal{{$tempDossier->id}}"
+										  class="btn btn-outline-secondary">
 									<span class="ti ti-eye"></span>
 								</button>
 								{{--	modal --}}
-								<x-modal-component full-screen id="dossierModal{{$dossier->id}}" title="Liste des document du dossiers">
-									@foreach ($dossier->tempDocuments as $doc)
-										@php
-											$url = $doc->url;
-											$part = explode('.', $url);
-											$ext = end($part)
-										@endphp
+								<x-modal-component fullscreen id="dossierModal{{$tempDossier->id}}"
+														 title="Liste des document du dossiers">
+									@foreach ($tempDossier->tempDocuments as $tempDocument)
 										<div class="border mx-2 my-2">
-											<div class="d-flex border justify-content-between"
-												  style="border:1px solid white">
-												<img
-													src="{{ asset('icones/' . ($ext == 'pdf' ? 'pdf' : 'img') . '.png') }}"
-													alt="" class="img-fluid" width="30">
-												<span>{{ '[' . Str::substr($doc->numero, 0, 14) . '...]' }}.{{ $ext }}</span>
-												@if(session()->has("dossier-{$dossier->id}.document-{$doc->id}"))
-													<span class="text-danger">(initie)</span>
-												@endif
-												<a target="_blank" href="{{ route('file.preview',['id'=>$doc->id]) }}"
+											<div class="d-flex justify-content-between border-2" >
+												<div>
+													<img
+														src="{{ $tempDocument->extension_image }}"
+														alt="" class="img-fluid" width="30">
+													<span>{{   $tempDocument->data['original_filename']  }}</span>
+													@if(session()->has("dossier-{$tempDossier->id}.document-{$tempDocument->id}"))
+														<span class="text-danger">(initie)</span>
+													@endif
+												</div>
+												<div>
+													<b>Size:</b> {{number_format(megaOctet($tempDocument->data['size']),2)}} MO
+												</div>
+												<a target="_blank" href="{{ route('file.preview',['id'=>$tempDocument->id]) }}"
 													class="btn border btn-sm"
-													title="voir de document"><span class="fa fa-eye"></span></a>
-
+													title="voir de document">open <span class="ti ti-eye"></span></a>
 											</div>
 										</div>
 									@endforeach

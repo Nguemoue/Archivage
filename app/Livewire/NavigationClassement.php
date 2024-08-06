@@ -5,15 +5,16 @@ namespace App\Livewire;
 use App\Models\Classement;
 use App\Models\Dossier;
 use App\Models\SousClassement;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class NavigationClassement extends Component
 {
-    public $classements = null;
-
+    public Collection $classements ;
     public $depth = 1;
     public $dossierId;
     public $sousDepth = false;
@@ -23,15 +24,14 @@ class NavigationClassement extends Component
     public $directories = [];
     public $sousDirectories = [];
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.navigation-classement');
     }
 
     public function mount()
     {
-    	$structure = webAuth()->user()->structure;
-    	//$this->classements = Classement::query()->where('structure_id','=',$structure->id);
+		 //$this->classements = Classement::query()->where('structure_id','=',$structure->id);
     }
 
     function loadSousClassement($id)
@@ -50,7 +50,7 @@ class NavigationClassement extends Component
 
     function setSousDepth($first, $sousClassementId){
 
-        $this->currentSousClassement = $sousClassementId;
+        //$this->currentSousClassement = $sousClassementId;
         $this->currentSousClassement = SousClassement::find($sousClassementId);
         $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
 

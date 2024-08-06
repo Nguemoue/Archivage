@@ -7,16 +7,18 @@
 
 	if(!function_exists("megaOctet")){
 		/**
-		 * renvoi la taille en octet
-		 * @param $size
+		 * Renvoi la taille en octet
+		 * @param float|int $size
 		 * @param string $type
 		 * @return float|int|null
 		 */
-		function megaOctet($size, $type="o"): float|int|null
+		function megaOctet(float|int $size, string $type="o"): float|int|null
 		{
-			if($type == "o"){
-				return $size / (pow(1024,2));
-			}elseif ($type == "ko"){
+			if ($type === "o") {
+				return $size / (1024 ** 2);
+			}
+
+			if($type === "ko") {
 				return $size / 1024;
 			}
 			return null;

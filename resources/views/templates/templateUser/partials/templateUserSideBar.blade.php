@@ -23,7 +23,7 @@
 				{{-- Operations --}}
 				<x-ui.sidebar.sidebar-item icon="ti ti-folder" text="Operations" is-group>
 					<x-slot name="groupItem">
-						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Scan"/>
+						<x-ui.sidebar.sidebar-item :url="route('scan.index')" text="Scan"/>
 						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Traitement"/>
 						<x-ui.sidebar.sidebar-item  :url="route('navigation.index')" text="Navigation"/>
 						<x-ui.sidebar.sidebar-item :url="route('statistique.index')" text="Statistique"/>

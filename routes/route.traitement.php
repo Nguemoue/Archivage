@@ -1,33 +1,30 @@
 <?php
 
-use App\Http\Controllers\Traitement\TraitementDocument;
-use App\Http\Controllers\Traitement\TraitementDossier;
 use App\Http\Controllers\Traitement\TraitementController;
+use App\Http\Controllers\Traitement\TraitementDocumentController;
+use App\Http\Controllers\Traitement\TraitementDossier;
 use Illuminate\Support\Facades\Route;
+
 Route::group([
 	"prefix" => LaravelLocalization::setLocale(),
-	'middleware' => ["localeSessionRedirect","localizationRedirect","localeViewPath","permission:".config('perm_names.TRAIT_DOC')]
-],function() {
-
+	'middleware' => ["localeSessionRedirect", "localizationRedirect", "localeViewPath", "permission:" . config('perm_names.TRAIT_DOC')]
+], static function () {
 
 	Route::group(
 		[
 			'prefix' => "traitement",
 			'as' => "traitement."
 		],
-		function () {
+		static function () {
 
 			Route::get("/", [TraitementController::class, "index"])->name("index");
 			// route pour les documents
-			Route::get("document", [TraitementDocument::class, "index"])->name("document.index");
-			Route::get("document/{id}", [TraitementDocument::class, "show"])->name("document.show");
+			Route::get("document", [TraitementDocumentController::class, "index"])->name("document.index");
+			Route::get("document/{id}", [TraitementDocumentController::class, "show"])->name("document.show");
 
 			// route pour les dossiers
 			Route::get("dossier", [TraitementDossier::class, "index"])->name("dossier.index");
 			Route::get("dossier/{id}", [TraitementDossier::class, "show"])->name("dossier.show")->whereNumber("id");
-
-			Route::get("document/{id}/sucess", [TraitementDocument::class, "success"])->name("document.finish");
-			Route::post("document/{id}/updateData", [TraitementDocument::class, "updateData"])->name("document.updateData");
 
 			Route::post("document/{id}/finish", [TraitementDossier::class, "finish"])->name("dossier-traitement.finish");
 		}

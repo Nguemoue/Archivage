@@ -24,9 +24,9 @@ class Document extends Model
 		return $this->belongsTo(SousTypeDocument::class);
 	}
 
-	public function dossierDocument(): HasOne
+	public function dossier(): BelongsTo
 	{
-		return $this->hasOne(DossierDocument::class, 'document_id');
+		return $this->belongsTo(Dossier::class);
 	}
 
 }

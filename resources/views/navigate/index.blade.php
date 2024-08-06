@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <livewire:navigation-classement :classements="$classements"])/>
+
+        <livewire:navigation-classement :classements="$classements"/>
     </div>
 @endsection
 
 @push('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
-
+    @vite(['resources/js/app.js'])
 @endpush
 

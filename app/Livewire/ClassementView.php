@@ -34,13 +34,13 @@ class ClassementView extends Component
         //je verifie si mes ordre de classent correspondent
 		 	foreach ($this->classements as $classement){
 		 		if(!Storage::disk("local")->exists($classement->nom)){
-		 			Storage::disk("local")->createDir($classement->nom);
+		 			Storage::disk("local")->makeDirectory(path: $classement->nom);
 				}
 				//je construit mes sous classements si il n'existe pas
 				if($classement->sousCLassements){
 					foreach ($classement->sousCLassements as $c){
 						if(!Storage::disk("local")->exists($classement->nom.DIRECTORY_SEPARATOR.$c->nom)){
-							Storage::disk("local")->createDir($classement->nom.DIRECTORY_SEPARATOR.$c->nom);
+							Storage::disk("local")->makeDirectory($classement->nom.DIRECTORY_SEPARATOR.$c->nom);
 						}
 					}
 				}

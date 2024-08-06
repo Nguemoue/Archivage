@@ -12,64 +12,77 @@ class SessionTraitementDocument implements TraitementDocumentContract
 {
 
 
-	public ?int $folderId = null;
+	public ?int $folderId ;
 
-	public function updateDocument(int $fileId, array|\App\Models\TempDocument $newData)
+	/**
+	 * @throws Exception
+	 */
+	public function updateDocument(int $tempDocumentId, array|TempDocument $newData): void
 	{
-		if($this->folderId==null){
-			throw new Exception("Le Document doit etre attâcher a un dossier");
+		if($this->folderId===null){
+			throw new Exception("Document must be attached to a folder");
 		}
-		if (!$this->hasDocument($fileId)) {
+		if (!$this->hasDocument($tempDocumentId)) {
 			$this->addDocument($newData);
 		}
 
-		$oldData = $this->getDocument($fileId);
+		$oldData = $this->getDocument($tempDocumentId);
 
 		foreach ($newData as $key => $val) {
 			$oldData[$key] = $val;
 		}
-		Session::put($this->getDocumentKey($this->folderId, $fileId), $oldData);
+		Session::put($this->getDocumentKey($this->folderId, $tempDocumentId), $oldData);
 	}
 
-	public function hasDocument(int $fileId): bool
+	/**
+	 * @throws Exception
+	 */
+	public function hasDocument(int $tempDocumentId): bool
 	{
-		return $this->getDocument($fileId) != null;
+		return $this->getDocument($tempDocumentId) !== null;
 	}
 
-	public function getDocument(int $fileId)
+	/**
+	 * @throws Exception
+	 */
+	public function getDocument(int $tempDocumentId)
 	{
-		if($this->folderId==null){
-			throw new Exception("Le Document doit etre attâcher a un dossier");
+		if($this->folderId===null){
+			throw new Exception("Document must be attached to a file");
 		}
-		return Session::get($this->getDocumentKey($this->folderId, $fileId), null);
+		return Session::get($this->getDocumentKey($this->folderId, $tempDocumentId), null);
 	}
 
-	public function addDocument(array|\App\Models\TempDocument $fileData)
+	public function addDocument(array|TempDocument $tempDocument): void
 	{
 
-		if ($fileData instanceof TempDocument) {
-			Session::put($this->getDocumentKey($this->folderId, $fileData->id), $fileData->toArray());
-		} elseif (is_array($fileData)) {
-			Session::put($this->getDocumentKey($this->folderId, $fileData['id']), $fileData);
+		if ($tempDocument instanceof TempDocument) {
+			Session::put($this->getDocumentKey($this->folderId, $tempDocument->id), $tempDocument->attributesToArray());
+		} else {
+			Session::put($this->getDocumentKey($this->folderId, $tempDocument['id']), $tempDocument);
 		}
 	}
 
 	/**
 	 * @param int $docId
 	 * @param int $documentId
-	 * @return mixed
+	 * @return string
 	 */
-	public function getDocumentKey(int $docId, int $documentId)
+	public function getDocumentKey(int $docId, int $documentId): string
 	{
+
 		return prefixDossier() . $docId . "." . prefixDocument() . $documentId;
 	}
 
-	public function deleteDocument(int $fileId)
+	/**
+	 * @throws Exception
+	 */
+	public function deleteDocument(int $temDocumentId): void
 	{
-		if($this->folderId==null){
-			throw new Exception("Le Document doit etre attâcher a un dossier");
+		if($this->folderId===null){
+			throw new Exception("The Document must be attached to a folder");
 		}
-		Session::forget($this->getDocumentKey($this->folderId,$fileId));
+		Session::forget($this->getDocumentKey($this->folderId,$temDocumentId));
 	}
 
 	public function attachToFolder(int $folderId): TraitementDocumentContract
@@ -79,24 +92,24 @@ class SessionTraitementDocument implements TraitementDocumentContract
 	}
 
 	/**
-	 * @param int $docId
-	 * @return mixed
+	 * @param int $folderId
+	 * @return string
 	 */
-	public function getDossierKey(int $docId)
+	public function getDossierKey(int $folderId): string
 	{
-		return prefixDossier() . $docId;
+		return prefixDossier() . $folderId;
 	}
 
 
-	public function getAll(int $dossierId = null):array
+	public function getAll(int $folderId = null):array
 	{
-		$dossierId = $dossierId??$this->folderId;
-		return Session::get($this->getDossierKey($dossierId));
+		$folderId = $folderId??$this->folderId;
+		return Session::get($this->getDossierKey($folderId));
 	}
 
-	public function deleteAll(int $dossierId = null):void
+	public function deleteAll(int $folderId = null):void
 	{
-		$dossierId = $dossierId??$this->folderId;
-		Session::forget($this->getDossierKey($dossierId));
+		$folderId = $folderId??$this->folderId;
+		Session::forget($this->getDossierKey($folderId));
 	}
 }

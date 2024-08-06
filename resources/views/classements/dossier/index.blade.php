@@ -1,4 +1,4 @@
-@extends('template')
+@extends('templates.templateUser.templateUser')
 
 @section('content')
     <div class="container-fluid">
@@ -8,6 +8,5 @@
 
 @push('scripts')
     <script src="{{ mix('js/app.js') }}"></script>
-
 @endpush
 

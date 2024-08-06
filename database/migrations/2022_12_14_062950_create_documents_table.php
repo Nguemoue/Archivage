@@ -18,6 +18,8 @@ class CreateDocumentsTable extends Migration
             $table->string("numero")->unique();
             $table->string("nom")->unique();
             $table->string("url");
+			  $table->foreignId("user_id")->nullable()->constrained();
+			  $table->foreignId("dossier_id")->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

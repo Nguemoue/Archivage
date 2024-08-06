@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Traitement\TraitementDocument;
+use App\Http\Controllers\Traitement\TraitementDocumentController;
 use App\Http\Controllers\Traitement\TraitementDossier;
 use App\Http\Controllers\Traitement\TraitementController;
 use Illuminate\Support\Facades\Route;

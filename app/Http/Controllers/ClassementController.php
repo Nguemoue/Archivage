@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Classement;
 use App\Models\Dossier;
+use App\Models\TempDossier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ClassementController extends Controller
 {
@@ -16,21 +18,15 @@ class ClassementController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return view("classements.create");
-
-    }
-
     public function store(Request $request)
     {
         //je recupere les donnes
         $request->validate([
             'nom'=>"required|string|unique:classements,nom"
         ]);
-        $user = webAuth()->user();
+        $user = $request->user('web');
         $structure = $user->structure;
-        $ordre = Classement::query()->max("ordre");
+        $ordre = Classement::max('ordre');
         $nom = $request->input("nom");
         Classement::query()->create([
             'nom'=>$nom,
@@ -76,11 +72,14 @@ class ClassementController extends Controller
 
     function  classDossier(Request $request, $dossierId){
         $dossier = Dossier::find($dossierId);
-        $structure = webAuth()->user()->structure;
-        $classements = Classement::query()->whereStructureId($structure->id)->get();
+        $structureId = $request->user('web')->structure_id;
+        $classements = Classement::query()->where('structure_id',$structureId)->get();
         if($classements->isEmpty()){
         	return redirect()->route("home")->withDanger("vous devez cree des dossier de classements ");
 		  }
-        return view("classements.dossier.index",compact("dossier","classements"));
+        return view("classements.dossier.index",[
+			  'classements' => $classements,
+			  'dossier' => $dossier
+		  ]);
     }
 }

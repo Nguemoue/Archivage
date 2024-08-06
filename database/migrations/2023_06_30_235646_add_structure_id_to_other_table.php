@@ -22,11 +22,7 @@ return new class extends Migration {
 			 $table->foreignId("structure_id")->nullable()->constrained("structures")->cascadeOnDelete();
 
 		 });
-		 //dans la table temp documents
-		 Schema::table('temp_documents', function (Blueprint $table) {
-			 $table->foreignId("structure_id")->nullable()->constrained("structures")->cascadeOnDelete();
 
-		 });
 
     }
 
@@ -45,9 +41,6 @@ return new class extends Migration {
 		 Schema::table('temp_dossiers', function (Blueprint $table) {
 			 $table->dropConstrainedForeignId("structure_id");
 		 });
-		 //dans la table temp documents
-		 Schema::table('temp_documents', function (Blueprint $table) {
-			 $table->dropConstrainedForeignId("structure_id");
-		 });
+
     }
 };

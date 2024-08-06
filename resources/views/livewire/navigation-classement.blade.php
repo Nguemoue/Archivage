@@ -3,7 +3,7 @@
 		<h4 class="card-title text-center">Navigation Dans les dossiers</h4>
 	</div>
 	<div class="card-body border ">
-		@if($depth == 1)
+		@if($depth === 1)
 			<div class="row gap-1 p-1">
 				@foreach($classements as $classement)
 					<div class="d-flex px-2 flex-column m-3">
@@ -17,7 +17,7 @@
 		@elseif($depth == 2)
 			<div class="card">
 				<div class="card-footer d-flex justify-content-between">
-					<button wire:click='setDepth(1)' class="btn btn-outline-info"><i class="fa fa-arrow-left"></i>
+					<button wire:click='setDepth(1)' class="btn btn-outline-info"><i class="ti ti-arrow-left"></i>
 					</button>
 					<h6 class="card-title">
 						Sous Dossier de <b>{{$currentClassement->nom}}</b>
@@ -30,7 +30,7 @@
 							@foreach($sousClassements as $sousClassement)
 								<div class="d-flex flex-column">
 									<a wire:click='setSousDepth(true,{{$sousClassement->id}})' href="#">
-										<i class="fa fa-folder text-warning fa-3x"></i>
+										<i class="ti ti-folder text-warning fa-3x"></i>
 									</a>
 									<i>{{$sousClassement->nom}}</i>
 								</div>
@@ -48,7 +48,7 @@
 											<div class="jumbotron border p-2" style="cursor: pointer">
 												<a data-toggle="collapse" class=""
 													data-target="#dropDownMenu{{$dossier->id}}">
-													<i class="fa fa-folder fa-2x text-warning mx-2"></i>
+													<i class="ti ti-folder fa-2x text-warning mx-2"></i>
 													<span class="text-wrap" style="max-width: 100px;">
                                                     {{$dossier->nom}}
                                                     <b class="text-bold font-bold"> ({{($dossier->documents->count())}}</b> Fichiers)

@@ -6,29 +6,26 @@ use App\Casts\TraitementCast;
 use App\Traits\LoggableTarget;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Enumerable;
 use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Node\Block\Document;
 
 class TempDossier extends Model
 {
-    use HasFactory,LoggableTarget;
+    use LoggableTarget;
     public const DEFAULT_PATH = "temp_dossiers";
 
     protected $guarded = [];
 
-    function tempDocuments(){
-        return $this->belongsToMany(TempDocument::class,TempDossierDocument::class);
+	protected $casts = [
+		'date'=>'date',
+	];
+
+    public function tempDocuments(): HasMany
+	 {
+        return $this->hasMany(TempDocument::class);
     }
 
-    function get0Attribute(){
-        return null;
-    }
-    protected $casts = [
-        'date'=>'date',
-    ];
-
-    protected $appends = [
-    		"size"=> 0
-	 ];
 }

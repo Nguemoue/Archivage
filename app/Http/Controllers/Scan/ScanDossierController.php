@@ -2,61 +2,37 @@
 
 namespace App\Http\Controllers\Scan;
 
-use App\Models\TempDossierDocument;
-use Faker\Core\File;
-use Faker\Factory;
-use Illuminate\Support\Str;
-use App\Models\TempDocument;
-use Illuminate\Http\Request;
+use App\Actions\Scan\ScanFolderStoreAction;
 use App\Http\Controllers\Controller;
-use App\Models\TempDossier;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Scan\ScanFolderStoreRequest;
+use App\Services\Scan\ScanService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 
 class ScanDossierController extends Controller
 {
-    function index(){
-        return view("scann.dossiers.index");
-    }
+	public function __construct(public ScanService $scanService, public ScanFolderStoreAction $folderStoreAction)
+	{
+	}
 
-    function create(){
-        return view("scann.dossiers.create");
-    }
+	public function index()
+	{
+		return view("scann.dossiers.index");
+	}
 
-    function store(Request $request){
-        $validator = Validator::make($request->only('titre', 'files'), [
-            'files' => ["required"],
-            'titre' => "required|string|unique:temp_dossiers,nom"
-        ], customAttributes: ['files' => "les fichiers rattaches"]);
-        $validator->validate();
+	public function store(ScanFolderStoreRequest $request): JsonResponse
+	{
 
-        // mon repertoire de stockage
-        $dir  = now()->format("y_m_d").'/'.$request->input('titre');
-        // je stocke mon fichier image
+		$this->folderStoreAction->handle(request: $request);
 
-        $createdFolder = TempDossier::query()->create([
-            'nom'=>$request->input("titre"),
-			   "structure_id"=>auth(webGuard())->user()->structure->id
+		return response()->json([
+			'status' => 'ok'
+		]);
 
-		  ]);
-        // je cree les documents_dossiers qui correspondents
-        // je parcours toutes la liste de mes fichiers
-        foreach($request->file("files") as   $file){
-            // je cree ma source a partir de cette derniers
-                // je cree mon document
-            $tempDocument = TempDocument::query()->create([
-            	'url'=> $file->store(TempDossier::DEFAULT_PATH.'/'.$dir,
-							["disk"=>tmpDisk()]),
-                'numero'=>Str::uuid(),
-                'data'=>$file->getClientOriginalName(),
-					 "structure_id"=>auth(webGuard())->user()->structure->id
-            ]);
-            TempDossierDocument::query()->create([
-                'temp_document_id'=>$tempDocument->id,
-                'temp_dossier_id'=>$createdFolder->id
-            ]);
-        }
-        return redirect()->back()->with("success", "fichier envoyer avec success");
-        // je stocke les documents en fonctions de la date du jour
-        // TempDocument::
-    }
+	}
+
+	public function create():View
+	{
+		return view("scann.dossiers.create");
+	}
 }

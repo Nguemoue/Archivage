@@ -9,23 +9,23 @@ use App\Models\TempDocument;
 
 interface TraitementDocumentContract
 {
-	public function addDocument(array | TempDocument $fileData);
+	public function addDocument(array | TempDocument $tempDocument);
 
-	public function getDocument(int $fileId);
+	public function getDocument(int $tempDocumentId);
 
-	public function updateDocument(int $fileId, array| TempDocument $newData);
+	public function updateDocument(int $tempDocumentId, array| TempDocument $newData);
 
-	public function deleteDocument(int $fileId);
+	public function deleteDocument(int $temDocumentId);
 
 	public function attachToFolder(int $folderId): self;
 
-	public function hasDocument(int $fileId):bool;
+	public function hasDocument(int $tempDocumentId):bool;
 
-	public function getDossierKey(int $docId);
+	public function getDossierKey(int $folderId);
 
 	public function getDocumentKey(int $docId,int $documentId);
 
-	public function getAll(int $dossierId = null):array;
+	public function getAll(int $folderId = null):array;
 
-	public function deleteAll(int $dossierId = null):void;
+	public function deleteAll(int $folderId = null):void;
 }

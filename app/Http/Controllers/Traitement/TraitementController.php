@@ -15,31 +15,16 @@ use Illuminate\Support\Facades\Storage;
 
 class TraitementController extends Controller
 {
-    function index(){
+    public function index(Request $request){
 
-    	 //je recupere tous les dossier traite par ce dernier
-		 $user = webAuth()->user();
-		 $dossiersNonFini = Dossier::query()->whereUserId($user->id)
-			 ->whereIsClassed(false)
-			 ->get();
-		 if($dossiersNonFini->isNotEmpty()){
-			 foreach ($dossiersNonFini as $item){
-				 return  redirect()->route('classement.dossier.post',[$item->id]);
-			 }
-		 }
-
-        $temp_dossiers = TempDossier::query()
+		 $tempDossiers = TempDossier::query()
 			  ->with("tempDocuments")
 			  ->withCasts(['status' => TraitementCast::class])
-			  ->withCount("tempDocuments")->get()
-			  ->each(function ($element){
-					$element->size = $element->tempDocuments->reduce(function ($carry,$document){
-						return $carry += Storage::disk(tmpDisk())->size($document->url);
-					});
-					$element->size = megaOctet($element->size);
-			  });
+			  ->withCount("tempDocuments")->get();
 
-        return view("traitement.index",compact('temp_dossiers'));
+        return view("traitement.index",[
+			  'tempDossiers' => $tempDossiers
+		  ]);
 
     }
 

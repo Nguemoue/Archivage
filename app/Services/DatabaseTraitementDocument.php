@@ -22,27 +22,27 @@ class DatabaseTraitementDocument implements TraitementDocumentContract
 		}
 	}
 
-	public function getDocument(int $fileId)
+	public function getDocument(int $tempDocumentId)
 	{
 		if($this->folderId==null){
 			throw new Exception("Le Document doit etre attâcher a un dossier");
 		}
-		return TempDocument::where("id",$fileId)->get();
+		return TempDocument::where("id",$tempDocumentId)->get();
 	}
 
 	/**
 	 * @throws \Exception
 	 */
-	public function updateDocument(int $fileId, TempDocument|array $newData)
+	public function updateDocument(int $tempDocumentId, TempDocument|array $newData)
 	{
 		if($this->folderId==null){
 			throw new \Exception("Le Document doit etre attâcher a un dossier");
 		}
-		if (!$this->hasDocument($fileId)) {
+		if (!$this->hasDocument($tempDocumentId)) {
 			$this->addDocument($newData);
 		}
 
-		$oldData = $this->getDocument($fileId);
+		$oldData = $this->getDocument($tempDocumentId);
 
 		foreach ($newData as $key => $val) {
 			$oldData[$key] = $val;
@@ -58,7 +58,7 @@ class DatabaseTraitementDocument implements TraitementDocumentContract
 		}
 	}
 
-	public function deleteDocument(int $fileId)
+	public function deleteDocument(int $temDocumentId)
 	{
 
 	}
@@ -68,13 +68,13 @@ class DatabaseTraitementDocument implements TraitementDocumentContract
 		// TODO: Implement attachToFolder() method.
 	}
 
-	public function hasDocument(int $fileId): bool
+	public function hasDocument(int $tempDocumentId): bool
 	{
-		return $this->getDocument($fileId) != null;
+		return $this->getDocument($tempDocumentId) != null;
 
 	}
 
-	public function getDossierKey(int $docId)
+	public function getDossierKey(int $folderId)
 	{
 
 	}
@@ -84,12 +84,12 @@ class DatabaseTraitementDocument implements TraitementDocumentContract
 
 	}
 
-	public function getAll(int $dossierId = null): array
+	public function getAll(int $folderId = null): array
 	{
 		// TODO: Implement getAll() method.
 	}
 
-	public function deleteAll(int $dossierId = null): void
+	public function deleteAll(int $folderId = null): void
 	{
 		// TODO: Implement deleteAll() method.
 	}

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTempDossierDocumentsTable extends Migration
+class CreateTempDossiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTempDossierDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('temp_dossiers_documents', function (Blueprint $table) {
+        Schema::create('temp_dossiers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("temp_dossier_id")->constrained()->cascadeOnDelete();
-            $table->foreignId("temp_document_id")->constrained()->cascadeOnDelete();
+            $table->string("nom");
+				$table->date('is_published')->nullable();
+			  $table->foreignId("user_id")->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTempDossierDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('temp_dossiers_documents');
+        Schema::dropIfExists('temp_dossiers');
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration {
 			  $table->timestamp('email_verified_at')->nullable();
 			  $table->string('password');
 			  $table->string("role",80)->nullable();
+			  $table->foreignId("structure_id")->nullable()->constrained()->nullOnDelete();
 			  $table->rememberToken();
 			  $table->timestamps();
         });

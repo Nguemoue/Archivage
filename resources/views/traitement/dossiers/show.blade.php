@@ -9,38 +9,38 @@
 	<div class="mt-4">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title text-center">Traitement du dossier <b>#{{ $dossier->nom }}</b></h4>
+				<h4 class="card-title text-center">Traitement du dossier <b>#{{ $tempDossier->nom }}</b></h4>
 			</div>
-			@foreach ($dossier->tempDocuments as $item)
+			@foreach ($tempDossier->tempDocuments as $tempDocument)
 				<div class="border my-2 p-2 d-flex justify-content-between">
 					<div>
-						<img src="{{ asset('icones/'.($item->ext=="pdf"?'pdf':'img' ).'.png') }}" alt="icone fichier"
-								 class="img-fluid"
-								 width="30"/>
-						<span>{{ $item->numero }}</span>
+						<img src="{{ $tempDocument->extension_image}}" alt="file icon"
+							  class="img-fluid"
+							  width="30"/>
+						<span>{{ $tempDocument->data['original_filename'] }}</span>
 					</div>
 					{{-- si le dossier es en cours de traitement--}}
-					@if($item->status == config('traitement.terminer'))
+					@if($tempDocument->status === config('traitement.terminer'))
 						<span class="float-right text-success text-lowercase"><i
 								class="ti ti-check"></i> Traiter avec success</span>
-					@elseif($item->status == config('traitement.encours'))
-						<a href="{{ route('traitement.document.show',[$item->id]) }}"
+					@elseif($tempDocument->status === config('traitement.encours'))
+						<a href="{{ route('traitement.document.show',[$tempDocument->id]) }}"
 							class="float-right btn-sm text-lowercase border rounded btn btn-warning"> <span
 								class="tti-player-play"></span>
-							continuer le traitement
+							Continuer le traitement
 						</a>
 					@else
-						<a href="{{ route('traitement.document.show',[$item->id]) }}"
+						<a href="{{ route('traitement.document.show',[$tempDocument->id]) }}"
 							class="btn btn-outline-secondary">
 							Traiter <i class="ti ti-hand-move"></i>
 						</a>
 					@endif
 				</div>
 			@endforeach
-			@if($dossier->status == config('traitement.terminer'))
+			@if($tempDossier->status === config('traitement.terminer'))
 				<div class="card-footer">
 					<form id="validAllForm" method="post"
-							action="{{route('traitement.dossier-traitement.finish',['id'=>$dossier->id])}}">
+							action="{{route('traitement.dossier-traitement.finish',['id'=>$tempDossier->id])}}">
 						@csrf
 						<input type="hidden" name="copy" id="copyVal" value="0">
 						<button id="validAll" type="button" hreflang="fr" class="btn btn-sm btn-outline-info text-lowercase">
@@ -50,9 +50,7 @@
 					</form>
 				</div>
 			@else
-				<div class="alert alert-info mx-4 alert-dismissible">Veuillez effectuer tous les traitement pour la validation
-					finale!
-				</div>
+				<div class="alert alert-warning mx-4 alert-dismissible">Notice!! Veuillez effectuer tous les traitement pour la validation finale!</div>
 			@endif
 
 		</div>
