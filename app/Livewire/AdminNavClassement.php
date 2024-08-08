@@ -31,7 +31,7 @@ class AdminNavClassement extends Component
 
 	function loadSousClassement($id)
 	{
-		$this->currentClassement = Classement::query()->with('sousCLassements')->find($id);
+		$this->currentClassement = Classement::query()->with('sousClassements')->find($id);
 		$this->sousClassements = $this->currentClassement->sousCLassements;
 		$this->depth = 2;
 	}

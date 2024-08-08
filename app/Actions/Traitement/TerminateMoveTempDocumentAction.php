@@ -22,7 +22,7 @@ class TerminateMoveTempDocumentAction
 		$tempDossier = TempDossier::query()->find($tempDossierId);
 		abort_if($tempDossier === null, new Response("model non trouve", 404));
 		$tempDocuments = $tempDossier->tempDocuments;
-		$result = \DB::transaction(function () use ($tempDossier, $user, $tempDocuments, $structure, $method) {
+		return \DB::transaction(function () use ($tempDossier, $user, $tempDocuments, $structure, $method) {
 			$dossier = Dossier::create([
 				'nom' => sha1($tempDossier->nom),
 				'numero' => Str::uuid(),
@@ -60,7 +60,6 @@ class TerminateMoveTempDocumentAction
 			}
 			return $dossier !== null;
 		});
-		return  $result;
 
 	}
 

@@ -8,18 +8,18 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class TraitementCast implements CastsAttributes
 {
-    public function get($model, $key, $value, $attributes)
-    {
+    public function get($model, $key, $value, $attributes): string
+	 {
         switch ($model){
 			  case TempDocument::class or TempDossier::class:
-			  	if($value == 0){
+			  	if ($value === 0) {
 			  		return 'non traite';
-				}elseif ($value == 1){
-			  		return 'en cours de traitement';
-				}else{
-			  		return 'traité';
 				}
-			  	break;
+
+				  if($value === 1) {
+			  		return 'en cours de traitement';
+				}
+				  return 'traité';
 
 			  default:
 			  	break;

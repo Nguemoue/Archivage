@@ -31,7 +31,7 @@ Route::group([
 		Route::get('/', function () {
 			return view('index');
 		})->name("home");
-
+		Route::view("/exploitation","exploitation")->name('exploitation.index');
 		Route::group([
 
 		], function () {

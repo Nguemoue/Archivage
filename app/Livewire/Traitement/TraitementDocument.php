@@ -34,6 +34,11 @@ class TraitementDocument extends Component
 	 */
 	public function firstStep(): void
 	{
+		$this->tempDocument->update([
+			'titre' => $this->title,
+			'sous_type_document_id'=>$this->subTypeDocumentId
+		]);
+
 		//second step
 		$this->configureStepTo(2);
 		foreach ($this->documentFields as $field) {
@@ -94,6 +99,10 @@ class TraitementDocument extends Component
 	public function mount(): void
 	{
 		$this->title = (string) $this->tempDocument->titre;
+		if ($this->tempDocument->sous_type_document_id){
+			$this->subTypeDocumentId = $this->tempDocument->sous_type_document_id;
+			$this->typeDocumentId = $this->tempDocument->sousTypeDocument->type_document_id;
+		}
 		$this->configureStepTo(1);
 	}
 

@@ -11,7 +11,7 @@ class Classement extends Model
 	use LoggableTarget;
     protected $guarded = [];
 
-    public function sousCLassements(): HasMany
+    public function sousClassements(): HasMany
     {
         return $this->hasMany(SousClassement::class,"classement_id");
     }

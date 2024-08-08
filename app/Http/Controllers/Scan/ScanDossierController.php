@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Scan;
 use App\Actions\Scan\ScanFolderStoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Scan\ScanFolderStoreRequest;
+use App\Models\Dossier;
+use App\Models\TempDossier;
 use App\Services\Scan\ScanService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +35,9 @@ class ScanDossierController extends Controller
 
 	public function create():View
 	{
-		return view("scann.dossiers.create");
+		$dossiers = TempDossier::all(['id','nom']);
+		return view("scann.dossiers.create",[
+			'dossiers'=>$dossiers
+		]);
 	}
 }

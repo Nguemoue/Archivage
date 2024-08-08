@@ -24,8 +24,8 @@
 					<tr>
 						<td>{{$loop->index+1}}</td>
 						<td>{{$item->action}}</td>
-						<td><span class="badge badge-info badge-lg">{{$item->target->logTargetForHumans()}}</span></td>
-						<td><span class="badge badge-secondary badge-lg">{{$item->actor->logActorForHumans()}}</span></td>
+						<td><span class="badge badge-info badge-lg">{{$item->target?->logTargetForHumans()}}</span></td>
+						<td><span class="badge badge-secondary badge-lg">{{$item->actor?->logActorForHumans()}}</span></td>
 						<td>{{$item->created_at->isoFormat("lll")}}</td>
 						<td>
 							<div class="d-flex">

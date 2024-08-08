@@ -1,6 +1,6 @@
 <div class="">
     <div class="card-header-text card-header">
-        <h4 class="card-title text-center">Ordre de Classements</h4>
+        <h4 class="card-title text-center">Classement du Dossier {{$dossier->dossier}}</h4>
     </div>
 	@if(session()->has("success"))
 		<div class="alert alert-success w-75 mx-auto">

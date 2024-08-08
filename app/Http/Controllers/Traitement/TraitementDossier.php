@@ -52,19 +52,46 @@ class TraitementDossier extends Controller
 		$request->validate([
 			'copy'=>['nullable','int'],
 		]);
+		$authUser = $request->user('web');
 		//$tempDossier = TempDossier::find($id);
-		$result = $this->action->handle(request: $request,tempDossierId: $id);
+		//$result = $this->action->handle(request: $request,tempDossierId: $id);
 		$tempDossier = TempDossier::find($id);
-		$dossier  = Dossier::create([
-			'nom'=>$tempDossier->nom,
-			'is_classed'=>0,
-			'user_id'=>auth('web')->id(),
-			'structure_id' => auth('web')->user()->structure_id,
-			'numero'=>Str::uuid()
-		]);
-		if ($result) {
+		$dossier = \DB::transaction(function () use ($tempDossier,$authUser){
+			$dossier = Dossier::create([
+				'nom'=>$tempDossier->nom,
+				'numero'=>uniqid('', true),
+				'user_id'=>$authUser->id,
+				'structure_id'=>$authUser->structure_id,
+				'is_classed'=>false,
+				'sous_classement_id'=>null
+			]);
+			foreach ($tempDossier->tempDocuments as $tempDocument){
+				$document = $dossier->documents()->create([
+					'nom' => $tempDocument->titre,
+					'numero' => $tempDocument->numero,
+					'structure_id' => $tempDocument->structure_id,
+					'url' => $tempDocument->url,
+					'data' => $tempDocument->data,
+					'sous_type_document_id' => $tempDocument->sous_type_document_id,
+					'user_id' => $authUser->id,
+				]);
+				$document->fields()->sync(
+					$tempDocument->tempDocumentFields
+						->pluck('content','field_id')
+						->map(fn($item)=>['content'=>$item])
+						->toArray()
+				);
+			}
+
 			$tempDossier->delete();
-		}
+			return $dossier;
+		});
+
 		return redirect()->route("classement.dossier.post", [$dossier->id]);
+	}
+
+	public function destroy()
+	{
+		return redirect()->back();
 	}
 }

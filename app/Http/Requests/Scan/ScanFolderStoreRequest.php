@@ -9,8 +9,9 @@ class ScanFolderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-			  'title'=>['required','string'],
-			  'files'=>['required']
+			  'title' => ['required'],
+			  'files' => ['required'],
+			  'existing_folder' => ['required','bool'],
         ];
     }
 

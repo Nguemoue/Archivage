@@ -34,7 +34,7 @@ class SousClassementController extends Controller
     }
 
     function edit(Classement $classement,SousClassement $sousClassement){
-        $classements = Classement::without("sousCLassements")->get();
+        $classements = Classement::without("sousClassements")->get();
         return view("sousclassements.edit",compact("classement","sousClassement","classements"));
     }
 

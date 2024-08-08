@@ -89,7 +89,7 @@
 									</div>
 								</div>
 								<div class="message-body">
-									<a href="./page-user-profile.html" class="py-8 px-7 mt-8 d-flex align-items-center">
+									<a href="javascript:void(0)" class="py-8 px-7 mt-8 d-flex align-items-center">
                             <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
                               <img src="{{asset('_materialize_v2/dist/images/svgs/icon-account.svg')}}" alt="" width="24" height="24">
                             </span>

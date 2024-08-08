@@ -73,13 +73,26 @@ class ClassementController extends Controller
     function  classDossier(Request $request, $dossierId){
         $dossier = Dossier::find($dossierId);
         $structureId = $request->user('web')->structure_id;
-        $classements = Classement::query()->where('structure_id',$structureId)->get();
+        $classements = Classement::query()->where('structure_id',$structureId)->with('sousClassements')->get();
         if($classements->isEmpty()){
         	return redirect()->route("home")->withDanger("vous devez cree des dossier de classements ");
 		  }
+
         return view("classements.dossier.index",[
 			  'classements' => $classements,
 			  'dossier' => $dossier
 		  ]);
     }
+
+	public  function  storeClassDossier(Request $request, $dossierId){
+		 $request->validate([
+			 'sous_classement_id'=>['required','int']
+		 ]);
+		Dossier::whereKey($dossierId)->update([
+			'is_classed'=>1,
+			'sous_classement_id'=>$request->integer('sous_classement_id')
+		]);
+		return redirect()->route('traitement.index')->with('success','Classement reussi!');
+
+	}
 }

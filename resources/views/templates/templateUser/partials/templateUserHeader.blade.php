@@ -25,6 +25,10 @@
 			<li class="nav-item dropdown-hover d-none d-xl-block">
 				<a class="nav-link" href="javascript:void(0)">Teledeclaration</a>
 			</li>
+			<li class="nav-item dropdown-hover d-none d-xl-block">
+				<span class="nav-link" href="javascript:void(0)"><b>[ {{webUser()->structure->nom}} ]</b></span>
+			</li>
+
 		</ul>
 
 		<button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +66,7 @@
 							<div class="notification bg-primary rounded-circle"></div>
 						</a>
 						<div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-							<x-notification-component :user="auth(superAdminGuard())->user()"/>
+							<x-notification-component :user="auth(webGuard())->user()"/>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -81,15 +85,15 @@
 								<div class="d-flex align-items-center py-9 mx-7 border-bottom">
 									<img src="{{asset('_materialize_v2/dist/images/profile/user-1.jpg')}}" class="rounded-circle" width="80" height="80" alt="" />
 									<div class="ms-3">
-										<h5 class="mb-1 fs-3">Mathew Anderson</h5>
-										<span class="mb-1 d-block text-dark">Designer</span>
+										<h5 class="mb-1 fs-3">{{webUser()->name}}</h5>
+										<span class="mb-1 d-block text-dark">User</span>
 										<p class="mb-0 d-flex text-dark align-items-center gap-2">
-											<i class="ti ti-mail fs-4"></i> info@modernize.com
+											<i class="ti ti-mail fs-4"></i> {{webUser()->email}}
 										</p>
 									</div>
 								</div>
 								<div class="message-body">
-									<a href="./page-user-profile.html" class="py-8 px-7 mt-8 d-flex align-items-center">
+									<a href="javascript:void(0)" class="py-8 px-7 mt-8 d-flex align-items-center">
                             <span class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
                               <img src="{{asset('_materialize_v2/dist/images/svgs/icon-account.svg')}}" alt="" width="24" height="24">
                             </span>
@@ -100,7 +104,10 @@
 									</a>
 								</div>
 								<div class="d-grid py-4 px-7 pt-8">
-									<a href="#" class="btn btn-outline-primary">Log Out</a>
+									<form action="{{route('logout')}}" method="post">
+										@csrf
+										<button class="btn btn-danger">Log Out</button>
+									</form>
 								</div>
 							</div>
 						</div>

@@ -22,6 +22,9 @@ Route::group([
 			Route::get("dossier/{dossierId}", [\App\Http\Controllers\ClassementController::class, "classDossier"])
 				->name("dossier.post")
 				->whereNumber("dossierId");
+			Route::post("dossier/{dossierId}", [\App\Http\Controllers\ClassementController::class, "storeClassDossier"])
+				->name("dossier.post")
+				->whereNumber("dossierId");
 		}
 	);
 

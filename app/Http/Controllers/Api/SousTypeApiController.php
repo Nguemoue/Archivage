@@ -17,9 +17,9 @@ class SousTypeApiController extends Controller
         $documents = $sousType->documents;
         $final = collect();
         $except = collect(["dossierId"]);
-        ($documents->pluck("data")->map(function ($elt)
+        ($documents->pluck("fields")->map(function ($elt)
         {
-          return array_keys($elt);
+          return array_column($elt->toArray(),'label');
         })->each(function ($req) use(&$final,$except){
             foreach ($req as $re){
                 if(!$final->contains($re) and $except->doesntContain($re)){

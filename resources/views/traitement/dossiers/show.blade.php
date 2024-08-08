@@ -43,8 +43,8 @@
 							action="{{route('traitement.dossier-traitement.finish',['id'=>$tempDossier->id])}}">
 						@csrf
 						<input type="hidden" name="copy" id="copyVal" value="0">
-						<button id="validAll" type="button" hreflang="fr" class="btn btn-sm btn-outline-info text-lowercase">
-							<i class="fa fa-reply-all"></i>
+						<button id="validAll" type="button" hreflang="fr" class="btn  btn-outline-info text-lowercase">
+							<i class="ti ti-check"></i>
 							Valider tous ses traitements
 						</button>
 					</form>

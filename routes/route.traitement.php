@@ -23,8 +23,14 @@ Route::group([
 			Route::get("document/{id}", [TraitementDocumentController::class, "show"])->name("document.show");
 
 			// route pour les dossiers
-			Route::get("dossier", [TraitementDossier::class, "index"])->name("dossier.index");
-			Route::get("dossier/{id}", [TraitementDossier::class, "show"])->name("dossier.show")->whereNumber("id");
+			Route::get("dossier", [TraitementDossier::class, "index"])
+				->name("dossier.index");
+			Route::get("dossier/{id}", [TraitementDossier::class, "show"])
+				->name("dossier.show")
+				->whereNumber("id");
+			Route::delete("dossier/{id}", [TraitementDossier::class, "destroy"])
+				->name("dossier.destroy")
+				->whereNumber("id");
 
 			Route::post("document/{id}/finish", [TraitementDossier::class, "finish"])->name("dossier-traitement.finish");
 		}

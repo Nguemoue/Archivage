@@ -53,5 +53,9 @@ class TempDocument extends Model
 		return $this->belongsToMany(Field::class,TempDocumentField::class);
 	}
 
+	public function sousTypeDocument()
+	{
+		return $this->belongsTo(SousTypeDocument::class);
+	}
 
 }

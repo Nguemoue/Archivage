@@ -10,13 +10,15 @@ use Nette\Utils\Json;
 class Modal extends Component
 {
     public $id;
-    public $document = null;
+    public Document|null $document = null;
     public $content = [];
-    public function __construct($document,$id)
+    public function __construct($document, $id)
     {
         $this->document = $document;
         $this->id = $id;
-        $this->content= $this->document->data;
+//        $fields = $this->content= $this->document->fields;
+//		  $documentFields = $this->document->documentFields;
+//		  dd($this->content);
     }
 
     public function render(): View

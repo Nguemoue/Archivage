@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Role;
+use App\Models\TempDocument;
+use App\Models\TempDossier;
 
 if (!function_exists("imageFromGender")){
     function imageFromGender(?string $gender=null): string
@@ -86,6 +88,12 @@ if (!function_exists('authUser')){
         return auth()->user();
     }
 }
+if (!function_exists("webUser")){
+	function webUser()
+	{
+		return auth('web')->user();
+	}
+}
 if (!function_exists('authRole')){
     function authRole():\App\Models\Role{
         return authUser()->loadMissing("role")->role;
@@ -103,4 +111,21 @@ if(!function_exists("diffMonths")){
         }
         return $date1->diffInDays($date2);
     }
+}
+
+if (!function_exists('statusTraitement')){
+	function statusTraitement(int $status): string
+	{
+		if ($status === 0) {
+			return 'non traite';
+		}
+
+		if($status === 1) {
+			return 'en cours de traitement';
+		}
+		return 'traité';
+
+
+
+	}
 }

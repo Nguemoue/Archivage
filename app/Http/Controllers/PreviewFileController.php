@@ -31,7 +31,9 @@ class PreviewFileController extends Controller
 
     function previewFile($documentId){
 		 $tempDoc = Document::query()->findOrFail($documentId);
-		 $pathToFile = ($tempDoc->url);
+		 $pathToFile = Storage::disk(tmpDisk())->path($tempDoc->url);
+		 //$file = \File::get($pathToFile);
+		 //dd($file);
 		 return response()->file($pathToFile,["Content-Disposition"=>"inline"]);
 	 }
 }

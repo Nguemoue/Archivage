@@ -10,6 +10,7 @@
 				  <x-slot:header><h6>Nouveau document</h6> </x-slot:header>
 				  @include('classements.createModal')
 			  </x-app.modal>
+			  <a href="{{route('sousClassement.all')}}">Sous classement</a>
         </div>
         <div class="card ">
             <div class="card-header">
@@ -43,6 +44,7 @@
                                         </form>
                                     </a>
                                         <a href="{{ route('classement.edit',['classement'=>$item->id]) }}" class="btn btn-sm btn-success">Edit</a>
+													<a class="btn btn-link" href="{{route('classement.sousclassement.index',[$item->id])}}">Sous classement</a>
                                     </div>
                                 </td>
                             </tr>

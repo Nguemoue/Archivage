@@ -78,7 +78,7 @@
 @include('templates.partials.izitoast')
 <script >
 	$(document).ready(function () {
-		var table = $(".table").DataTable()
+		const table = $(".table").DataTable()
 	})
 </script>
 @stack("scripts")

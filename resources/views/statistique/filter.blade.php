@@ -73,7 +73,7 @@
                 data.forEach(elt=>{
                    html+=`<option value="${elt}">${elt}</option>`;
                    champTab+=`<label for="${elt}" class="mx-4">
-						${elt} <input type="checkbox" id="${elt}" value="${elt}" name="champTab[]">
+						${elt} <input type="checkbox p-1" id="${elt}" value="${elt}" name="champTab[]">
 					</label>`;
                })
                 $('#champ').html(html)

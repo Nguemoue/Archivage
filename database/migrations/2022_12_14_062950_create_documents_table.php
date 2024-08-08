@@ -6,32 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDocumentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->id();
-            $table->string("numero")->unique();
-            $table->string("nom")->unique();
-            $table->string("url");
-			  $table->foreignId("user_id")->nullable()->constrained();
-			  $table->foreignId("dossier_id")->constrained()->cascadeOnDelete();
-            $table->softDeletes();
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('documents', static function (Blueprint $table) {
+			$table->id();
+			$table->string("numero");
+			$table->string("nom");
+			$table->string("url");
+			$table->foreignId("user_id")->nullable()->constrained();
+			$table->unique(['numero','nom']);
+			$table->timestamps();
+			$table->foreignId("dossier_id")->constrained()->cascadeOnDelete();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('documents');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('documents');
+	}
 }

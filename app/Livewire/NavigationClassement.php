@@ -15,44 +15,51 @@ use Livewire\Component;
 class NavigationClassement extends Component
 {
     public Collection $classements ;
-    public $depth = 1;
-    public $dossierId;
-    public $sousDepth = false;
-    public $currentClassement = null;
-    public $currentSousClassement = null;
-    public $sousClassements = null;
-    public $directories = [];
-    public $sousDirectories = [];
+    public int $depth = 1;
+    public int $dossierId;
+    public bool $sousDepth = false;
+    public ?Classement $currentClassement = null;
+    public ?SousClassement $currentSousClassement = null;
+    public Collection|null $sousClassements = null;
+    public array $directories = [];
+    public array|Collection $sousDirectories;
 
     public function render(): View
     {
         return view('livewire.navigation-classement');
     }
 
-    public function mount()
-    {
+    public function mount(): void
+	 {
 		 //$this->classements = Classement::query()->where('structure_id','=',$structure->id);
     }
 
-    function loadSousClassement($id)
-    {
-        $this->currentClassement = Classement::query()->with('sousCLassements')->find($id);
+    public function loadSousClassement(int $classementId): void
+	 {
+        $this->currentClassement = Classement::with('sousClassements')->find($classementId);
         $this->sousClassements = $this->currentClassement->sousCLassements;
         $this->depth = 2;
     }
 
-    function setDepth($number)
-    {
+    public function setDepth($number): void
+	 {
         $this->reset( "sousClassements","sousDepth","currentSousClassement");
         $this->depth = $number;
 
     }
 
-    function setSousDepth($first, $sousClassementId){
+	/**
+	 * Get all folder attach to a sub classment.s
+	 * @param bool $first
+	 * @param int $sousClassementId
+	 * @return void
+	 */
+	public function setSousDepth(bool $first, int $sousClassementId): void
+	 {
 
         //$this->currentSousClassement = $sousClassementId;
         $this->currentSousClassement = SousClassement::find($sousClassementId);
-        $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
+//        $url = $this->currentClassement->nom .DIRECTORY_SEPARATOR. $this->currentSousClassement->nom;
 
         $this->sousDirectories = $this->currentSousClassement->dossiers;
 //        $final = collect([]);
@@ -80,11 +87,11 @@ class NavigationClassement extends Component
 //        }
 //        $this->sousDirectories = $final;
         #je charge le contenu du dossiers
-        $this->sousDepth = boolval($first);
+        $this->sousDepth = $first;
     }
 
-    function download(Request $request)
-    {
+    public function download(): void
+	 {
         $classement = $this->currentClassement;
         $sousClassement = SousClassement::find($this->currentSousClassement);
         $endUrl = $classement->nom . DIRECTORY_SEPARATOR . $sousClassement->nom;

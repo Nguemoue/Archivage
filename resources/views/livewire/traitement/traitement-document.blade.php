@@ -63,20 +63,28 @@
 				</div>
 			</div>
 			<div class="d-block text-center d-flex justify-content-between mt-2">
-				<button type="button" class="btn btn-danger " wire:click='prev'>Precedent</button>
-				<button type="submit" class="btn btn-primary"> suivant</button>
+				<button type="button" class="btn btn-danger" wire:click='prev'><i class="ti ti-arrow-left"></i> Precedent</button>
+				<button type="submit" class="btn btn-primary">
+					Suivant
+					<i wire:loading wire:target="saveDocumentField" class="ti ti-loader"></i>
+					<i wire:loading.remove wire:target="saveDocumentField" class="ti ti-arrow-right"></i>
+				</button>
 			</div>
 		</form>
 	@elseif($step===3)
 		<form wire:submit.prevent="finishTreatment">
-			<h1 class="text-center">Voulez vous terminer le traitement?</h1>
+			<h4 class="text-center">Vous arrivez a la phase finale du traitement</h4>
+			<h4 class="text-center">Voulez vous confirmer le traitement</h4>
 			<p>
 				Vos donnes seront:
 
 			</p>
 			<div class="d-block text-center d-flex justify-content-between mt-2">
 				<button type="button" class="btn-sm btn btn-danger " wire:click='prev'> <i class="ti ti-arrow-left"></i> Precedent</button>
-				<button type="submit" class="btn btn-dark"> Terminer <i class="ti ti-check"></i> </button>
+				<button type="submit" class="btn btn-dark"> Terminer
+					<i wire:loading wire:target="saveDocumentField" class="ti ti-loader"></i>
+					<i wire:loading.remove wire:target="saveDocumentField" class="ti ti-check"></i>
+				</button>
 			</div>
 		</form>
 	@endif
