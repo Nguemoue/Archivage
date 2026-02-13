@@ -30,6 +30,7 @@
                                 <option value="email"> Email </option>
                                 <option value="password"> Mot de passe </option>
                                 <option value="search"> Recherche </option>
+                                <option value="number"> Nombre </option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
@@ -85,9 +86,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ mix('js/app.js') }}"></script>
+    @vite(['resources/js/app.js'])
 @endpush
 
-@push('styles')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endpush

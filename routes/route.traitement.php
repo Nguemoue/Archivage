@@ -21,14 +21,19 @@ Route::group([
 			// route pour les documents
 			Route::get("document", [TraitementDocument::class, "index"])->name("document.index");
 			Route::get("document/{id}", [TraitementDocument::class, "show"])->name("document.show");
+			//reset process for one document
+			Route::post("document/{id}/destroy", [TraitementDocument::class, "destroy"])->name("document.destroy");
 
 			// route pour les dossiers
 			Route::get("dossier", [TraitementDossier::class, "index"])->name("dossier.index");
 			Route::get("dossier/{id}", [TraitementDossier::class, "show"])->name("dossier.show")->whereNumber("id");
+			Route::post("dossier/{id}/destroy", [TraitementDossier::class, "destroy"])->name("dossier.destroy")->whereNumber("id");
 
+			// finish document process
 			Route::get("document/{id}/sucess", [TraitementDocument::class, "success"])->name("document.finish");
+			//update documents fields to a document
 			Route::post("document/{id}/updateData", [TraitementDocument::class, "updateData"])->name("document.updateData");
-
+			// finish a process for one document
 			Route::post("document/{id}/finish", [TraitementDossier::class, "finish"])->name("dossier-traitement.finish");
 		}
 	);

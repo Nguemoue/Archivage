@@ -1,5 +1,8 @@
 <?php
-	if(!function_exists("superName")){
+
+use Illuminate\Support\Facades\Storage;
+
+if(!function_exists("superName")){
 		function superName(){
 
 		}
@@ -97,6 +100,27 @@ if(!function_exists("prefixDossier")){
 if(!function_exists("prefixDocument")){
 	function prefixDocument(){
 		return (config("misc.prefix.document","document-"));
+	}
+}
+
+if (!function_exists("archivage_disk")){
+	function archivage_disk(): \Illuminate\Contracts\Filesystem\Filesystem
+	{
+		return Storage::disk('archivage');
+	}
+}
+
+if (!function_exists("folderNameForStructure")){
+	function folderNameForStructure($structure,$folder):string
+	{
+		return str($structure)->slug('_').DIRECTORY_SEPARATOR.str($folder)->slug('_');
+	}
+}
+
+if (!function_exists("classementPath")){
+	function classementPath($classement):string
+	{
+		return archivage_disk()->path(auth()->user()->structure->nom.DIRECTORY_SEPARATOR.$classement);
 	}
 }
 

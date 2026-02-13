@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->foreignId("structure_id")->nullable()->constrained()->nullOnDelete();
+            $table->foreignId("structure_id")->constrained()->cascadeOnDelete();
         });
     }
 

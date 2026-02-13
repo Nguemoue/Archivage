@@ -35,7 +35,8 @@ class TraitementDocument extends Controller
     	  $allData = $request->except("_token","dossierId");
 //        dd($allData);
         $data = json_encode($allData);
-        \TraitementProcessor::attachToFolder($request->input("dossierId"))->updateDocument($id,['data'=>$data]);
+        \TraitementProcessor::attachToFolder($request->input("dossierId"))
+			  ->updateDocument($id,['data'=>$data]);
       	$document = TempDocument::find($id);
       	$dossier = TempDossier::find($request->input("dossierId"));
       	$document->status = config('traitement.terminer');
@@ -49,11 +50,16 @@ class TraitementDocument extends Controller
 				$dossier->save();
 			}
 
-        return response()->json([
-            'message'=>"ok",
-        ]);
+        return redirect()->route('traitement.document.finish',['id'=>$id]);
     }
 
+	 public function destroy($id,Request $request)
+	 {
+		 $request->validate(['dossierId'=>'int']);
+		 session()->forget('dossier-'.$request->input('dossierId'));
+		 TempDocument::whereKey($id)->update(['status'=>config('traitement.debuter')]);
+		 return back()->with('success','reinitialisation avec success');
+	 }
     function success($id){
         $document = TempDocument::find($id);
         $dossier = $document->tempDossiers()->first();

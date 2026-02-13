@@ -14,7 +14,6 @@
 						<th>status</th>
 						<th>Cree le</th>
 						<th>Fichiers</th>
-						<th>Taille (Mo) </th>
 						<th>Actions</th>
 					</tr>
 					</thead>
@@ -29,7 +28,6 @@
 							</td>
 							<td>{{$dossier->created_at->isoFormat("ll")}}</td>
 							<td>{{$dossier->temp_documents_count}} Fichiers</td>
-							<td> {{round($dossier->size,2)}} </td>
 							<td class="btn-group btn-group-sm">
 								<a href="{{route('traitement.dossier.show',[$dossier->id])}}" class="btn btn-success">
 									traiter

@@ -1,23 +1,21 @@
-<div class="card">
-	<div class="card-header">
-		<h4 class="card-title text-center">Navigation Dans les dossiers</h4>
-	</div>
-	<div class="card-body border ">
+<div>
+	<h4 class="card-title text-center mb-3">Navigation Dans les dossiers</h4>
+	<div>
 		@if($depth == 1)
-			<div class="row gap-1 p-1">
+			<div class="d-flex flex-wrap  gap-1 p-1">
 				@foreach($classements as $classement)
-					<div class="d-flex px-2 flex-column m-3">
-						<a wire:click='loadSousClassement({{$classement->id}})' href="#!">
-							<span class="ti ti-folder fa-4x text-warning"></span>
-						</a>
-						<h6 class="font-bold">{{$classement->nom}}</h6>
+					<div class="border mx-2">
+						<button wire:click='loadSousClassement({{$classement->id}})' class="btn">
+							<img src="{{asset('icones/folder.png')}}" alt="" width="30">
+							<strong class="font-bold d-block">{{$classement->nom}}</strong>
+						</button>
 					</div>
 				@endforeach
 			</div>
 		@elseif($depth == 2)
-			<div class="card">
+			<div>
 				<div class="card-footer d-flex justify-content-between">
-					<button wire:click='setDepth(1)' class="btn btn-outline-info"><i class="fa fa-arrow-left"></i>
+					<button wire:click='setDepth(1)' class="btn btn-outline-info"><i class="ti ti-arrow-left"></i>
 					</button>
 					<h6 class="card-title">
 						Sous Dossier de <b>{{$currentClassement->nom}}</b>
@@ -60,55 +58,62 @@
 														@foreach($dossier->documents as $sousDirect)
 															<div>
 																<li title="voir les details sur le fichiers"
-																 class="d-flex justify-content-between my-2">
+																	 class="d-flex justify-content-between my-2">
                                                                 <span><i class="fa fa-file"></i>
                                                                 <em>{{$sousDirect->nom}}</em></span>
-																<div class="btn-group">
-																	<a data-toggle="modal" href="#modalFile{{$sousDirect->id}}"
-																		class="btn btn-sm btn-outline-info"><i class="fa fa-sync"></i></a>
-																	<a data-toggle="modal" href="#modalPreview{{$sousDirect->id}}"
-																		class="btn btn-sm btn-primary">
-																		<i class="fa fa-eye"></i>
-																	</a>
-																</div>
-															</li>
-															{{-- pour la modal --}}
-															<x-navigation.modal  :document="$sousDirect"
-																					  id="modalFile{{$sousDirect->id}}"/>
-															<x-navigation.modal-preview  :document="$sousDirect"
-																								 id="modalPreview{{$sousDirect->id}}"/>
+																	<div class="btn-group">
+																		<a data-toggle="modal" href="#modalFile{{$sousDirect->id}}"
+																			class="btn btn-sm btn-outline-info"><i class="fa fa-sync"></i></a>
+																		<a data-toggle="modal" href="#modalPreview{{$sousDirect->id}}"
+																			class="btn btn-sm btn-primary">
+																			<i class="fa fa-eye"></i>
+																		</a>
+																	</div>
+																</li>
+																{{-- pour la modal --}}
+																<x-navigation.modal :document="$sousDirect"
+																						  id="modalFile{{$sousDirect->id}}"/>
+																<x-navigation.modal-preview :document="$sousDirect"
+																									 id="modalPreview{{$sousDirect->id}}"/>
 															</div>
-															@endforeach
-															<div><a data-toggle="modal" data-target="#modalNewFile{{$sousDirect->id}}" class="btn btn-primary" href="#">ajouter un documents</a></div>
-															{{-- pour la modal d'ajout --}}
-															<div class="modal fade" id="modalNewFile{{$sousDirect->id}}" tabindex="-1" role="dialog"  aria-hidden="true">
-																<div class="modal-dialog modal-dialog-centered" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title" id="exampleModalLongTitle">Ajouter d'un document </h5>
-																			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																				<span aria-hidden="true">&times;</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<form action="#!">
-																				@csrf
-																				<div class="form-group">
-																					<label for="file">Fichier a selectionner</label>
-																					<input type="file" class="custom-file form-control">
-																				</div>
-																				<div class="form-group">
-																					<label for="nom">Nom du document</label>
-																					<input type="text" placeholder="nom du document" class="form-control">
-																				</div>
-																			</form>
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Fermer</button>
-																		</div>
+														@endforeach
+														<div><a data-toggle="modal" data-target="#modalNewFile{{$sousDirect->id}}"
+																  class="btn btn-primary" href="#">ajouter un documents</a></div>
+														{{-- pour la modal d'ajout --}}
+														<div class="modal fade" id="modalNewFile{{$sousDirect->id}}" tabindex="-1"
+															  role="dialog" aria-hidden="true">
+															<div class="modal-dialog modal-dialog-centered" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">Ajouter d'un
+																			document </h5>
+																		<button type="button" class="close" data-dismiss="modal"
+																				  aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<div class="modal-body">
+																		<form action="#!">
+																			@csrf
+																			<div class="form-group">
+																				<label for="file">Fichier a selectionner</label>
+																				<input type="file" class="custom-file form-control">
+																			</div>
+																			<div class="form-group">
+																				<label for="nom">Nom du document</label>
+																				<input type="text" placeholder="nom du document"
+																						 class="form-control">
+																			</div>
+																		</form>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary btn-sm"
+																				  data-dismiss="modal"><i class="fa fa-close"></i> Fermer
+																		</button>
 																	</div>
 																</div>
 															</div>
+														</div>
 													</ul>
 												</div>
 											</div>

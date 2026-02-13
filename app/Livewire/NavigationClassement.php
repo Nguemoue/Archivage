@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class NavigationClassement extends Component
 {
-    public $classements = null;
+    public $classements;
 
     public $depth = 1;
     public $dossierId;
@@ -28,11 +28,11 @@ class NavigationClassement extends Component
         return view('livewire.navigation-classement');
     }
 
-    public function mount()
+    public function mount():void
     {
-    	$structure = webAuth()->user()->structure;
-    	//$this->classements = Classement::query()->where('structure_id','=',$structure->id);
-    }
+		 $structureId = auth()->user()->structure_id;
+		 $this->classements = Classement::query()->where('structure_id','=',$structureId)->get();
+	 }
 
     function loadSousClassement($id)
     {

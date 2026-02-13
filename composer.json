@@ -16,7 +16,7 @@
         "livewire/livewire": "^3.4",
         "mcamara/laravel-localization": "~1.8.0",
         "outhebox/blade-flags": "^1.2",
-        "spatie/laravel-medialibrary": "^10.15",
+        "spatie/laravel-medialibrary": "^10",
         "spatie/laravel-permission": "^5.5",
         "tightenco/ziggy": "^1.0"
     },

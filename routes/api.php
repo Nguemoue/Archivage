@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+	return $request->user();
 });
 
 Route::get("/sousType/{id}/fields", [SousTypeApiController::class, "index"])->name("api.soustype.fields");
+Route::get("classement/{classement}/sousClassement", [\App\Http\Controllers\Api\ApiSousClassementController::class, 'index'])
+	->name('api.sousClassement.index');
 
-Route::get("/logo",function (){
+Route::get("/logo", function () {
 	$file = base_path("public/minepat.jpg");
 	$f = File::get($file);
-	return response($f)->withHeaders(['Content-Type'=>'image/jpg']);
+	return response($f)->withHeaders(['Content-Type' => 'image/jpg']);
 })->name("api.logo");

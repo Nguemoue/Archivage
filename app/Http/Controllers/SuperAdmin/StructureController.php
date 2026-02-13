@@ -4,10 +4,12 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Structure;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+#[ObservedBy()]
 class StructureController extends Controller
 {
     public function index()
@@ -45,10 +47,11 @@ class StructureController extends Controller
 			 "description"=>['required','string']
 		 ])->validate();
 		 //
-		 Structure::query()->create([
+		 $structure = Structure::query()->create([
 			 "nom"=>$request->input("nom"),
 			 "description"=>$request->input("description"),
 		 ]);
+
 
 		 return redirect()->back()->with("success",__("response.create.success"));
 	 }

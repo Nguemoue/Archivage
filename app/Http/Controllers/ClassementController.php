@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClassementCollection;
+use App\Http\Resources\ClassementResource;
 use App\Models\Classement;
 use App\Models\Dossier;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 
 class ClassementController extends Controller
@@ -76,11 +79,11 @@ class ClassementController extends Controller
 
     function  classDossier(Request $request, $dossierId){
         $dossier = Dossier::find($dossierId);
-        $structure = webAuth()->user()->structure;
-        $classements = Classement::query()->whereStructureId($structure->id)->get();
-        if($classements->isEmpty()){
-        	return redirect()->route("home")->withDanger("vous devez cree des dossier de classements ");
-		  }
-        return view("classements.dossier.index",compact("dossier","classements"));
+        $structure = auth()->user()->structure;
+        $classements = Classement::query()->whereStructureId($structure->id)->with("sousClassements",'sousClassements.dossiers')->get(['id','nom'])->keyBy('id');
+        return view("classements.dossier.index",[
+			  'dossier'=>$dossier,
+			  'classements' => $classements,
+		  ]);
     }
 }

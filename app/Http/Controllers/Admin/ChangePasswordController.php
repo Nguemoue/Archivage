@@ -26,7 +26,7 @@ class ChangePasswordController extends Controller
 		]);
 		$auth->save();
 		\Auth::guard(adminGuard())->logout();
-		return redirect()->route("login");
+		return redirect()->route("login")->with('success','Connexion resussi');
 
 	}
 

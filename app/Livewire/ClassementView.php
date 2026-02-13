@@ -30,23 +30,6 @@ class ClassementView extends Component
 
     public function mount()
     {
-        //$this->classements = $classement?Classement::query()->get();
-        //je verifie si mes ordre de classent correspondent
-		 	foreach ($this->classements as $classement){
-		 		if(!Storage::disk("local")->exists($classement->nom)){
-		 			Storage::disk("local")->createDir($classement->nom);
-				}
-				//je construit mes sous classements si il n'existe pas
-				if($classement->sousCLassements){
-					foreach ($classement->sousCLassements as $c){
-						if(!Storage::disk("local")->exists($classement->nom.DIRECTORY_SEPARATOR.$c->nom)){
-							Storage::disk("local")->createDir($classement->nom.DIRECTORY_SEPARATOR.$c->nom);
-						}
-					}
-				}
-			}
-
-
 
     }
 
@@ -76,20 +59,20 @@ class ClassementView extends Component
         $this->sousDepth = boolval($val);
     }
 
-    function download(Request $request)
+    function download(Request $request):bool
     {
         $classement = $this->currentClassement;
-        $sousClassement = SousClassement::find($this->currentSousClassement);
+		  $sousClassement = SousClassement::find($this->currentSousClassement);
+        $endUrl = classementPath($classement->nom);
 
-        $endUrl = Storage::disk("local")
-			  ->path($classement->nom . DIRECTORY_SEPARATOR . $sousClassement->nom);
         $dossier = Dossier::find($this->dossierId);
-		 $this->isDownloaded = $dossier->is_classed;
-		 	#je deplace tous ces documents vers l'emplacement choisis
+		 	$this->isDownloaded = $dossier->is_classed;
+
+			 #je deplace tous ces documents vers l'emplacement choisis
         $documents = $dossier->documents;
         $documents->each(function ($element) use ($endUrl) {
-        		$extension = last(explode(".",$element->url));
-			  $endUrl.=DIRECTORY_SEPARATOR.$element->nom.".".$extension;
+			  $extension = last(explode(".",$element->url));
+
             if(File::exists($element->url)){
                 $moved = File::move($element->url, $endUrl);
                 if ($moved) {

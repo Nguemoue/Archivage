@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('classements', function (Blueprint $table) {
-            $table->foreignId("structure_id")->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId("structure_id")->constrained()->cascadeOnDelete();
         });
     }
 

@@ -45,7 +45,10 @@ return [
 			 'driver' => 'local',
 			 'root' => storage_path('tmp')
 		 ],
-
+		 'archivage'=>[
+			 'driver'=>'local',
+			 'root'=>storage_path('archivage'),
+		 ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

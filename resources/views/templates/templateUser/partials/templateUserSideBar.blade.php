@@ -18,12 +18,17 @@
 
 
 				{{-- classements --}}
-				<x-ui.sidebar.sidebar-item icon="ti ti-filter" :url="route('classement.index')" text="Classement"/>
+				<x-ui.sidebar.sidebar-item icon="ti ti-tie"  text="Classement" is-group>
+					<x-slot name="groupItem">
+					<x-ui.sidebar.sidebar-item icon="ti ti-filter" :url="route('classement.index')" text="Dossier Classement"/>
+					<x-ui.sidebar.sidebar-item icon="ti ti-filter" :url="route('sousClassement.all')" text="Sous Dossier"/>
+					</x-slot>
+				</x-ui.sidebar.sidebar-item>
 
 				{{-- Operations --}}
 				<x-ui.sidebar.sidebar-item icon="ti ti-folder" text="Operations" is-group>
 					<x-slot name="groupItem">
-						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Scan"/>
+						<x-ui.sidebar.sidebar-item :url="route('scan.index')" text="Scan"/>
 						<x-ui.sidebar.sidebar-item :url="route('traitement.index')" text="Traitement"/>
 						<x-ui.sidebar.sidebar-item  :url="route('navigation.index')" text="Navigation"/>
 						<x-ui.sidebar.sidebar-item :url="route('statistique.index')" text="Statistique"/>
